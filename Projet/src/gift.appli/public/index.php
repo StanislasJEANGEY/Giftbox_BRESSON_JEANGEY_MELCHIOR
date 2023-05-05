@@ -24,7 +24,7 @@ foreach (\gift\app\models\Prestation::all() as $presta) {
 	echo $presta->libelle . PHP_EOL;
 	echo $presta->description . PHP_EOL;
 	echo $presta->tarif . PHP_EOL;
-	echo $presta->unit . PHP_EOL;
+	echo $presta->unite . PHP_EOL;
 	echo "-------------------" . PHP_EOL;
 }
 echo "Fin : Question 1" . PHP_EOL;
@@ -41,7 +41,7 @@ foreach (\gift\app\models\Prestation::with('categorie')->get() as $presta) {
 	echo $presta->libelle . "({$presta->categorie->libelle})" . PHP_EOL;
 	echo $presta->description . PHP_EOL;
 	echo $presta->tarif . PHP_EOL;
-	echo $presta->unit . PHP_EOL;
+	echo $presta->unite . PHP_EOL;
 	echo "-------------------" . PHP_EOL;
 }
 echo "Fin : Question 2" . PHP_EOL;
@@ -59,17 +59,16 @@ echo $category->libelle . PHP_EOL;
 foreach ($category->prestations as $presta) {
 	echo $presta->libelle . PHP_EOL;
 	echo $presta->tarif . PHP_EOL;
-	echo $presta->unit . PHP_EOL;
+	echo $presta->unite . PHP_EOL;
 	echo "-------------------" . PHP_EOL;
 }
 echo "Fin : Question 3" . PHP_EOL;
 
-
 /**
  * Question 4
  */
-//afficher la box d'ID 360bb4cc-e092-3f00-9eae-774053730cb2 : libellé, description,
-//montant.
+
+// Afficher la box d'ID 360bb4cc-e092-3f00-9eae-774053730cb2 : libellé, description, montant.
 
 echo "Question 4 :" . PHP_EOL;
 $box = \gift\app\models\Box::find('360bb4cc-e092-3f00-9eae-774053730cb2');
@@ -78,3 +77,23 @@ echo $box->description . PHP_EOL;
 echo $box->montant . PHP_EOL;
 echo "Fin : Question 4" . PHP_EOL;
 
+/**
+ * Question 5
+ */
+
+// Afficher la box d'ID 360bb4cc-e092-3f00-9eae-774053730cb2 : libellé, description, montant. Afficher de plus la les
+// prestations prévues dans la box (libellé, tarif, unité, quantité).
+
+echo "Question 5 :" . PHP_EOL;
+$box = \gift\app\models\Box::with('prestations')->where('id', '=', '360bb4cc-e092-3f00-9eae-774053730cb2')->first();
+echo $box->libelle . PHP_EOL;
+echo $box->description . PHP_EOL;
+echo $box->montant . PHP_EOL;
+foreach ($box->prestations as $presta) {
+	echo $presta->libelle . PHP_EOL;
+	echo $presta->tarif . PHP_EOL;
+	echo $presta->unite . PHP_EOL;
+	echo $presta->contenu->quantite . PHP_EOL;
+	echo "-------------------" . PHP_EOL;
+}
+echo "Fin : Question 5" . PHP_EOL;
