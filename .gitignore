@@ -12,4 +12,6 @@
 .idea/*
 *.idea/
 
+vendor
+composer.lock
 conf.ini
