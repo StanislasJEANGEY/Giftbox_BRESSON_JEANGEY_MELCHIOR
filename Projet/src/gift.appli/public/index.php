@@ -35,12 +35,11 @@ echo "Fin : Question 1" . PHP_EOL;
 // de plus la catégorie de la prestation. On utilisera un chargement lié (eager loading).
 
 echo "Question 2 :" . PHP_EOL;
-foreach (\gift\app\models\Prestation::with('category')->get() as $presta) {
-	echo $presta->libelle . PHP_EOL;
+foreach (\gift\app\models\Prestation::with('categorie')->get() as $presta) {
+	echo $presta->libelle . "({$presta->categorie->libelle})" . PHP_EOL;
 	echo $presta->description . PHP_EOL;
 	echo $presta->tarif . PHP_EOL;
 	echo $presta->unit . PHP_EOL;
-	echo $presta->category->libelle . PHP_EOL;
 	echo "-------------------" . PHP_EOL;
 }
 echo "Fin : Question 2" . PHP_EOL;
