@@ -97,3 +97,22 @@ foreach ($box->prestations as $presta) {
 	echo "-------------------" . PHP_EOL;
 }
 echo "Fin : Question 5" . PHP_EOL;
+
+/**
+ * Question 6
+ */
+
+// Créer une box et lui ajouter 3 prestations.
+
+echo "Question 6 :" . PHP_EOL;
+$box = new \gift\app\models\Box();
+$box->id = \Ramsey\Uuid\Uuid::uuid4()->toString();
+$box->libelle = "Box 6";
+$box->description = "Description Box 6";
+$box->token = base64_encode(random_bytes(32));
+$box->save();
+$box->prestations()->attach([
+	'4cca0b9e-1b1a-3f00-9eae-774053730cb2' => ['quantite' => 1],
+	'4cca0b9e-1b1a-3f00-9eae-774053730cb3' => ['quantite' => 2],
+	'4cca0b9e-1b1a-3f00-9eae-774053730cb4' => ['quantite' => 3]
+]);
