@@ -1,6 +1,6 @@
 <?php
 
-namespace girft\app\models;
+namespace gift\app\models;
 
 class Prestation extends \Illuminate\Database\Eloquent\Model {
 

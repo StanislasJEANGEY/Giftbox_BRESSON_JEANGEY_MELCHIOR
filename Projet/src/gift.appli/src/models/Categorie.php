@@ -1,6 +1,6 @@
 <?php
 
-namespace girft\app\models;
+namespace gift\app\models;
 
 class Categorie extends \Illuminate\Database\Eloquent\Model {
 

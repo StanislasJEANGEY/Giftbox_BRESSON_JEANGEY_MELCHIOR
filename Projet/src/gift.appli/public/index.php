@@ -1,15 +1,17 @@
 <?php
 declare(strict_types=1);
 
-require_once __DIR__ . '/../src/vendor/autoload.php';
+require_once '../../../vendor/autoload.php';
 
 /* application boostrap */
-$app = (require_once __DIR__ . '/../src/conf/bootstrap.php')();
+//$app = (require_once __DIR__ . '/../src/conf/bootstrap.php')();
 
 /* routes loading */
-(require_once __DIR__ . '/../src/conf/routes.php')($app);
+//(require_once __DIR__ . '/../src/conf/routes.php')($app);
 
-\gift\app\services\utils\Eloquent::init(__DIR__ . '/../src/conf/gift.db.conf.ini');
+//$app->run();
+
+\gift\app\services\utils\Eloquent::init('../src/conf/gift.db.conf.ini');
 
 /**
  * Question 1
@@ -62,4 +64,3 @@ foreach ($category->prestations as $presta) {
 }
 echo "Fin : Question 3" . PHP_EOL;
 
-$app->run();

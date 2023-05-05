@@ -1,6 +1,6 @@
 <?php
 
-namespace girft\app\models;
+namespace gift\app\models;
 
 use Illuminate\Database\Eloquent\Model as Model;
 
