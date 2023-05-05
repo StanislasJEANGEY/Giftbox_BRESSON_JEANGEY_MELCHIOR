@@ -64,3 +64,17 @@ foreach ($category->prestations as $presta) {
 }
 echo "Fin : Question 3" . PHP_EOL;
 
+
+/**
+ * Question 4
+ */
+//afficher la box d'ID 360bb4cc-e092-3f00-9eae-774053730cb2 : libellé, description,
+//montant.
+
+echo "Question 4 :" . PHP_EOL;
+$box = \gift\app\models\Box::find('360bb4cc-e092-3f00-9eae-774053730cb2');
+echo $box->libelle . PHP_EOL;
+echo $box->description . PHP_EOL;
+echo $box->montant . PHP_EOL;
+echo "Fin : Question 4" . PHP_EOL;
+
