@@ -1,13 +1,13 @@
 <?php
 
-require_once __DIR__ . '/../services/utils.php';
-require_once __DIR__ . '/../models/Prestation.php';
+require_once '../services/utils.php';
+require_once '../models/Prestation.php';
 
 use gift\app\services\utils\Eloquent;
 
 
 // Appel de la fonction init()
-Eloquent::init(__DIR__ . '/../conf/gift.db.conf.ini');
+Eloquent::init('../conf/gift.db.conf.ini');
 
 /**
  * Question 1
