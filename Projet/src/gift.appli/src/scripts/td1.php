@@ -1,13 +1,13 @@
 <?php
 
-use Illuminate\Support\Facades\DB;
+require_once __DIR__ . '/../services/utils.php';
+require_once __DIR__ . '/../models/Prestation.php';
 
-$db = new DB();
-//definit la configuration de la base de données
-$db->addConnection(parse_ini_file('../conf/gift.db.conf.ini'));
-//lance la connexion
-$db->setAsGlobal();
-$db->bootEloquent();
+use gift\app\services\utils\Eloquent;
+
+
+// Appel de la fonction init()
+Eloquent::init(__DIR__ . '/../conf/gift.db.conf.ini');
 
 /**
  * Question 1
@@ -16,7 +16,7 @@ $db->bootEloquent();
 // Lister les prestations ; pour chaque prestation, afficher le libellé, la description, le tarif et l'unité.
 
 echo "Question 1 :" . PHP_EOL;
-foreach (\gift\app\models\Prestation::all() as $presta) {
+foreach (gift\app\models\Prestation::all() as $presta) {
     echo $presta->libelle . PHP_EOL;
     echo $presta->description . PHP_EOL;
     echo $presta->tarif . PHP_EOL;
