@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Support\Facades\DB;
+
 $db = new DB();
 //definit la configuration de la base de données
 $db->addConnection(parse_ini_file('../conf/gift.db.conf.ini'));
