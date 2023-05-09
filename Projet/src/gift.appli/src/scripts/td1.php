@@ -15,15 +15,15 @@ Eloquent::init(__DIR__ . '/../conf/gift.db.conf.ini');
 
 // Lister les prestations ; pour chaque prestation, afficher le libellé, la description, le tarif et l'unité.
 
-echo "Question 1 :" . PHP_EOL;
+echo "Question 1 :" . PHP_EOL."<br>";
 foreach (gift\app\models\Prestation::all() as $presta) {
-    echo $presta->libelle . PHP_EOL;
-    echo $presta->description . PHP_EOL;
-    echo $presta->tarif . PHP_EOL;
-    echo $presta->unite . PHP_EOL;
-    echo "-------------------" . PHP_EOL;
+    echo $presta->libelle . PHP_EOL ."<br>";
+    echo $presta->description . PHP_EOL."<br>";
+    echo $presta->tarif . PHP_EOL."<br>";
+    echo $presta->unite . PHP_EOL."<br>";
+    echo "-------------------" . PHP_EOL."<br>";
 }
-echo "Fin : Question 1" . PHP_EOL;
+echo "Fin : Question 1" . PHP_EOL ."<br> <br> <br>";
 
 /**
  * Question 2
@@ -33,7 +33,7 @@ echo "Fin : Question 1" . PHP_EOL;
 // de plus la catégorie de la prestation. On utilisera un chargement lié (eager loading).
 
 echo "Question 2 :" . PHP_EOL;
-foreach (\gift\app\models\Prestation::with('categorie')->get() as $presta) {
+foreach (\gift\app\models\Prestation::with('Categorie')->get() as $presta) {
     echo $presta->libelle . "({$presta->categorie->libelle})" . PHP_EOL;
     echo $presta->description . PHP_EOL;
     echo $presta->tarif . PHP_EOL;
