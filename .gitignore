@@ -14,4 +14,4 @@
 
 vendor
 composer.lock
-gift.db.conf.ini.dist
+gift.db.conf.ini
