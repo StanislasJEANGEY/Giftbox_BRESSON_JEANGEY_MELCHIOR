@@ -1,11 +1,11 @@
 <?php
+use Slim\App;
+use Slim\Psr7\Request;
+use Slim\Psr7\Response;
 
-$app = \Slim\Factory\AppFactory::create();
-$app->addRoutingMiddleware();
-$app->setBasePath('/my/app');
-
-$app->get('/hello/{name}', function (Request $request, Response $rs, $args) {
-	$name = $args['name'];
-	$rs->getBody()->write("Hello, $name");
-	return $rs;
-});
+return function (App $app) {
+    $app->get('/', function (Request $request, Response $response, array $args) {
+        $response->getBody()->write("Hello world!");
+        return $response;
+    });
+};
