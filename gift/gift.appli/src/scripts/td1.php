@@ -103,7 +103,7 @@ echo "Fin : Question 5" . PHP_EOL."<br><br><br>";
 
 echo "Question 6 :" . PHP_EOL."<br>";
 $box = new \gift\app\models\Box();
-$box->id = \Ramsey\Uuid\Uuid::uuid4()->toString();
+//$box->id = \Ramsey\Uuid\Uuid::uuid4()->toString();
 $box->libelle = "Box 6";
 $box->description = "Description Box 6";
 $box->token = base64_encode(random_bytes(32));

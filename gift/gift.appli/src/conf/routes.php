@@ -18,7 +18,7 @@ define ("PRESTA", [
 ]);
 
 return function (App $app) {
-    $app->get('../scripts/td1.php', function (Request $request, Response $response, array $args) {
+    $app->get('/gift.appli/public/', function (Request $request, Response $response, array $args) {
         $response->getBody()->write("Hello world!");
         return $response;
     });
