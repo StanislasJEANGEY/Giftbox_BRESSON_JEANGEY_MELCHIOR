@@ -40,7 +40,7 @@ foreach (\gift\app\models\Prestation::with('Categorie')->get() as $presta) {
     echo $presta->unite . PHP_EOL."<br>";
     echo "-------------------" . PHP_EOL."<br>";
 }
-echo "Fin : Question 2" . PHP_EOL."<br>";
+echo "Fin : Question 2" . PHP_EOL."<br><br><br>";
 
 /**
  * Question 3
@@ -50,7 +50,7 @@ echo "Fin : Question 2" . PHP_EOL."<br>";
 // On utilisera impérativement la méthode implantant l'association.
 
 echo "Question 3 :" . PHP_EOL."<br>";
-$category = \gift\app\models\Category::find(3);
+$category = \gift\app\models\Categorie::find(3);
 echo $category->libelle . PHP_EOL."<br>";
 foreach ($category->prestations as $presta) {
     echo $presta->libelle . PHP_EOL."<br>";
@@ -58,7 +58,7 @@ foreach ($category->prestations as $presta) {
     echo $presta->unite . PHP_EOL."<br>";
     echo "-------------------" . PHP_EOL."<br>";
 }
-echo "Fin : Question 3" . PHP_EOL."<br>";
+echo "Fin : Question 3" . PHP_EOL."<br><br><br>";
 
 /**
  * Question 4
@@ -71,7 +71,7 @@ $box = \gift\app\models\Box::find('360bb4cc-e092-3f00-9eae-774053730cb2');
 echo $box->libelle . PHP_EOL."<br>";
 echo $box->description . PHP_EOL."<br>";
 echo $box->montant . PHP_EOL."<br>";
-echo "Fin : Question 4" . PHP_EOL."<br>";
+echo "Fin : Question 4" . PHP_EOL."<br><br><br>";
 
 /**
  * Question 5
@@ -92,7 +92,7 @@ foreach ($box->prestations as $presta) {
     echo $presta->contenu->quantite . PHP_EOL."<br>";
     echo "-------------------" . PHP_EOL."<br>";
 }
-echo "Fin : Question 5" . PHP_EOL."<br>";
+echo "Fin : Question 5" . PHP_EOL."<br><br><br>";
 
 /**
  * Question 6
