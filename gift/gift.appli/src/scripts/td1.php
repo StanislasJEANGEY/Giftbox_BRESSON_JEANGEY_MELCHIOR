@@ -4,6 +4,7 @@ require_once '../services/utils.php';
 require_once '../models/Prestation.php';
 
 use gift\app\services\utils\Eloquent;
+use Ramsey\Uuid\Uuid;
 
 
 // Appel de la fonction init()
