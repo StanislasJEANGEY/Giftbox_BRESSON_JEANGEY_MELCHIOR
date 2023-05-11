@@ -18,7 +18,7 @@ define ("PRESTA", [
 ]);
 
 return function (App $app) {
-    $app->get('../scripts/td1.php', function (Request $request, Response $response, array $args) {
+    $app->get('/gift.appli/public/', function (Request $request, Response $response, array $args) {
         $response->getBody()->write("Hello world!");
         return $response;
     });
@@ -26,7 +26,7 @@ return function (App $app) {
     /**
      * Question 1
      */
-    $app->get('/categories[/]', function (Request $request, Response $response, array $args) {
+    $app->get('/gift.appli/public/categories[/]', function (Request $request, Response $response, array $args) {
         $html = <<<HTML
         <html>
         <head>
@@ -35,21 +35,20 @@ return function (App $app) {
         <body>
         <h1>Categories</h1>
         <ul>
-            <li>1. <a> href="/categories/1">restauration</a></li>
-            <li>2. <a> href="/categories/2">hébergement</a></li>
-            <li>3. <a> href="/categories/3">attention</a></li>
-            <li>4. <a> href="/categories/3">activités</a></li>
+            <li>1. <a href="/gift.appli/public/categories/1">restauration</a></li>
+            <li>2. <a href="/gift.appli/public/categories/2">hébergement</a></li>
+            <li>3. <a href="/gift.appli/public/categories/3">attention</a></li>
+            <li>4. <a href="/gift.appli/public/categories/4">activités</a></li>
         </ul></body></html>
 HTML;
         $response->getBody()->write($html);
         return $response;
     });
-};
 
 /**
  * Question 2
  */
-$app->get('/categories/{id:\d+}[/]', function (Request $request, Response $response, array $args) {
+$app->get('/gift.appli/public/categories/{id}[/]', function (Request $request, Response $response, array $args) {
     $id = $args['id'];
     $cat = CATEGS[$id];
 
@@ -67,3 +66,4 @@ HTML;
     $response->getBody()->write($html);
     return $response;
 });
+};
