@@ -45,14 +45,14 @@ HTML;
         return $response;
     });
 
-/**
- * Question 2
- */
-$app->get('/gift.appli/public/categories/{id}[/]', function (Request $request, Response $response, array $args) {
-    $id = $args['id'];
-    $cat = CATEGS[$id];
+    /**
+     * Question 2
+     */
+    $app->get('/gift.appli/public/categories/{id}[/]', function (Request $request, Response $response, array $args) {
+        $id = $args['id'];
+        $cat = CATEGS[$id];
 
-    $html = <<<HTML
+        $html = <<<HTML
     <html>
     <head>
     <title>Categorie $id</title>
@@ -63,7 +63,7 @@ $app->get('/gift.appli/public/categories/{id}[/]', function (Request $request, R
     <h2>{$cat['description']}</h2>
     </body></html>
 HTML;
-    $response->getBody()->write($html);
-    return $response;
-});
+        $response->getBody()->write($html);
+        return $response;
+    });
 };
