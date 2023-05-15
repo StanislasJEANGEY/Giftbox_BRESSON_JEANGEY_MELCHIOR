@@ -23,47 +23,52 @@ return function (App $app) {
         return $response;
     });
 
-    /**
-     * Question 1
-     */
-    $app->get('/gift.appli/public/categories[/]', function (Request $request, Response $response, array $args) {
-        $html = <<<HTML
-        <html>
-        <head>
-        <title>Categories</title>
-        </head>
-        <body>
-        <h1>Categories</h1>
-        <ul>
-            <li>1. <a href="/gift.appli/public/categories/1">restauration</a></li>
-            <li>2. <a href="/gift.appli/public/categories/2">hébergement</a></li>
-            <li>3. <a href="/gift.appli/public/categories/3">attention</a></li>
-            <li>4. <a href="/gift.appli/public/categories/4">activités</a></li>
-        </ul></body></html>
-HTML;
-        $response->getBody()->write($html);
-        return $response;
-    });
+    $app->get('/gift.appli/public/categories/{id}[/]', \gift\app\actions\GetCategoryAction::class);
+    $app->get('/gift.appli/public/categories/{id}[/]', \gift\app\actions\GetCategorieByIdAction::class);
+$app->get('/gift.appli/public/categories/prestations[/]', \gift\app\actions\GetPrestationsByIdAction::class);
+    $app->get('/gift.appli/public/categories/{id}/prestations[/]', \gift\app\actions\GetPrestationsByCategorieAction::class);
 
-    /**
-     * Question 2
-     */
-    $app->get('/gift.appli/public/categories/{id}[/]', function (Request $request, Response $response, array $args) {
-        $id = $args['id'];
-        $cat = CATEGS[$id];
-
-        $html = <<<HTML
-    <html>
-    <head>
-    <title>Categorie $id</title>
-    </head>
-    <body>
-    <h1>la Categorie $id</h1>
-    <h2>{$cat['libelle']}</h2>
-    <h2>{$cat['description']}</h2>
-    </body></html>
-HTML;
-        $response->getBody()->write($html);
-        return $response;
-    });
+//    /**
+//     * Question 1
+//     */
+//    $app->get('/gift.appli/public/categories[/]', function (Request $request, Response $response, array $args) {
+//        $html = <<<HTML
+//        <html>
+//        <head>
+//        <title>Categories</title>
+//        </head>
+//        <body>
+//        <h1>Categories</h1>
+//        <ul>
+//            <li>1. <a href="/gift.appli/public/categories/1">restauration</a></li>
+//            <li>2. <a href="/gift.appli/public/categories/2">hébergement</a></li>
+//            <li>3. <a href="/gift.appli/public/categories/3">attention</a></li>
+//            <li>4. <a href="/gift.appli/public/categories/4">activités</a></li>
+//        </ul></body></html>
+//HTML;
+//        $response->getBody()->write($html);
+//        return $response;
+//    });
+//
+//    /**
+//     * Question 2
+//     */
+//    $app->get('/gift.appli/public/categories/{id}[/]', function (Request $request, Response $response, array $args) {
+//        $id = $args['id'];
+//        $cat = CATEGS[$id];
+//
+//        $html = <<<HTML
+//    <html>
+//    <head>
+//    <title>Categorie $id</title>
+//    </head>
+//    <body>
+//    <h1>la Categorie $id</h1>
+//    <h2>{$cat['libelle']}</h2>
+//    <h2>{$cat['description']}</h2>
+//    </body></html>
+//HTML;
+//        $response->getBody()->write($html);
+//        return $response;
+//    });
 };
