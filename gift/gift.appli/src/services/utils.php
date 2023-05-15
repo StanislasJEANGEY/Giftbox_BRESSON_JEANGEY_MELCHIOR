@@ -2,19 +2,28 @@
 
 namespace gift\app\services\utils;
 
-require_once '../vendor/autoload.php';
-
-use Illuminate\Database\Capsule\Manager as DB ;
+use Illuminate\Database\Capsule\Manager as Capsule;
 
 class Eloquent {
 
-	public static function init ($filename) {
+    public static function init($filename) {
+        $capsule = new Capsule;
 
-		$db = new DB();
-		$db->addConnection(parse_ini_file($filename));
-		$db->setAsGlobal();
-		$db->bootEloquent();
+        $config = parse_ini_file($filename);
 
-	}
+        $capsule->addConnection([
+            'driver' => $config['driver'],
+            'host' => $config['host'],
+            'database' => $config['database'],
+            'username' => $config['username'],
+            'password' => $config['password'],
+            'charset' => 'utf8mb4',
+            'collation' => 'utf8mb4_unicode_ci',
+            'prefix' => '',
+        ]);
+
+        $capsule->setAsGlobal();
+        $capsule->bootEloquent();
+    }
 
 }
