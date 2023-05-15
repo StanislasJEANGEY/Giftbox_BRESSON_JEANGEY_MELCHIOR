@@ -10,18 +10,30 @@ class GetCategorieAction extends AbstractAction
     public function __invoke(ServerRequestInterface $request, ResponseInterface $response, array $args) : ResponseInterface {
         $html = <<<HTML
         <html>
-        <head>
-        <title>Categories</title>
-        </head>
-        <body>
-        <h1>Categories</h1>
-        <ul>
-            <li>1. <a href="/categories/1">restauration</a></li>
-            <li>2. <a href="/categories/2">hébergement</a></li>
-            <li>3. <a href="/categories/3">attention</a></li>
-            <li>4. <a href="/categories/4">activités</a></li>
-        </ul></body></html>
-HTML;
+            <head>
+                <title>Catégories</title>
+            </head>
+            <body>
+                <h1>Catégories</h1>
+        HTML;
+
+        $html .= '<ul>';
+        $categories = \gift\app\models\Categorie::all();
+        foreach ($categories as $categorie) {
+            $html .= <<<HTML
+                <li> $categorie->id : <a href="/categories/$categorie->id"> $categorie->libelle </a>
+                <br>
+                Description : $categorie->description
+                </li>
+            HTML;
+        }
+        $html .= '</ul>';
+
+
+        $html .= <<<HTML
+            </body>
+        </html>
+        HTML;
         $response->getBody()->write($html);
         return $response;
     }

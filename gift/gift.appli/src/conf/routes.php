@@ -18,8 +18,26 @@ define ("PRESTA", [
 ]);
 
 return function (App $app) {
-    $app->get('/gift.appli/public/', function (Request $request, Response $response, array $args) {
-        $response->getBody()->write("Hello world!");
+    $app->get('[/]', function (Request $request, Response $response, array $args) {
+        $html = <<<HTML
+        <html>
+            <head>
+                <title>Accueil</title>
+            </head>
+            <body>
+                <center><h1>Accueil</h1></center>
+                <h2>
+                    <ul>
+                        <li>1. <a href="/categories">Categories</a></li>
+                    </ul>
+                </h2>
+            </body>
+        </html>
+        HTML;
+
+
+
+        $response->getBody()->write($html);
         return $response;
     });
 
