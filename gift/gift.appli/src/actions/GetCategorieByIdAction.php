@@ -1,7 +1,6 @@
 <?php
 
 namespace gift\app\actions;
-use gift\app\actions\AbstractAction;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 
@@ -19,7 +18,7 @@ class GetCategorieByIdAction extends AbstractAction
     <title>Categorie $id</title>
     </head>
     <body>
-    <h1>la Categorie $id</h1>
+    <h1>La Categorie $id</h1>
     <h2>{$cat['libelle']}</h2>
     <h2>{$cat['description']}</h2>
     </body></html>

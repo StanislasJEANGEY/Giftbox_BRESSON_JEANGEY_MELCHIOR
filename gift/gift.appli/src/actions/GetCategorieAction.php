@@ -2,14 +2,12 @@
 
 namespace gift\app\actions;
 
-use gift\app\actions\AbstractAction;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 
 class GetCategorieAction extends AbstractAction
 {
-    public function __invoke(ServerRequestInterface $request, ResponseInterface $response, array $args) : ResponseInterface
-    {
+    public function __invoke(ServerRequestInterface $request, ResponseInterface $response, array $args) : ResponseInterface {
         $html = <<<HTML
         <html>
         <head>
