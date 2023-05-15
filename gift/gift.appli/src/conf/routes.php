@@ -23,10 +23,10 @@ return function (App $app) {
         return $response;
     });
 
-    $app->get('/gift.appli/public/categories/{id}[/]', \gift\app\actions\GetCategoryAction::class);
+    $app->get('/gift.appli/public/categories[/]', \gift\app\actions\GetCategorieAction::class);
     $app->get('/gift.appli/public/categories/{id}[/]', \gift\app\actions\GetCategorieByIdAction::class);
-$app->get('/gift.appli/public/categories/prestations[/]', \gift\app\actions\GetPrestationsByIdAction::class);
-    $app->get('/gift.appli/public/categories/{id}/prestations[/]', \gift\app\actions\GetPrestationsByCategorieAction::class);
+//$app->get('/gift.appli/public/categories/prestations[/]', \gift\app\actions\GetPrestationsByIdAction::class);
+//    $app->get('/gift.appli/public/categories/{id}/prestations[/]', \gift\app\actions\GetPrestationsByCategorieAction::class);
 
 //    /**
 //     * Question 1

@@ -1,11 +1,12 @@
 <?php
 
-namespace gift\appli\action;
+namespace gift\app\actions;
 
-use http\Client\Response;
+use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\ServerRequestInterface;
 
 abstract class AbstractAction {
 
-	abstract public function __invoke($request, $response, $args) : Response;
+	abstract public function __invoke(ServerRequestInterface $request, ResponseInterface $response, array $args) : ResponseInterface;
 
 }
