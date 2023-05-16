@@ -6,7 +6,7 @@ use Illuminate\Database\Capsule\Manager as Capsule;
 
 class Eloquent {
 
-    public static function init($filename) {
+    public static function init($filename): void {
         $capsule = new Capsule;
 
         $config = parse_ini_file($filename);

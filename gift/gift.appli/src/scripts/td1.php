@@ -1,6 +1,6 @@
 <?php
 
-require_once '../services/utils.php';
+require_once '../services/utils/Eloquent.php';
 require_once '../models/Prestation.php';
 
 use gift\app\services\utils\Eloquent;

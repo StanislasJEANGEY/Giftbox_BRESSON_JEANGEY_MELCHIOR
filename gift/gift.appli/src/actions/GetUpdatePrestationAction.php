@@ -3,7 +3,7 @@
 namespace gift\app\actions;
 
 use Exception;
-use gift\app\services\PrestationsService;
+use gift\app\services\prestations\PrestationsService;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 

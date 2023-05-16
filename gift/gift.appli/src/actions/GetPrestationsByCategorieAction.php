@@ -2,21 +2,22 @@
 
 namespace gift\app\actions;
 
-use gift\app\services\PrestationsService;
+use Exception;
+use gift\app\services\prestations\PrestationsService;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 
 class GetPrestationsByCategorieAction extends AbstractAction {
 
     /**
-     * @throws \Exception
+     * @throws Exception
      */
     public function __invoke(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface {
         $id = $args['id'];
         $prestaService = new PrestationsService();
         $categorie = $prestaService->getCategorieById($id);
         $html = <<<HTML
-        <html>
+        <html lang="fr">
             <head>
                 <title>Catégorie</title>
             </head>

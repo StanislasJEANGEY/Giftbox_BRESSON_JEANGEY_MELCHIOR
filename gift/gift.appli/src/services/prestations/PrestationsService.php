@@ -1,6 +1,6 @@
 <?php
 
-namespace gift\app\services;
+namespace gift\app\services\prestations;
 
 use Exception;
 use gift\app\models\Prestation;
@@ -20,7 +20,7 @@ class PrestationsService
         try {
             return Categorie::findOrFail($id)->toArray();
         } catch (ModelNotFoundException $e) {
-            throw new Exception("La catégorie $id n'existe pas");
+            throw new PrestationsServiceException("La catégorie $id n'existe pas", 404, $e);
         }
     }
 
@@ -31,7 +31,7 @@ class PrestationsService
         try {
             return Prestation::findOrFail($id)->toArray();
         } catch (ModelNotFoundException $e) {
-            throw new Exception("Prestation $id n'existe pas");
+            throw new PrestationsServiceException("Prestation $id n'existe pas", 404, $e);
         }
     }
 
@@ -42,7 +42,7 @@ class PrestationsService
         try {
             return Categorie::findOrFail($id)->prestations->toArray();
         } catch (ModelNotFoundException $e) {
-            throw new Exception("La catégorie $id n'existe pas");
+            throw new PrestationsServiceException("La catégorie $id n'existe pas", 404, $e);
         }
     }
 
@@ -55,7 +55,7 @@ class PrestationsService
 			$prestation->update($attributs);
 			return $prestation->toArray();
 		} catch (ModelNotFoundException $e) {
-			throw new Exception("Prestation $id n'existe pas");
+			throw new PrestationsServiceException("Prestation $id n'existe pas", 404, $e);
 		}
 	}
 }
