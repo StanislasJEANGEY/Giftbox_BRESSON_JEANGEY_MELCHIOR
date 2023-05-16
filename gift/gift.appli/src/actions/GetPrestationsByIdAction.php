@@ -8,6 +8,9 @@ use Psr\Http\Message\ServerRequestInterface;
 
 class GetPrestationsByIdAction extends AbstractAction {
 
+	/**
+	 * @throws \Exception
+	 */
 	public function __invoke(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface {
         $id = $args['id'];
         $prestaService = new PrestationsService();
@@ -25,6 +28,9 @@ class GetPrestationsByIdAction extends AbstractAction {
                 <p>Description : {$prestation['description']}</p>
                 <br>
                 <img src={$prestation['img']} alt="image de {$prestation['img']}">
+                <br>
+                <br>
+                <button><a href="/prestations/{$prestation['id']}/update">Modifier</a></button>
             </body>
         </html>
         HTML;

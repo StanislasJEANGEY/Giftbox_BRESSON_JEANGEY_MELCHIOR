@@ -2,6 +2,9 @@
 
 namespace gift\app\models;
 
+/**
+ * @method static findOrFail(int $id)
+ */
 class Categorie extends \Illuminate\Database\Eloquent\Model {
 
 	protected $table = 'categorie';

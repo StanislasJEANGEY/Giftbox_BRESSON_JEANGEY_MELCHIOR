@@ -2,6 +2,9 @@
 
 namespace gift\app\models;
 
+/**
+ * @method static findOrFail(string $id)
+ */
 class Prestation extends \Illuminate\Database\Eloquent\Model {
 
     protected $table = 'prestation';
