@@ -4,10 +4,13 @@ namespace gift\app\actions;
 
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
+use gift\app\services\PrestationsService as PrestationsService;
 
 class GetCategorieAction extends AbstractAction
 {
     public function __invoke(ServerRequestInterface $request, ResponseInterface $response, array $args) : ResponseInterface {
+        $prestaService = new PrestationsService();
+        $categories = $prestaService->getCategories();
         $html = <<<HTML
         <html>
             <head>
@@ -19,10 +22,10 @@ class GetCategorieAction extends AbstractAction
         HTML;
 
         $html .= '<ul>';
-        $categories = \gift\app\models\Categorie::all();
+
         foreach ($categories as $categorie) {
             $html .= <<<HTML
-                <li> $categorie->id : <a href="/categories/$categorie->id"> $categorie->libelle </a></li>
+                <li> {$categorie['id']} : <a href="/categories/{$categorie['id']}"> {$categorie['libelle']} </a></li>
                 <br>
             HTML;
         }

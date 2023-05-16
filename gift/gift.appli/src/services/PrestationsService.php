@@ -1,6 +1,6 @@
 <?php
 
-namespace gift\app\services\prestations;
+namespace gift\app\services;
 
 use gift\app\models\Prestation;
 use gift\app\models\Categorie;
@@ -12,12 +12,27 @@ class PrestationsService
         return Categorie::all()->toArray();
     }
 
-    public function getPrestationsByCategorieId(string $id): array {
+    public function getCategorieById(int $id): array {
         try {
-            $categorie = Categorie::findOrFail($id);
-            return $categorie->prestations->toArray();
+            return Categorie::findOrFail($id)->toArray();
         } catch (ModelNotFoundException $e) {
-            return [];
+            throw new \Exception("La catégorie $id n'existe pas");
+        }
+    }
+
+    public function getPrestationById(string $id): array {
+        try {
+            return Prestation::findOrFail($id)->toArray();
+        } catch (ModelNotFoundException $e) {
+            throw new \Exception("Prestation $id n'existe pas");
+        }
+    }
+
+    public function getPrestationByCategorieId(int $id): array {
+        try {
+            return Categorie::findOrFail($id)->prestations->toArray();
+        } catch (ModelNotFoundException $e) {
+            throw new \Exception("La catégorie $id n'existe pas");
         }
     }
 }
