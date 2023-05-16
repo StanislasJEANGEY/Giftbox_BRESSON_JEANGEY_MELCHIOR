@@ -14,22 +14,19 @@ class GetCategorieAction extends AbstractAction
                 <title>Catégories</title>
             </head>
             <body>
-                <h1>Catégories</h1>
+                <center><h1>Catégories</h1></center>
+                <br>
         HTML;
 
         $html .= '<ul>';
         $categories = \gift\app\models\Categorie::all();
         foreach ($categories as $categorie) {
             $html .= <<<HTML
-                <li> $categorie->id : <a href="/categories/$categorie->id"> $categorie->libelle </a>
+                <li> $categorie->id : <a href="/categories/$categorie->id"> $categorie->libelle </a></li>
                 <br>
-                Description : $categorie->description
-                </li>
             HTML;
         }
         $html .= '</ul>';
-
-
         $html .= <<<HTML
             </body>
         </html>

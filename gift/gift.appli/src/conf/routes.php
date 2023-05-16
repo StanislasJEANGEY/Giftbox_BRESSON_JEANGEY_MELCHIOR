@@ -30,6 +30,6 @@ return function (App $app) {
 
     $app->get('/categories[/]', \gift\app\actions\GetCategorieAction::class);
     $app->get('/categories/{id}[/]', \gift\app\actions\GetCategorieByIdAction::class);
-//	$app->get('/prestations[/]', \gift\app\actions\GetPrestationsByIdAction::class);
-//	$app->get('/categories/{id:\d+}/prestations', \gift\app\actions\GetPrestationsByCategorieAction::class);
+	$app->get('/prestations/{id}[/]', \gift\app\actions\GetPrestationsByIdAction::class);
+	$app->get('/categories/{id:\d+}/prestations', \gift\app\actions\GetPrestationsByCategorieAction::class);
 };

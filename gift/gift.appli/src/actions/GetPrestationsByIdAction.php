@@ -8,22 +8,25 @@ use Psr\Http\Message\ServerRequestInterface;
 class GetPrestationsByIdAction extends AbstractAction {
 
 	public function __invoke(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface {
-		$id = $args['id'];
-		$cat = CATEGS[$id];
+        $id = $args['id'];
+        $prestation = \gift\app\models\Prestation::find($id);
+        $html = <<<HTML
+        <html>
+            <head>
+                <title>Prestation</title>
+            </head>
+            <body>
+                <center><h1>$prestation->libelle</h1></center>
+                <br>
+                <p>Prix : $prestation->tarif €</p>
+                <br>
+                <p>Description : $prestation->description</p>
+                <br>
+                <img src=$prestation->img alt="image de $prestation->img">
+            </body>
+        </html>
+        HTML;
 
-		$html = <<<HTML
-    <html>
-    <head>
-    <title>Prestations $id</title>
-    </head>
-    <body>
-    <h1>La Prestation $id</h1>
-    <h2>{$cat['libelle']}</h2>
-    <h2>{$cat['description']}</h2>
-    <h2>{$cat['tarif']}</h2>
-    <h2>{$cat['unite']}</h2>
-    </body></html>
-HTML;
 		$response->getBody()->write($html);
 		return $response;
 	}

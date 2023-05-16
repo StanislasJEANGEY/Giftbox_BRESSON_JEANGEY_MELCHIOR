@@ -8,20 +8,30 @@ use Psr\Http\Message\ServerRequestInterface;
 class GetPrestationsByCategorieAction extends AbstractAction {
 
 	public function __invoke(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface {
-		$html = <<<HTML
+        $id = $args['id'];
+        $categorie = \gift\app\models\Categorie::find($id);
+        $html = <<<HTML
         <html>
-        <head>
-        <title>Prestations</title>
-        </head>
-        <body>
-        <h1>Prestations</h1>
-        <ul>
-            <li>1. <a href="/prestations/1">diner</a></li>
-            <li>2. <a href="/prestations/2">déjeuner</a></li>
-            <li>3. <a href="/prestations/3">saut parachute</a></li>
-            <li>4. <a href="/prestations/4">massage</a></li>
-        </ul></body></html>
-HTML;
+            <head>
+                <title>Catégorie</title>
+            </head>
+            <body>
+                <center><h1>$categorie->libelle</h1></center>
+        HTML;
+
+        $prestations = \gift\app\models\Prestation::where('cat_id', '=', $id)->get();
+        $html .= '<ul>';
+        foreach ($prestations as $presta) {
+            $html .= <<<HTML
+                <li><a href="/prestations/$presta->id"> $presta->libelle </a> </li>
+                <br>
+            HTML;
+        }
+        $html .= '</ul>';
+        $html .= <<<HTML
+            </body>
+        </html>
+        HTML;
 		$response->getBody()->write($html);
 		return $response;
 	}
