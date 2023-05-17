@@ -37,7 +37,7 @@ class GetPrestationsByIdAction extends AbstractAction {
                 <img src="{$cheminImage}" alt="{$cheminImage}">
                 <br>
                 <br>
-                <button><a href="/prestations/{$prestation['id']}/update">Modifier</a></button>
+                <a href="/prestations/{$prestation['id']}/update"><button>Modifier</button></a>
             </body>
         </html>
         HTML;

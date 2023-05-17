@@ -6,6 +6,7 @@ use Exception;
 use gift\app\models\Prestation;
 use gift\app\models\Categorie;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Database\QueryException;
 
 class PrestationsService
 {
@@ -45,6 +46,25 @@ class PrestationsService
             throw new PrestationsServiceException("La catégorie $id n'existe pas", 404, $e);
         }
     }
+
+//	/**
+//	 * @throws PrestationsServiceException
+//	 */
+//	public function getUpdatePrestation(string $id, array $attributs): void {
+//		try {
+//			$prestation = Prestation::findOrFail($id);
+//		} catch (ModelNotFoundException $e) {
+//			throw new PrestationsServiceException("Prestation $id n'existe pas", 404, $e);
+//		}
+//		foreach ($attributs as $key => $value) {
+//			$prestation->$key = $value;
+//		}
+//		try {
+//			$prestation->save();
+//		} catch (QueryException $e) {
+//			throw new PrestationsServiceException("Erreur lors de la mise à jour de la prestation $id", 500, $e);
+//		}
+//	}
 
 	/**
 	 * @throws Exception
