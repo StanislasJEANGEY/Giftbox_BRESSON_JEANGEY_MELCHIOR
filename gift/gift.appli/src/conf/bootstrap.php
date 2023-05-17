@@ -10,6 +10,9 @@ $app = AppFactory::create();
 $app->addRoutingMiddleware();
 $app->addErrorMiddleware(true, false, false);
 
+//Dans le bootstrap de l'application, créer et enregistrer l'objet twig.
+
+
 //Eloquent::init(__DIR__ . '/../gift.db.conf.ini');
 
 return $app;
