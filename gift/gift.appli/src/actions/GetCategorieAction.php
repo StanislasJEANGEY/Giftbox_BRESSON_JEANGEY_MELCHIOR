@@ -4,7 +4,7 @@ namespace gift\app\actions;
 
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
-use gift\app\services\PrestationsService as PrestationsService;
+use gift\app\services\prestations\PrestationsService as PrestationsService;
 
 class GetCategorieAction extends AbstractAction
 {
@@ -30,7 +30,10 @@ class GetCategorieAction extends AbstractAction
             HTML;
         }
         $html .= '</ul>';
+
         $html .= <<<HTML
+            <br>
+            <a href="/categories/add"> Ajouter une catégorie </a>
             </body>
         </html>
         HTML;

@@ -58,4 +58,12 @@ class PrestationsService
 			throw new PrestationsServiceException("Prestation $id n'existe pas", 404, $e);
 		}
 	}
+
+    public function createCategorie(String $name, String $description) : int {
+        $categorie = new Categorie();
+        $categorie->libelle = $name;
+        $categorie->description = $description;
+        $categorie->save();
+        return $categorie->id;
+    }
 }
