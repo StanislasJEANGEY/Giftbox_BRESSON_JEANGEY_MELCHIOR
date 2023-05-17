@@ -10,10 +10,6 @@ class GetCategorieAction extends AbstractAction
 {
     public function __invoke(ServerRequestInterface $request, ResponseInterface $response, array $args) : ResponseInterface {
         $prestaService = new PrestationsService();
-        if ($request->getMethod() === 'POST') {
-            $data = $request->getParsedBody();
-            $prestaService->getCreateCategorie($data['libelle'], $data['description']);
-        }
         $categories = $prestaService->getCategories();
         $html = <<<HTML
         <html>
