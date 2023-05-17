@@ -11,12 +11,7 @@ class GetAddCategorieAction extends AbstractAction
 
     public function __invoke(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
     {
-        $prestaService = new PrestationsService();
-        if ($request->getMethod() === 'POST') {
-            $data = $request->getParsedBody();
-            $prestaService->getCreateCategorie($data['libelle'], $data['description']);
-            header('Location: /categories');
-        }
+
         $html = <<<HTML
         <html>
             <head>
@@ -25,7 +20,7 @@ class GetAddCategorieAction extends AbstractAction
             <body>
                 <center><h1>Ajouter une catégorie</h1></center>
                 <br>
-                <form action="/categories/add" method="post">
+                <form action="/categories" method="post">
                     <label for="libelle">Libelle</label>
                     <input type="text" name="libelle" id="libelle">
                     <br>
