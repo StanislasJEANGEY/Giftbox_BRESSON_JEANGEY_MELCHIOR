@@ -59,7 +59,7 @@ class PrestationsService
 		}
 	}
 
-    public function createCategorie(String $name, String $description) : int {
+    public function getCreateCategorie(String $name, String $description) : int {
         $categorie = new Categorie();
         $categorie->libelle = $name;
         $categorie->description = $description;
