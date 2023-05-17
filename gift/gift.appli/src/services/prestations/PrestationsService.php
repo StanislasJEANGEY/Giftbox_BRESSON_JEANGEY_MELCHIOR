@@ -59,6 +59,20 @@ class PrestationsService
 		}
 	}
 
+	/**
+	 * @throws PrestationsServiceException
+	 */
+	public function setPrestationCategorie(int $id, int $categorieId) : void {
+		try {
+			$prestation = Prestation::findOrFail($id);
+			$categorie = Categorie::findOrFail($categorieId);
+			$prestation->categorie()->associate($categorie);
+			$prestation->save();
+		} catch (ModelNotFoundException $e) {
+			throw new PrestationsServiceException("Prestation $id ou catégorie $categorieId n'existe pas", 404, $e);
+		}
+	}
+
     public function getCreateCategorie(String $name, String $description) : int {
         $categorie = new Categorie();
         $categorie->libelle = $name;
@@ -66,4 +80,19 @@ class PrestationsService
         $categorie->save();
         return $categorie->id;
     }
+
+	/**
+	 * @throws PrestationsServiceException
+	 */
+	public function getDeleteCategorie(int $id) : void {
+		try {
+			$categorie = Categorie::findOrFail($id);
+			$categorie->delete();
+		} catch (ModelNotFoundException $e) {
+			throw new PrestationsServiceException("La catégorie $id n'existe pas", 404, $e);
+		}
+	}
+
+
+
 }

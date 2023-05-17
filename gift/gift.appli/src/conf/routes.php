@@ -28,7 +28,9 @@ return function (App $app) {
 
     $app->get('/categories[/]', \gift\app\actions\GetCategorieAction::class);
     //$app->get('/categories/add[/]', \gift\app\actions\GetAddCategorieAction::class);
+	//$app->get('/categories/del[/]', \gift\app\actions\GetDelCategorieAction::class);
     $app->get('/categories/{id}[/]', \gift\app\actions\GetCategorieByIdAction::class);
+	//$app->get('/categories/{id}/prestations', \gift\app\actions\GetPrestationsCategorieAction::class);
 	$app->get('/prestations/{id}[/]', \gift\app\actions\GetPrestationsByIdAction::class);
 	$app->get('/categories/{id:\d+}/prestations', \gift\app\actions\GetPrestationsByCategorieAction::class);
 	//$app->get('/prestations/{id}/update', \gift\app\actions\GetUpdatePrestationAction::class);

@@ -20,6 +20,7 @@ class GetPrestationsByIdAction extends AbstractAction {
         $id = $args['id'];
         $prestaService = new PrestationsService();
         $prestation = $prestaService->getPrestationById($id);
+		//$updatePrestation = $prestaService->getUpdatePrestation($id, $prestation);
         $html = <<<HTML
         <html>
             <head>
@@ -35,7 +36,7 @@ class GetPrestationsByIdAction extends AbstractAction {
                 <img src=../../../shared/img/{$prestation['img']} alt="image de {$prestation['img']}">
                 <br>
                 <br>
-                <button><a href="/prestations/{$prestation['id']}/update">Modifier</a></button>
+                <!-- <button><a href="/prestations/{$prestation['id']}/update">Modifier</a></button> -->
             </body>
         </html>
         HTML;
