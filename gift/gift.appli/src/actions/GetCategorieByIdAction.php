@@ -22,7 +22,7 @@ class GetCategorieByIdAction extends AbstractAction
         $prestaService = new PrestationsService();
         $categories = $prestaService->getCategorieById($id);
         $html = <<<HTML
-        <html>
+        <html lang="fr">
             <head>
                 <title>Catégorie</title>
             </head>

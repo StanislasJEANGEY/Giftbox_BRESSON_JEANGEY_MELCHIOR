@@ -19,6 +19,7 @@ class GetPrestationsByCategorieAction extends AbstractAction {
         $html = <<<HTML
         <html lang="fr">
             <head>
+                <meta charset="UTF-8">
                 <title>Catégorie</title>
             </head>
             <body>

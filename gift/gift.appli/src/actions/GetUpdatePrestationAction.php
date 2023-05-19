@@ -27,8 +27,9 @@ class GetUpdatePrestationAction extends AbstractAction {
 			exit();
 		}
 		$html = <<<HTML
-		<html>
-			<head>
+		<html lang="fr">
+			<head> 
+			    <meta charset="UTF-8">
 				<title>Modifier une prestation</title>
 			</head>
 			<body>

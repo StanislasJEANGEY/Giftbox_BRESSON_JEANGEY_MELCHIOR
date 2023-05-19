@@ -12,8 +12,9 @@ class GetCategorieAction extends AbstractAction
         $prestaService = new PrestationsService();
         $categories = $prestaService->getCategories();
         $html = <<<HTML
-        <html>
+        <html lang="fr">
             <head>
+                <meta charset="UTF-8">
                 <title>Catégories</title>
             </head>
             <body>

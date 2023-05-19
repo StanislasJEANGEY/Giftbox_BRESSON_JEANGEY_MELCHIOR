@@ -16,8 +16,9 @@ class GetAddCategorieAction extends AbstractAction
             $data = $request->getParsedBody();
             $prestaService->getCreateCategorie($data['libelle'], $data['description']);
             $html = <<<HTML
-            <html>
+            <html lang="fr">
                 <head>
+                    <meta charset="UTF-8">
                     <title>Ajouter une catégorie</title>
                 </head>
                 <body>
@@ -29,8 +30,9 @@ class GetAddCategorieAction extends AbstractAction
             HTML;
         } else {
             $html = <<<HTML
-            <html>
+            <html lang="fr">
                 <head>
+                    <meta charset="UTF-8">
                     <title>Ajouter une catégorie</title>
                 </head>
                 <body>
