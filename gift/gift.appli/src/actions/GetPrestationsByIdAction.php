@@ -20,7 +20,7 @@ class GetPrestationsByIdAction extends AbstractAction {
         $id = $args['id'];
         $prestaService = new PrestationsService();
         $prestation = $prestaService->getPrestationById($id);
-        $cheminImage = "../../../shared/img/" . $prestation['img'];
+        $cheminImage = "../../shared/img/" . $prestation['img'];
         $html = <<<HTML
         <html lang="fr">
             <head>
