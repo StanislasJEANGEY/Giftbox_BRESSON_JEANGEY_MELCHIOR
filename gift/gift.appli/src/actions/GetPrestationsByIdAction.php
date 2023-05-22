@@ -20,7 +20,6 @@ class GetPrestationsByIdAction extends AbstractAction {
         $id = $args['id'];
         $prestaService = new PrestationsService();
         $prestation = $prestaService->getPrestationById($id);
-        $cheminImage = "../../shared/img/" . $prestation['img'];
         $html = <<<HTML
         <html lang="fr">
             <head>
@@ -34,7 +33,7 @@ class GetPrestationsByIdAction extends AbstractAction {
                 <br>
                 <p>Description : {$prestation['description']}</p>
                 <br>
-                <img src="{$cheminImage}" alt="{$cheminImage}">
+                <img src="../../shared/img/{$prestation['img']}" alt="../../shared/img/{$prestation['img']}">
                 <br>
                 <br>
                 <a href="/prestations/{$prestation['id']}/update"><button>Modifier</button></a>

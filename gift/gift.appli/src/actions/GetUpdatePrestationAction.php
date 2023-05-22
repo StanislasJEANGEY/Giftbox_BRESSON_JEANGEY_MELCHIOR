@@ -47,7 +47,7 @@ class GetUpdatePrestationAction extends AbstractAction {
 					<br>
 					<label for=categorie>Catégorie</label>
 					<select name=categorie id=categorie>
-					<option value={$prestation['cat_id']}>{$prestation['cat_id']}</option>";
+						<option value={$prestation['cat_id']}>{$prestation['cat_id']}</option>
 		HTML;
 		foreach ($categories as $categorie) {
 			$html .= "<option value={$categorie['id']}>{$categorie['libelle']}</option>";

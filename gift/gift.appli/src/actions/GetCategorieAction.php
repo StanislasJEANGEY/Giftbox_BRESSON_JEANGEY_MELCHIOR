@@ -5,6 +5,7 @@ namespace gift\app\actions;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use gift\app\services\prestations\PrestationsService as PrestationsService;
+use Slim\Routing\RouteContext;
 use Slim\Views\Twig;
 use Twig\Error\LoaderError;
 use Twig\Error\RuntimeError;
@@ -20,6 +21,13 @@ class GetCategorieAction extends AbstractAction
     public function __invoke(ServerRequestInterface $request, ResponseInterface $response, array $args) : ResponseInterface {
         $prestaService = new PrestationsService();
         $categories = $prestaService->getCategories();
+		$routeConext = RouteContext::fromRequest($request);
+		$basePath = $routeConext->getBasePath();
+		foreach ($categories as $index) {
+			$url = $routeConext->getRouteParser()->urlFor('categorie', ['id' => $categories['id']]);
+			$categories[$index]['url'] = $url;
+		}
+
         /*$html = <<<HTML
         <html lang="fr">
             <head>
