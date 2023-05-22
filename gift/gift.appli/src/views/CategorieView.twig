@@ -1,0 +1,18 @@
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8">
+        <title>Catégories</title>
+    </head>
+    <body>
+        <center><h1>Catégories</h1></center>
+        <br>
+        <ul>
+            {% for categorie in list_categ %}
+                <li><a href="/categories/{{ categorie['id'] }}">{{ categorie['libelle'] }}</a></li>
+                <br>
+            {% endfor %}
+        </ul>
+        <br>
+        <a href="/categories/add"><button>Ajouter une catégorie</button></a>
+    </body>
+</html>

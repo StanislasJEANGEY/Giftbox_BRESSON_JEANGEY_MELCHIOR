@@ -5,13 +5,14 @@ namespace gift\app\actions;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use gift\app\services\prestations\PrestationsService as PrestationsService;
+use Slim\Views\Twig;
 
 class GetCategorieAction extends AbstractAction
 {
     public function __invoke(ServerRequestInterface $request, ResponseInterface $response, array $args) : ResponseInterface {
         $prestaService = new PrestationsService();
         $categories = $prestaService->getCategories();
-        $html = <<<HTML
+        /*$html = <<<HTML
         <html lang="fr">
             <head>
                 <meta charset="UTF-8">
@@ -37,7 +38,13 @@ class GetCategorieAction extends AbstractAction
             <a href="/categories/add"><button>Ajouter une catégorie</button></a>
             </body>
         </html>
-        HTML;
+        HTML;*/
+
+        $view = Twig::fromRequest($request);
+        $html = $view->render($response, '../views/CategoriesView.twig', [
+            'categories' => $categories
+        ]);
+
         $response->getBody()->write($html);
         return $response;
     }
