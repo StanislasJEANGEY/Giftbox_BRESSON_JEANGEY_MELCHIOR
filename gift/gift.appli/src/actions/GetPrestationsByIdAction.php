@@ -7,6 +7,7 @@ use gift\app\services\prestations\PrestationsService;
 use gift\app\services\prestations\PrestationsServiceException;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
+use Slim\Views\Twig;
 
 class GetPrestationsByIdAction extends AbstractAction {
 
@@ -21,28 +22,9 @@ class GetPrestationsByIdAction extends AbstractAction {
         $prestaService = new PrestationsService();
         $prestation = $prestaService->getPrestationById($id);
         $cheminImage = "../../shared/img/" . $prestation['img'];
-        $html = <<<HTML
-        <html lang="fr">
-            <head>
-                <meta charset="UTF-8">
-                <title>Prestation</title>
-            </head>
-            <body>
-                <center><h1>{$prestation['libelle']}</h1></center>
-                <br>
-                <p>Prix : {$prestation['tarif']} €</p>
-                <br>
-                <p>Description : {$prestation['description']}</p>
-                <br>
-                <img src="{$cheminImage}" alt="{$cheminImage}">
-                <br>
-                <br>
-                <a href="/prestations/{$prestation['id']}/update"><button>Modifier</button></a>
-            </body>
-        </html>
-        HTML;
-
-		$response->getBody()->write($html);
-		return $response;
+        $view = Twig::fromRequest($request);
+        return $view->render($response, 'PrestationByIdView.twig', [
+            'cheminImage' => $cheminImage, 'prestation' => $prestation
+        ]);
 	}
 }

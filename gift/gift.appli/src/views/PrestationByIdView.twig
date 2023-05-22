@@ -1,0 +1,18 @@
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8">
+        <title>Prestation</title>
+    </head>
+    <body>
+        <center><h1>{{prestation['libelle']}}</h1></center>
+        <br>
+        <p>Prix : {{prestation['tarif']}} €</p>
+        <br>
+        <p>Description : {{prestation['description']}}</p>
+        <br>
+        <img src="{{cheminImage}}" alt="image de {{prestation.img}}">
+        <br>
+        <br>
+        <a href="/prestations/{{prestation['id']}}/update"><button>Modifier</button></a>
+    </body>
+</html>

@@ -35,5 +35,6 @@ return function (App $app) {
 	$app->get('/prestations/{id}[/]', \gift\app\actions\GetPrestationsByIdAction::class);
 	$app->get('/categories/{id:\d+}/prestations', \gift\app\actions\GetPrestationsByCategorieAction::class);
 	$app->get('/prestations/{id}/update', \gift\app\actions\GetUpdatePrestationAction::class);
-	$app->post('/prestations/{id}[/]', \gift\app\actions\GetUpdatePrestationAction::class);
+	$app->post('/prestations/{id}/update', \gift\app\actions\GetUpdatePrestationAction::class);
+	$app->post('/prestations/{id}[/]', \gift\app\actions\GetPrestationsByIdAction::class);
 };

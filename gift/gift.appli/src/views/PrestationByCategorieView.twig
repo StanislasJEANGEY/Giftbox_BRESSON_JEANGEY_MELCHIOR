@@ -1,0 +1,15 @@
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8">
+        <title>Catégorie</title>
+    </head>
+    <body>
+        <center><h1>{{categorie.libelle}}</h1></center>
+        <ul>
+            {% for presta in liste_presta %}
+                <li><a href="/prestations/{{presta.id}}"> {{presta.libelle}} </a> </li>
+                <br>
+            {% endfor %}
+        </ul>
+    </body>
+</html>

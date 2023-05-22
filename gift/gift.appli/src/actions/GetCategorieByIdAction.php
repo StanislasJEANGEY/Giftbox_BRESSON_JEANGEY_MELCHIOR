@@ -6,6 +6,7 @@ use gift\app\services\prestations\PrestationsService;
 use gift\app\services\prestations\PrestationsServiceException;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
+use Slim\Views\Twig;
 
 class GetCategorieByIdAction extends AbstractAction
 {
@@ -20,26 +21,13 @@ class GetCategorieByIdAction extends AbstractAction
 		}
         $id = $args['id'];
         $prestaService = new PrestationsService();
-        $categories = $prestaService->getCategorieById($id);
-
-        $html = <<<HTML
-        <html lang="fr">
-            <head>
-                <meta charset="UTF-8">
-                <title>Catégorie</title>
-            </head>
-            <body>
-                <center><h1>{$categories['libelle']}</h1></center>
-                <br>
-                <p>Description : {$categories['description']}</p>
-                <br>
-                <h2><a href="/categories/{$categories['id']}/prestations">Prestations</a></h2>
-            </body>
-        </html>
-        HTML;
+        $categorie = $prestaService->getCategorieById($id);
 
 
-        $response->getBody()->write($html);
-        return $response;
+        $view = Twig::fromRequest($request);
+        return $view->render($response, 'CategorieByIdView.twig', [
+            'categorie' => $categorie
+        ]);
+
     }
 }

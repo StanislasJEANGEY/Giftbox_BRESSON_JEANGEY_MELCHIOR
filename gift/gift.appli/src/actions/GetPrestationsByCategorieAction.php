@@ -6,40 +6,23 @@ use Exception;
 use gift\app\services\prestations\PrestationsService;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
+use Slim\Views\Twig;
 
 class GetPrestationsByCategorieAction extends AbstractAction {
 
     /**
      * @throws Exception
      */
-    public function __invoke(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface {
+    public function __invoke(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
+    {
         $id = $args['id'];
         $prestaService = new PrestationsService();
         $categorie = $prestaService->getCategorieById($id);
-        $html = <<<HTML
-        <html lang="fr">
-            <head>
-                <meta charset="UTF-8">
-                <title>Catégorie</title>
-            </head>
-            <body>
-                <center><h1>{$categorie['libelle']}</h1></center>
-        HTML;
 
         $prestations = $prestaService->getPrestationByCategorieId($id);
-        $html .= '<ul>';
-        foreach ($prestations as $presta) {
-            $html .= <<<HTML
-                <li><a href="/prestations/{$presta['id']}"> {$presta['libelle']} </a> </li>
-                <br>
-            HTML;
-        }
-        $html .= '</ul>';
-        $html .= <<<HTML
-            </body>
-        </html>
-        HTML;
-		$response->getBody()->write($html);
-		return $response;
-	}
+        $view = Twig::fromRequest($request);
+        return $view->render($response, 'PrestationByCategorieView.twig', [
+            'categorie' => $categorie, 'liste_presta' => $prestations
+        ]);
+    }
 }
