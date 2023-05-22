@@ -6,9 +6,17 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use gift\app\services\prestations\PrestationsService as PrestationsService;
 use Slim\Views\Twig;
+use Twig\Error\LoaderError;
+use Twig\Error\RuntimeError;
+use Twig\Error\SyntaxError;
 
 class GetCategorieAction extends AbstractAction
 {
+    /**
+     * @throws SyntaxError
+     * @throws RuntimeError
+     * @throws LoaderError
+     */
     public function __invoke(ServerRequestInterface $request, ResponseInterface $response, array $args) : ResponseInterface {
         $prestaService = new PrestationsService();
         $categories = $prestaService->getCategories();
@@ -41,11 +49,11 @@ class GetCategorieAction extends AbstractAction
         HTML;*/
 
         $view = Twig::fromRequest($request);
-        $html = $view->render($response, '../views/CategoriesView.twig', [
-            'categories' => $categories
+        return $view->render($response, 'CategorieView.twig', [
+            'list_categ' => $categories
         ]);
 
-        $response->getBody()->write($html);
-        return $response;
+        //$response->getBody()->write($html);
+        //return $response;
     }
 }
