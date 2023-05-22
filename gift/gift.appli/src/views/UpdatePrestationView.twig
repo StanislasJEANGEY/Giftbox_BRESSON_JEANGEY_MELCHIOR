@@ -18,9 +18,9 @@
             <br>
             <label for=categorie>Catégorie</label>
             <select name=categorie id=categorie>
-                {% for categorie in liste_categ %}
-                    <option value={{categorie['id']}}>{{categorie['libelle']}}</option>"
-                {% endfor %}
+                <option value={{$prestation['cat_id']}}>{{$prestation['cat_id']}}</option>
+                @foreach($categories as $categorie)
+                    <option value={{$categorie['id']}}>{{$categorie['libelle']}}</option>
             </select>
             <br>
             <button type="submit">Valider</button>
