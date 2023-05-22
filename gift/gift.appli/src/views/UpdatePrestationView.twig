@@ -11,16 +11,15 @@
             <input type=text name=libelle id=libelle value={{prestation['libelle']}}>
             <br>
             <label for=description>Description</label>
-            <input type=text name=description id=description value={{ prestation['description'] }}}>
+            <input type=text name=description id=description value={{ prestation['description'] }}>
             <br>
             <label for=prix>Prix</label>
             <input type=text name=prix id=prix value={{prestation['tarif']}}>
             <br>
             <label for=categorie>Catégorie</label>
             <select name=categorie id=categorie>
-                <option value={{$prestation['cat_id']}}>{{$prestation['cat_id']}}</option>
                 @foreach($categories as $categorie)
-                    <option value={{$categorie['id']}}>{{$categorie['libelle']}}</option>
+                    <option value={{categorie['id']}}>{{categorie['libelle']}}</option>
             </select>
             <br>
             <button type="submit">Valider</button>
