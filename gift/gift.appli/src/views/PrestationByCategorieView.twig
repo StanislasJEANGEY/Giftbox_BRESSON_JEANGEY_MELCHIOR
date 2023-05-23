@@ -5,6 +5,11 @@
     </head>
     <body>
         <center><h1>{{categorie.libelle}}</h1></center>
+        <br>
+        <a href="/"><button>Accueil</button></a>
+        <br>
+        <br>
+        <a href="/categories/{{id}}"><button>Retour</button></a>
         <ul>
             {% for presta in liste_presta %}
                 <li><a href="/prestations/{{presta.id}}"> {{presta.libelle}} </a> </li>

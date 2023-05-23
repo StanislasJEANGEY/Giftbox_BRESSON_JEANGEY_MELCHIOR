@@ -6,6 +6,8 @@
     <body>
         <center><h1>Catégories</h1></center>
         <br>
+        <a href="/"><button>Accueil</button></a>
+        <br>
         <ul>
             {% for categorie in list_categ %}
                 <li><a href="/categories/{{ categorie['id'] }}">{{ categorie['libelle'] }}</a></li>

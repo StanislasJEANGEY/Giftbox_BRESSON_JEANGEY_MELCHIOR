@@ -22,7 +22,7 @@ class GetPrestationsByCategorieAction extends AbstractAction {
         $prestations = $prestaService->getPrestationByCategorieId($id);
         $view = Twig::fromRequest($request);
         return $view->render($response, 'PrestationByCategorieView.twig', [
-            'categorie' => $categorie, 'liste_presta' => $prestations
+            'categorie' => $categorie, 'liste_presta' => $prestations, 'id' => $id
         ]);
     }
 }

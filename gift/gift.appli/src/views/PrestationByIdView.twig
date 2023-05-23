@@ -6,6 +6,11 @@
     <body>
         <center><h1>{{prestation['libelle']}}</h1></center>
         <br>
+        <a href="/"><button>Accueil</button></a>
+        <br>
+        <br>
+        <a href="/categories/{{prestation['cat_id']}}/prestations"><button>Retour</button></a>
+        <br>
         <p>Prix : {{prestation['tarif']}} €</p>
         <br>
         <p>Description : {{prestation['description']}}</p>
