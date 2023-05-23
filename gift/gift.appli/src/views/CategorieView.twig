@@ -8,7 +8,7 @@
         <br>
         <ul>
             {% for categorie in list_categ %}
-                <li><a href="/categories/{{ categorie['id'] }}">{{ categorie['libelle'] }}</a></li>
+                <li><a href="{{ url_for('categorie_by_id', { 'id':categorie.id} ) }}">{{ categorie['libelle'] }}</a></li>
                 <br>
             {% endfor %}
         </ul>
