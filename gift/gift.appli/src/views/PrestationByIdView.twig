@@ -9,7 +9,7 @@
         <a href="/"><button>Accueil</button></a>
         <br>
         <br>
-        <a href="/categories/{{prestation['cat_id']}}/prestations"><button>Retour</button></a>
+        <a href="{{ url_for('prestations_by_categorie', { 'id':prestation.id } ) }}"><button>Retour</button></a>
         <br>
         <p>Prix : {{prestation['tarif']}} €</p>
         <br>
@@ -18,6 +18,6 @@
         <img src="../../shared/img/{{prestation['img']}}" alt="image de {{prestation.img}}">
         <br>
         <br>
-        <a href="/prestations/{{prestation['id']}}/update"><button>Modifier</button></a>
+        <a href="{{ url_for('update_prestation_get', { 'id':presta.id } ) }}"><button>Modifier</button></a>
     </body>
 </html>
