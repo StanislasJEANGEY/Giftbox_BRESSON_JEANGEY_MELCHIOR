@@ -1,4 +1,5 @@
-<html lang="fr">
+{% extends 'SqueletteView.twig' %}
+{% block content %}
     <head>
         <meta charset="UTF-8">
         <title>Catégorie</title>
@@ -15,4 +16,4 @@
         <br>
         <h2><a href="{{ url_for('prestations_by_categorie', { 'id': categorie.id } ) }}">Prestations</a></h2>
     </body>
-</html>
+{% endblock %}
