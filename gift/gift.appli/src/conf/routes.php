@@ -7,8 +7,9 @@ use Slim\Psr7\Response;
 return function (App $app) {
     $app->get('[/]', function (Request $request, Response $response, array $args) {
         $html = <<<HTML
-        <html>
+        <html lang="fr">
             <head>
+                <meta charset="UTF-8">
                 <title>Accueil</title>
             </head>
             <body>
@@ -26,15 +27,15 @@ return function (App $app) {
         return $response;
     });
 
-    $app->get('/categories[/]', \gift\app\actions\GetCategorieAction::class);
-    $app->get('/categories/add[/]', \gift\app\actions\GetAddCategorieAction::class);
-    $app->post('/categories/add[/]', \gift\app\actions\GetAddCategorieAction::class);
+    $app->get('/categories[/]', \gift\app\actions\GetCategorieAction::class)->setName("categories");
+    $app->get('/categories/add[/]', \gift\app\actions\GetAddCategorieAction::class)->setName("add_categorie_get");
+    $app->post('/categories/add[/]', \gift\app\actions\GetAddCategorieAction::class)->setName("add_categorie_post");
 	//$app->get('/categories/del[/]', \gift\app\actions\GetDelCategorieAction::class);
-    $app->get('/categories/{id}[/]', \gift\app\actions\GetCategorieByIdAction::class);
+    $app->get('/categories/{id}[/]', \gift\app\actions\GetCategorieByIdAction::class)->setName("categorie_by_id");
 	//$app->get('/categories/{id}/prestations', \gift\app\actions\GetPrestationsCategorieAction::class);
-	$app->get('/prestations/{id}[/]', \gift\app\actions\GetPrestationsByIdAction::class);
-	$app->get('/categories/{id:\d+}/prestations', \gift\app\actions\GetPrestationsByCategorieAction::class);
-	$app->get('/prestations/{id}/update', \gift\app\actions\GetUpdatePrestationAction::class);
-	$app->post('/prestations/{id}/update', \gift\app\actions\GetUpdatePrestationAction::class);
-	$app->post('/prestations/{id}[/]', \gift\app\actions\GetPrestationsByIdAction::class);
+	$app->get('/prestations/{id}[/]', \gift\app\actions\GetPrestationsByIdAction::class)->setName("prestation_by_id");
+	$app->get('/categories/{id:\d+}/prestations', \gift\app\actions\GetPrestationsByCategorieAction::class)->setName("prestations_by_categorie");
+	$app->get('/prestations/{id}/update', \gift\app\actions\GetUpdatePrestationAction::class)->setName("update_prestation_get");
+	$app->post('/prestations/{id}/update', \gift\app\actions\GetUpdatePrestationAction::class)->setName("update_prestation_post");
+	$app->post('/prestations/{id}[/]', \gift\app\actions\GetPrestationsByIdAction::class)->setName("prestation_by_id_post");
 };
