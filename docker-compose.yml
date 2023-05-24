@@ -27,7 +27,7 @@ services:
 # mysql + adminer / can be replaced by mariadb
 #############################
   sql:
-   image: mariadb:latest
+   image: mysql:latest
    environment:
       - MYSQL_ROOT_PASSWORD=${DB_ROOT_PASSWORD}
       - MYSQL_DATABASE=${DB_NAME}
@@ -41,12 +41,14 @@ services:
         aliases:
           - sql.db
 
-  adminer:
-    image: adminer
+  phpmyadmin:
+    image: phpmyadmin:latest
+    environment:
+      PMA_HOST: sql
+      PMA_PORT: 3306
     ports:
-      - "8080:8080"
+      - "8080:80"
     networks:
       - giftbox.net
-
-
-
+    depends_on:
+      - sql
