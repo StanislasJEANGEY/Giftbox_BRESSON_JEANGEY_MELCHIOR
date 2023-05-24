@@ -1,0 +1,52 @@
+version: "3"
+
+networks:
+  giftbox.net:
+    driver: bridge
+
+services:
+  web:
+    image: canals/php:latest
+
+    ports:
+      - "80:80"
+    volumes :
+      - .\gift\gift.appli\public:/var/www/html
+      - .\gift\shared\img:/var/www/html/img
+      - .\gift\gift.appli\src:/var/www/src
+    working_dir: /var/www/src
+    networks:
+      - giftbox.net
+    depends_on:
+      - sql
+
+
+
+
+#############################
+# mysql + adminer / can be replaced by mariadb
+#############################
+  sql:
+   image: mariadb:latest
+   environment:
+      - MYSQL_ROOT_PASSWORD=${DB_ROOT_PASSWORD}
+      - MYSQL_DATABASE=${DB_NAME}
+      - MYSQL_USER=${DB_USER_NAME}
+      - MYSQL_PASSWORD=${DB_USER_PASSWORD}
+
+   ports:
+     - "3306:3306"
+   networks:
+     giftbox.net:
+        aliases:
+          - sql.db
+
+  adminer:
+    image: adminer
+    ports:
+      - "8080:8080"
+    networks:
+      - giftbox.net
+
+
+
