@@ -2,7 +2,7 @@
 {% block content %}
     <body>
         <center><h1>{{prestation['libelle']}}</h1></center>
-        <a href="{{ url_for('prestations_by_categorie', { 'id':prestation.id } ) }}"><button>Retour</button></a>
+        <a href="{{ url_for('prestations_by_categorie',  {'id':prestation.cat_id } ) }}"><button>Retour</button></a>
         <br>
         <p>Prix : {{prestation['tarif']}} €</p>
         <br>
@@ -11,7 +11,7 @@
         <img src="../../img/{{prestation['img']}}" alt="image de {{prestation.img}}">
         <br>
         <br>
-        <a href="{{ url_for('update_prestation_get', { 'id':presta.id } ) }}"><button>Modifier</button></a>
+        <a href="{{ url_for('update_prestation_get', { 'id':prestation.id } ) }}"><button>Modifier</button></a>
         <br>
         <br>
     </body>
