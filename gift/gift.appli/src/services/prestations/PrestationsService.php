@@ -74,13 +74,20 @@ class PrestationsService
 		}
 	}
 
-    public function getCreateCategorie(String $name, String $description) : int {
-        $categorie = new Categorie();
-        $categorie->libelle = $name;
-        $categorie->description = $description;
-        $categorie->save();
-        return $categorie->id;
-    }
+	/**
+	 * @throws PrestationsServiceException
+	 */
+	public function getCreateCategorie(array $attributs) : int {
+		try {
+			$categorie = new Categorie();
+			$categorie->libelle = $attributs['libelle'];
+			$categorie->description = $attributs['description'];
+			$categorie->save();
+			return $categorie->id;
+		} catch (QueryException $e) {
+			throw new PrestationsServiceException("Erreur lors de la création de la catégorie", 500, $e);
+		}
+	}
 
 	/**
 	 * @throws PrestationsServiceException
