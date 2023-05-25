@@ -1,10 +1,7 @@
-<html lang="fr">
+{% extends 'SqueletteView.twig' %}
+{% block content %}
     <body>
         <center><h1>{{prestation['libelle']}}</h1></center>
-        <br>
-        <a href="/"><button>Accueil</button></a>
-        <br>
-        <br>
         <a href="{{ url_for('prestations_by_categorie', { 'id':prestation.id } ) }}"><button>Retour</button></a>
         <br>
         <p>Prix : {{prestation['tarif']}} €</p>
@@ -15,5 +12,7 @@
         <br>
         <br>
         <a href="{{ url_for('update_prestation_get', { 'id':presta.id } ) }}"><button>Modifier</button></a>
+        <br>
+        <br>
     </body>
-</html>
+{% endblock %}

@@ -2,10 +2,6 @@
 {% block content %}
     <body>
         <center><h1>{{categorie.libelle}}</h1></center>
-        <br>
-        <a href="/"><button>Accueil</button></a>
-        <br>
-        <br>
         <a href="{{ url_for('categorie_by_id', { 'id':categorie.id } ) }}"><button>Retour</button></a>
         <ul>
             {% for presta in liste_presta %}

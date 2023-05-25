@@ -2,9 +2,6 @@
 {% block content %}
     <body>
         <center><h1>Catégories</h1></center>
-        <br>
-        <a href="/"><button>Accueil</button></a>
-        <br>
         <ul>
             {% for categorie in list_categ %}
                 <li><a href="{{ url_for('categorie_by_id', { 'id':categorie.id} ) }}">{{ categorie['libelle'] }}</a></li>
