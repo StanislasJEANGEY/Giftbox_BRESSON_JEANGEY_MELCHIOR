@@ -74,20 +74,18 @@ class PrestationsService
 		}
 	}
 
-	/**
-	 * @throws PrestationsServiceException
-	 */
-	public function getCreateCategorie(array $attributs) : int {
-		try {
-			$categorie = new Categorie();
-			$categorie->libelle = $attributs['libelle'];
-			$categorie->description = $attributs['description'];
-			$categorie->save();
-			return $categorie->id;
-		} catch (QueryException $e) {
-			throw new PrestationsServiceException("Erreur lors de la création de la catégorie", 500, $e);
-		}
-	}
+    public function getCreateCategorie(array $categ_data) : void {
+        if ($categ_data['libelle'] != filter_var($categ_data['libelle'], FILTER_SANITIZE_SPECIAL_CHARS)) {
+            throw new PrestationsServiceException("Le libellé de la catégorie contient des caractères spéciaux");
+        }
+
+        if ($categ_data['description'] != filter_var($categ_data['libelle'], FILTER_SANITIZE_SPECIAL_CHARS)) {
+            throw new PrestationsServiceException("La description de la catégorie contient des caractères spéciaux");
+        }
+
+        $categorie = new Categorie($categ_data);
+        $categorie->save();
+    }
 
 	/**
 	 * @throws PrestationsServiceException
