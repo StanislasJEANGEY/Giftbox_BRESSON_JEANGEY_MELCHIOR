@@ -5,16 +5,12 @@ namespace gift\app\actions;
 use Exception;
 use gift\app\services\prestations\PrestationsService;
 use gift\app\services\prestations\PrestationsServiceException;
-use gift\app\services\utils\CsrfException;
 use gift\app\services\utils\CsrfService;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Slim\Exception\HttpBadRequestException;
 use Slim\Routing\RouteContext;
 use Slim\Views\Twig;
-use Twig\Error\LoaderError;
-use Twig\Error\RuntimeError;
-use Twig\Error\SyntaxError;
 
 class GetAddCategorieAction extends AbstractAction {
 
@@ -32,6 +28,7 @@ class GetAddCategorieAction extends AbstractAction {
 		$url = $routeContext->getRouteParser()->urlFor('categories');
 
 		$view = Twig::fromRequest($request);
+
 		if ($request->getMethod() === "POST") {
 			$data = $request->getParsedBody();
 			$data['libelle'] = filter_var($data['libelle'], FILTER_SANITIZE_STRING);
