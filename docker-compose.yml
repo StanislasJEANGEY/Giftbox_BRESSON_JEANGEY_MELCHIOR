@@ -7,13 +7,15 @@ networks:
 services:
   web:
     image: canals/php:latest
-
+    environment:
+      - http_proxy=http://www-cache.iutnc.univ-lorraine.fr:3128
+      - https_proxy=http://www-cache.iutnc.univ-lorraine.fr:3128
     ports:
-      - "80:80"
+      - "18080:80"
     volumes :
-      - .\gift\gift.appli\public:/var/www/html
-      - .\gift\shared\img:/var/www/html/img
-      - .\gift\gift.appli\src:/var/www/src
+      - ./public:/var/www/html
+      - ./img:/var/www/html/img
+      - ./src:/var/www/src
     working_dir: /var/www/src
     networks:
       - giftbox.net
@@ -35,7 +37,7 @@ services:
       - MYSQL_PASSWORD=${DB_USER_PASSWORD}
 
    ports:
-     - "3306:3306"
+     - "18082:3306"
    networks:
      giftbox.net:
         aliases:
@@ -47,7 +49,7 @@ services:
       PMA_HOST: sql
       PMA_PORT: 3306
     ports:
-      - "8080:80"
+      - "18081:80"
     networks:
       - giftbox.net
     depends_on:
