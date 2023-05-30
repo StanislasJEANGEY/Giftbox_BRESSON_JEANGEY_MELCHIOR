@@ -1,0 +1,13 @@
+{% extends "SqueletteView.twig" %}
+{% block content %}
+<h2>Créer une catégorie :</h2>
+<form class="gift_form" method="post" action="{{ url_for('add_categorie_post') }}">
+    <label for="categ_lib_input">libellé</label>
+    <input type="text" id="libelle" name="libelle" required placeholder="libellé">
+    <label for="cated_desc_input">description</label>
+    <input type="text" id="description" name="description" required placeholder="description">
+
+    <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+    <input type="submit" value="Enregistrer">
+</form>
+{% endblock %}

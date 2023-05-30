@@ -9,6 +9,8 @@ use gift\app\services\utils\Eloquent;
 
 Eloquent::init(__DIR__ . '/../src/conf/gift.db.conf.ini');
 
+session_start();
+
 /* application boostrap */
 $app = (require_once __DIR__ . '/../src/conf/bootstrap.php');
 
