@@ -40,7 +40,7 @@ return function (App $app) {
 	$app->post('/prestations/{id}/update', \gift\app\actions\GetUpdatePrestationAction::class)->setName("update_prestation_post");
     $app->get('/box[/]', \gift\app\actions\GetBoxAction::class)->setName("box");
     $app->get('/box/{id}[/]', \gift\app\actions\GetBoxByIdAction::class)->setName("box_by_id");
-    $app->get('/box/{id:\d+}/prestations', \gift\app\actions\GetPrestationsByBoxAction::class)->setName("prestations_by_box");
+    $app->get('/box/{id}/prestations', \gift\app\actions\GetPrestationsByBoxAction::class)->setName("prestations_by_box");
     //$app->get('/box/add[/]', \gift\app\actions\GetAddBoxAction::class)->setName("add_box_get");
     //$app->post('/box/add[/]', \gift\app\actions\GetAddBoxAction::class)->setName("add_box_post");
 };
