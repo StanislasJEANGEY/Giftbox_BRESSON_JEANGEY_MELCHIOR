@@ -81,7 +81,7 @@ class PrestationsService
         if ($categ_data['libelle'] != filter_var($categ_data['libelle'], FILTER_SANITIZE_SPECIAL_CHARS)) {
             throw new PrestationsServiceException("Le libellé de la catégorie contient des caractères spéciaux");
         }
-        if ($categ_data['description'] != filter_var($categ_data['libelle'], FILTER_SANITIZE_SPECIAL_CHARS)) {
+        if ($categ_data['description'] != filter_var($categ_data['description'], FILTER_SANITIZE_SPECIAL_CHARS)) {
             throw new PrestationsServiceException("La description de la catégorie contient des caractères spéciaux");
         }
         $categorie = new Categorie($categ_data);
