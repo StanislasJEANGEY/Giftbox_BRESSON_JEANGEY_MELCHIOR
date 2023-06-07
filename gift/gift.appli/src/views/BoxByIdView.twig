@@ -1,0 +1,10 @@
+{% extends 'SqueletteView.twig' %}
+{% block content %}
+    <body>
+    <center><h1>{{box.libelle}}</h1></center>
+    <a href="{{ url_for('box') }}"><button>Retour</button></a>
+    <br>
+    <p>Description : {{box.description}}</p>
+    <h2><a href="{{ url_for('prestations_by_box', { 'id': box.id } ) }}">Prestations</a></h2>
+    </body>
+{% endblock %}

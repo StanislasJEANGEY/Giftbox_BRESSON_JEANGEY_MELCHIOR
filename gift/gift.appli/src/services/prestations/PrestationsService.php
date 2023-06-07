@@ -30,6 +30,14 @@ class PrestationsService
         }
     }
 
+    public function getBoxById(int $id): array {
+        try {
+            return Box::findOrFail($id)->toArray();
+        } catch (ModelNotFoundException $e) {
+            throw new PrestationsServiceException("La catégorie $id n'existe pas", 404, $e);
+        }
+    }
+
 	/**
 	 * @throws Exception
 	 */
