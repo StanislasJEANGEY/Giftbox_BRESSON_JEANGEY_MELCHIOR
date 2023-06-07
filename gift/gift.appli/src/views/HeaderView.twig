@@ -46,9 +46,10 @@
 <header>
     <nav>
         <ul>
-            <li><a href="/">Accueil</a></li>
-            <li><a href="/categories">Catégories</a></li>
-            <li><a href="/box">Coffret</a></li>
+            <li><a href="{{ url_for('accueil') }}">Accueil</a></li>
+            <li><a href="{{ url_for('categories') }}">Catégories</a></li>
+            <li><a href="{{ url_for('box') }}">Coffret</a></li>
+            <li><a href="{{ url_for('prestations') }}">Prestation</a></li>
         </ul>
     </nav>
 </header>
