@@ -1,0 +1,12 @@
+{% extends "SqueletteView.twig" %}
+{% block content %}
+    <body>
+        <center><h1>Box</h1></center>
+        <ul>
+            {% for box in list_box %}
+                <li><a href="{{  url_for('box', {'id':box.id}) }}" >{{ box.libelle }} </a></li>
+                <br>
+            {% endfor %}
+        </ul>
+    </body>
+{% endblock %}

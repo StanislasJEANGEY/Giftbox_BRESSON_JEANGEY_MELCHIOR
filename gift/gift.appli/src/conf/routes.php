@@ -39,4 +39,5 @@ return function (App $app) {
 	$app->get('/prestations/{id}/update', \gift\app\actions\GetUpdatePrestationAction::class)->setName("update_prestation_get");
 	$app->post('/prestations/{id}/update', \gift\app\actions\GetUpdatePrestationAction::class)->setName("update_prestation_post");
     $app->get('/box[/]', \gift\app\actions\GetBoxAction::class)->setName("box");
+    $app->get('/box/{id}[/]', \gift\app\actions\GetBoxByIdAction::class)->setName("box_by_id");
 };
