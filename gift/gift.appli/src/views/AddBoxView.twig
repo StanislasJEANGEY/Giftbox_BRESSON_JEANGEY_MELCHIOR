@@ -1,0 +1,14 @@
+{%  extends "SqueletteView.twig" %}
+{% block content %}
+    <h1>Créer une Boxe</h1>
+    <form class="gift_form" method="post" action="{{ url_for('add_box') }}">
+        <label for="libelle">Libellé</label>
+        <input type="text" id="libelle" required placeholder="libellé">
+        <label for="description">Description</label>
+        <input type="text" id="description" required placeholder="description">
+        <label for="prix">Prix</label>
+        <input type="number" id="prix" required placeholder="prix">
+        <label for="message">Message cadeau</label>
+        <input type="text" id="message" required placeholder="message">
+    </form>
+{% endblock %}
