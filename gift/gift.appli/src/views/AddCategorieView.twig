@@ -2,9 +2,9 @@
 {% block content %}
     <h2>Créer une catégorie :</h2>
     <form class="gift_form" method="post" action="{{ url_for('add_categorie_post') }}">
-        <label for="libelle">libellé</label>
+        <label for="libelle">Libellé</label>
         <input type="text" id="libelle" name="libelle" required placeholder="libellé">
-        <label for="description">description</label>
+        <label for="description">Description</label>
         <input type="text" id="description" name="description" required placeholder="description">
 
         <input type="hidden" name="csrf_token" value="{{ csrf_token }}">

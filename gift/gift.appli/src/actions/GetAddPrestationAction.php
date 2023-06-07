@@ -12,7 +12,7 @@ use Slim\Exception\HttpBadRequestException;
 use Slim\Routing\RouteContext;
 use Slim\Views\Twig;
 
-class GetAddCategorieAction extends AbstractAction {
+class GetAddPrestationAction {
 
 	/**
 	 * @param ServerRequestInterface $request
@@ -21,24 +21,27 @@ class GetAddCategorieAction extends AbstractAction {
 	 * @return ResponseInterface
 	 */
 	public function __invoke(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface {
+		// Formulaire sur lequel on peut créer une nouvelle prestation
 		$prestaService = new PrestationsService();
+		$prestations = $prestaService->getPrestations();
 
 		$routeContext = RouteContext::fromRequest($request);
-		$url = $routeContext->getRouteParser()->urlFor('categories');
+		$url = $routeContext->getRouteParser()->urlFor('prestations');
 
 		$view = Twig::fromRequest($request);
 
-		if ($request->getMethod() === "POST") {
+		if ($request->getMethod() === 'POST') {
 			$data = $request->getParsedBody();
-			$data['libelle'] = filter_var($data['libelle'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+			$data['tarif'] = filter_var($data['tarif'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 			$data['description'] = filter_var($data['description'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+			$data['img'] = filter_var($data['img'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 			try {
 				CsrfService::check($data['csrf_token']);
 			} catch (Exception $e) {
 				throw new HttpBadRequestException($request, $e->getMessage());
 			}
 			try {
-				$prestaService->getCreateCategorie($data);
+				$prestaService->getCreatePrestation($data);
 			} catch (PrestationsServiceException $e) {
 				throw new HttpBadRequestException($request, $e->getMessage());
 			}
@@ -46,7 +49,8 @@ class GetAddCategorieAction extends AbstractAction {
 		} else {
 			try {
 				$csrf = CsrfService::generate();
-				$view->render($response, 'AddCategorieView.twig', [
+				$view->render($response, 'AddPrestationView.twig', [
+					'prestations' => $prestations,
 					'csrf_token' => $csrf
 				]);
 			} catch (Exception $e) {
