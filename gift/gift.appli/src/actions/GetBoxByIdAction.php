@@ -22,7 +22,6 @@ class GetBoxByIdAction extends AbstractAction{
         $boxService = new BoxService();
         $box = $boxService->getBoxById($id);
 
-
         $view = Twig::fromRequest($request);
         return $view->render($response, 'BoxByIdView.twig', [
             'box' => $box

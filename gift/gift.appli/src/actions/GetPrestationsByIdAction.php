@@ -24,6 +24,7 @@ class GetPrestationsByIdAction extends AbstractAction {
         $id = $args['id'];
         $prestaService = new PrestationsService();
         $prestation = $prestaService->getPrestationById($id);
+
         $view = Twig::fromRequest($request);
 
         if (str_contains($previousURL, 'box')){

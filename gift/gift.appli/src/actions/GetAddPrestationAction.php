@@ -12,7 +12,7 @@ use Slim\Exception\HttpBadRequestException;
 use Slim\Routing\RouteContext;
 use Slim\Views\Twig;
 
-class GetAddPrestationAction {
+class GetAddPrestationAction extends AbstractAction {
 
 	/**
 	 * @param ServerRequestInterface $request
@@ -21,9 +21,7 @@ class GetAddPrestationAction {
 	 * @return ResponseInterface
 	 */
 	public function __invoke(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface {
-		// Formulaire sur lequel on peut créer une nouvelle prestation
 		$prestaService = new PrestationsService();
-		$prestations = $prestaService->getPrestations();
 
 		$routeContext = RouteContext::fromRequest($request);
 		$url = $routeContext->getRouteParser()->urlFor('prestations');
@@ -50,7 +48,6 @@ class GetAddPrestationAction {
 			try {
 				$csrf = CsrfService::generate();
 				$view->render($response, 'AddPrestationView.twig', [
-					'prestations' => $prestations,
 					'csrf_token' => $csrf
 				]);
 			} catch (Exception $e) {

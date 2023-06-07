@@ -4,11 +4,12 @@
         <center><h1>Catégories</h1></center>
         <ul>
             {% for categorie in list_categ %}
-                <li><a href="{{ url_for('categorie_by_id', { 'id':categorie.id} ) }}">{{ categorie['libelle'] }}</a></li>
+                <li><a href="{{ url_for('categorie_by_id', { 'id':categorie.id } ) }}">{{ categorie['libelle'] }}</a></li>
                 <br>
             {% endfor %}
         </ul>
-        <br>
         <a href="{{ url_for('add_categorie_get') }}"><button>Ajouter une catégorie</button></a>
+        <br>
+        <br>
     </body>
 {% endblock %}

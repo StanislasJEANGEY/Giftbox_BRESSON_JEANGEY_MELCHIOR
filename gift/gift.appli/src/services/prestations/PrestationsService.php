@@ -112,13 +112,15 @@ class PrestationsService
 	/**
 	 * @throws PrestationsServiceException
 	 */
-	public function getCreatePrestation(object|array $data): void {
-		try {
-			$prestation = new Prestation($data);
-			$prestation->save();
-		} catch (QueryException $e) {
-			throw new PrestationsServiceException("La prestation n'a pas pu être créée", 500, $e);
+	public function getCreatePrestation(object|array $presta_data): void {
+		if ($presta_data['prix'] != filter_var($presta_data['prix'], FILTER_SANITIZE_SPECIAL_CHARS)) {
+			throw new PrestationsServiceException("Le prix de la prestation contient des caractères spéciaux");
 		}
+		if ($presta_data['description'] != filter_var($presta_data['description'], FILTER_SANITIZE_SPECIAL_CHARS)) {
+			throw new PrestationsServiceException("La description de la prestation contient des caractères spéciaux");
+		}
+		$prestation = new Prestation($presta_data);
+		$prestation->save();
 	}
 
 
