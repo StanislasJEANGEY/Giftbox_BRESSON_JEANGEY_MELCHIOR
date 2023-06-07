@@ -2,7 +2,7 @@
 {% block content %}
     <body>
         <center><h1>{{prestation['libelle']}}</h1></center>
-        <a href="{{ url_for('prestations_by_categorie',  {'id':prestation.cat_id } ) }}"><button>Retour</button></a>
+        <a href="{{ url_for(previousURL,  {'id':id_url } ) }}"><button>Retour</button></a>
         <br>
         <p>Prix : {{prestation['tarif']}} €</p>
         <br>

@@ -17,13 +17,14 @@ class GetPrestationsByBoxAction
     public function __invoke(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
     {
         $id = $args['id'];
+        $url = 'prestations_by_box';
         $boxService = new BoxService();
         $box = $boxService->getBoxById($id);
 
         $prestations = $boxService->getPrestationByBoxId($id);
         $view = Twig::fromRequest($request);
         return $view->render($response, 'PrestationByBoxView.twig', [
-            'box' => $box, 'liste_presta' => $prestations, 'id' => $id
+            'box' => $box, 'liste_presta' => $prestations, 'id' => $id, 'url' => $url
         ]);
     }
 }
