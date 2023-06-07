@@ -13,6 +13,9 @@ return function (App $app) {
 	//$app->get('/categories/del[/]', \gift\app\actions\GetDelCategorieAction::class);
     $app->get('/categories/{id}[/]', \gift\app\actions\GetCategorieByIdAction::class)->setName("categorie_by_id");
 	//$app->get('/categories/{id}/prestations', \gift\app\actions\GetPrestationsCategorieAction::class);
+	$app->get('/prestations[/]', \gift\app\actions\GetPrestationAction::class)->setName("prestations");
+	$app->get('/prestations/add[/]', \gift\app\actions\GetAddPrestationAction::class)->setName("add_prestation_get");
+	$app->post('/prestations/add[/]', \gift\app\actions\GetAddPrestationAction::class)->setName("add_prestation_post");
 	$app->get('/prestations/{id}[/]', \gift\app\actions\GetPrestationsByIdAction::class)->setName("prestation_by_id");
 	$app->post('/prestations/{id}[/]', \gift\app\actions\GetPrestationsByIdAction::class)->setName("prestation_by_id_post");
 	$app->get('/categories/{id:\d+}/prestations', \gift\app\actions\GetPrestationsByCategorieAction::class)->setName("prestations_by_categorie");

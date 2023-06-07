@@ -15,6 +15,14 @@ class PrestationsService
         return Categorie::all()->toArray();
     }
 
+	public function getPrestations(): array {
+		return Prestation::all()->toArray();
+	}
+
+    public function getBox(): array {
+        return Box::all()->toArray();
+    }
+
 	/**
 	 * @throws Exception
 	 */
@@ -101,6 +109,17 @@ class PrestationsService
 		}
 	}
 
+	/**
+	 * @throws PrestationsServiceException
+	 */
+	public function getCreatePrestation(object|array $data): void {
+		try {
+			$prestation = new Prestation($data);
+			$prestation->save();
+		} catch (QueryException $e) {
+			throw new PrestationsServiceException("La prestation n'a pas pu être créée", 500, $e);
+		}
+	}
 
 
 }

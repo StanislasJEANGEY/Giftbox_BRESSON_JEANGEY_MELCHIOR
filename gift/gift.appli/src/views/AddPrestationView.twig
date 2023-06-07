@@ -1,0 +1,14 @@
+{% extends "SqueletteView.twig" %}
+{% block head %}
+    <h2>Créer une prestation :</h2>
+    <form class="gift_form" method="post" action="{{ url_for('add_prestation_post') }}">
+        <label for="prest_price_input">Prix</label>
+        <input type="number" name="prest_price_input" id="prest_price_input" placeholder="prix" required>
+        <label for="cated_desc_input">Description</label>
+        <input type="text" id="description" name="description" required placeholder="description">
+        <label for="cated_img_input">Image</label>
+        <input type="file" name="cated_img_input" id="cated_img_input" required>
+
+        <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+        <input type="submit" value="Enregistrer">
+{% endblock %}
