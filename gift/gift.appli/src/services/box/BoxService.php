@@ -26,12 +26,12 @@ class BoxService {
 		$box = new Box();
 		$box->libelle = $data['libelle'];
 		$box->description = $data['description'];
-		$box->kdo = $data['kdo'];
+        $box->kdo = $data['kdo'] ?? 0;
 		$box->message_kdo = $data['message_kdo'];
-		$box->url = $data['url'];
-		$box->montant = 0;
-		$box->token = $csrfService->generate();
-		$box->status = Box::CREATED;
+		//$box->url = $data['url'];
+        $box->montant = 0;
+        $box->token = $csrfService->generate();
+		$box->statut = Box::CREATED;
 		$box->id = Uuid::uuid4()->toString();
 		$box->save();
 

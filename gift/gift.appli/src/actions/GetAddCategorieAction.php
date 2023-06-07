@@ -22,7 +22,6 @@ class GetAddCategorieAction extends AbstractAction {
 	 */
 	public function __invoke(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface {
 		$prestaService = new PrestationsService();
-		$categories = $prestaService->getCategories();
 
 		$routeContext = RouteContext::fromRequest($request);
 		$url = $routeContext->getRouteParser()->urlFor('categories');
@@ -48,7 +47,6 @@ class GetAddCategorieAction extends AbstractAction {
 			try {
 				$csrf = CsrfService::generate();
 				$view->render($response, 'AddCategorieView.twig', [
-					'categories' => $categories,
 					'csrf_token' => $csrf
 				]);
 			} catch (Exception $e) {
