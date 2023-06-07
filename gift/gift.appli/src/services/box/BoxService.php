@@ -33,4 +33,10 @@ class BoxService {
 		return $box;
 	}
 
+	public function addPrestationToBox($idBox, $idPrestation): void {
+		$box = Box::find($idBox);
+		$box->prestations()->attach($idPrestation);
+		$box->save();
+	}
+
 }
