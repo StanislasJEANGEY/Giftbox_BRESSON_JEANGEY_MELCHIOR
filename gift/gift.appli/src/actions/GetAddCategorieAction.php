@@ -47,7 +47,7 @@ class GetAddCategorieAction extends AbstractAction {
 		} else {
 			try {
 				$csrf = CsrfService::generate();
-				$view->render($response, 'CategorieCreateView.twig', [
+				$view->render($response, 'AddCategorieView.twig', [
 					'categories' => $categories,
 					'csrf_token' => $csrf
 				]);
