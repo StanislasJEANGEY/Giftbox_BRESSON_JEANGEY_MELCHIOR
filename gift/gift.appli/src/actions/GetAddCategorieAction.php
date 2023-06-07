@@ -31,8 +31,8 @@ class GetAddCategorieAction extends AbstractAction {
 
 		if ($request->getMethod() === "POST") {
 			$data = $request->getParsedBody();
-			$data['libelle'] = filter_var($data['libelle'], FILTER_SANITIZE_STRING);
-			$data['description'] = filter_var($data['description'], FILTER_SANITIZE_STRING);
+			$data['libelle'] = filter_var($data['libelle'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+			$data['description'] = filter_var($data['description'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 			try {
 				CsrfService::check($data['csrf_token']);
 			} catch (Exception $e) {
