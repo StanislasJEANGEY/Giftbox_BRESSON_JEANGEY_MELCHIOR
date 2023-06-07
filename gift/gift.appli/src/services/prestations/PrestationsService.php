@@ -30,7 +30,7 @@ class PrestationsService
         }
     }
 
-    public function getBoxById(int $id): array {
+    public function getBoxById(string $id): array {
         try {
             return Box::findOrFail($id)->toArray();
         } catch (ModelNotFoundException $e) {
