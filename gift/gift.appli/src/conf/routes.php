@@ -5,28 +5,8 @@ use Slim\Psr7\Response;
 
 
 return function (App $app) {
-    $app->get('[/]', function (Request $request, Response $response, array $args) {
-        $html = <<<HTML
-        <html lang="fr">
-            <head>
-                <meta charset="UTF-8">
-                <title>Accueil</title>
-            </head>
-            <body>
-                <center><h1>Accueil</h1></center>
-                <h2>
-                    <ul>
-                        <li>1. <a href="/categories">Categories</a></li>
-                    </ul>
-                </h2>
-            </body>
-        </html>
-        HTML;
 
-        $response->getBody()->write($html);
-        return $response;
-    });
-
+    $app->get('[/]', \gift\app\actions\GetAccueilAction::class)->setName("accueil");
     $app->get('/categories[/]', \gift\app\actions\GetCategorieAction::class)->setName("categories");
     $app->get('/categories/add[/]', \gift\app\actions\GetAddCategorieAction::class)->setName("add_categorie_get");
     $app->post('/categories/add[/]', \gift\app\actions\GetAddCategorieAction::class)->setName("add_categorie_post");
