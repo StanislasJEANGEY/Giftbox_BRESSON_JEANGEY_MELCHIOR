@@ -26,6 +26,5 @@ class GetBoxByIdAction extends AbstractAction{
         return $view->render($response, 'BoxByIdView.twig', [
             'box' => $box
         ]);
-
     }
 }
