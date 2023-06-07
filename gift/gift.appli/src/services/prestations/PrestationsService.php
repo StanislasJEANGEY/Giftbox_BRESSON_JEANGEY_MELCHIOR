@@ -3,6 +3,7 @@
 namespace gift\app\services\prestations;
 
 use Exception;
+use gift\app\models\Box;
 use gift\app\models\Prestation;
 use gift\app\models\Categorie;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
@@ -12,6 +13,10 @@ class PrestationsService
 {
     public function getCategories(): array {
         return Categorie::all()->toArray();
+    }
+
+    public function getBox(): array {
+        return Box::all()->toArray();
     }
 
 	/**

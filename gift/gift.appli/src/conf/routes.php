@@ -38,5 +38,5 @@ return function (App $app) {
 	$app->get('/categories/{id:\d+}/prestations', \gift\app\actions\GetPrestationsByCategorieAction::class)->setName("prestations_by_categorie");
 	$app->get('/prestations/{id}/update', \gift\app\actions\GetUpdatePrestationAction::class)->setName("update_prestation_get");
 	$app->post('/prestations/{id}/update', \gift\app\actions\GetUpdatePrestationAction::class)->setName("update_prestation_post");
-
+    $app->get('/box[/]', \gift\app\actions\GetBoxAction::class)->setName("box");
 };
