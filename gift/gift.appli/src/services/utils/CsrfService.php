@@ -20,6 +20,7 @@ class CsrfService
 	 */
 	public static function check(?string $token): void {
 		$session_token = $_SESSION['csrf_token'] ?? null;
+		if ($session_token) unset($_SESSION['csrf_token']);
 		if (is_null($token) || ($session_token !== $token)) {
 			throw new CsrfException("Le token n'est pas valide");
 		}
