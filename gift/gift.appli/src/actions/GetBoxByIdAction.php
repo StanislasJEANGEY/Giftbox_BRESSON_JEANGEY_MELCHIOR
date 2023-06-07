@@ -1,6 +1,7 @@
 <?php
 namespace gift\app\actions;
 use Exception;
+use gift\app\services\box\BoxService;
 use gift\app\services\prestations\PrestationsService;
 use gift\app\services\prestations\PrestationsServiceException;
 use Psr\Http\Message\ResponseInterface;
@@ -18,8 +19,8 @@ class GetBoxByIdAction extends AbstractAction{
             throw new PrestationsServiceException("L'id n'existe pas", 400);
         }
         $id = $args['id'];
-        $prestaService = new PrestationsService();
-        $box = $prestaService->getBoxById($id);
+        $boxService = new BoxService();
+        $box = $boxService->getBoxById($id);
 
 
         $view = Twig::fromRequest($request);

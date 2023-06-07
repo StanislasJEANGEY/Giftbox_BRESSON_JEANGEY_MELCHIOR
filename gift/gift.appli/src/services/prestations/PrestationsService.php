@@ -15,24 +15,12 @@ class PrestationsService
         return Categorie::all()->toArray();
     }
 
-    public function getBox(): array {
-        return Box::all()->toArray();
-    }
-
 	/**
 	 * @throws Exception
 	 */
 	public function getCategorieById(int $id): array {
         try {
             return Categorie::findOrFail($id)->toArray();
-        } catch (ModelNotFoundException $e) {
-            throw new PrestationsServiceException("La catégorie $id n'existe pas", 404, $e);
-        }
-    }
-
-    public function getBoxById(string $id): array {
-        try {
-            return Box::findOrFail($id)->toArray();
         } catch (ModelNotFoundException $e) {
             throw new PrestationsServiceException("La catégorie $id n'existe pas", 404, $e);
         }
