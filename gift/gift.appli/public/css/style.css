@@ -19,6 +19,20 @@ header {
     padding: 10px;
 }
 
+.header-button {
+    position: relative; /* Permet de positionner le pseudo-élément par rapport à ce conteneur */
+}
+
+.header-button:not(:last-child)::after {
+    content: "|"; /* Contenu visuel de la séparation */
+    position: absolute; /* Positionne le pseudo-élément par rapport au conteneur */
+    top: 50%; /* Position verticale au milieu du bouton */
+    right: -10px; /* Ajuste la position horizontale de la séparation */
+    transform: translateY(-50%); /* Centre la séparation verticalement */
+    font-size: 25px;
+
+}
+
 nav {
     display: flex;
     justify-content: space-between;
