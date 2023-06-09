@@ -2,16 +2,17 @@
 {% block content %}
     <h1>Ajouter des Prestations</h1>
 
-    <form action="{{ url_for('add_prestation_post') }}" method="post">
+    <form action="{{ url_for('{# todo #}') }}" method="post">
         <ul>
             {% for i in range (1, prestations|length) %}
                 <li>
-                    <input type="checkbox" name="checkbox{{ i }}" id="checkbox{{ i }}">
-                    <label for="checkbox{{ i }}">{{ prestations[i-1].libelle }}</label>
+                    <input type="number" name="number{{ i }}" id="number{{ i }}" value="{{ prestations[i-1].id }}">
+                    <label for="number{{ i }}">{{ prestations[i-1].libelle }}</label>
                 </li>
             {% endfor %}
         </ul>
         <input type="submit" value="Ajouter">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
     </form>
 
     <br>
