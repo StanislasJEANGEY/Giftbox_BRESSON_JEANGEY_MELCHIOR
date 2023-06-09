@@ -30,6 +30,7 @@ class GetAddPrestationAction extends AbstractAction {
 
 		if ($request->getMethod() === 'POST') {
 			$data = $request->getParsedBody();
+			$data['libelle'] = filter_var($data['libelle'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 			$data['tarif'] = filter_var($data['tarif'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 			$data['description'] = filter_var($data['description'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 			$data['img'] = filter_var($data['img'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);

@@ -2,6 +2,8 @@
 {% block content %}
     <h2>Créer une prestation :</h2>
     <form class="gift_form" method="post" action="{{ url_for('add_prestation_post') }}">
+        <label for="libelle">Libelle</label>
+        <input type="text" id="libelle" name="libelle" required placeholder="libelle">
         <label for="prest_price_input">Prix</label>
         <input type="number" name="prest_price_input" id="prest_price_input" placeholder="prix" required>
         <label for="description">Description</label>

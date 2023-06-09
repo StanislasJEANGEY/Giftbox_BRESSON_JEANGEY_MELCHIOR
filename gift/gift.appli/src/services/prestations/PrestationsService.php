@@ -8,6 +8,7 @@ use gift\app\models\Prestation;
 use gift\app\models\Categorie;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Database\QueryException;
+use Ramsey\Uuid\Uuid;
 
 class PrestationsService
 {
@@ -113,13 +114,19 @@ class PrestationsService
 	 * @throws PrestationsServiceException
 	 */
 	public function getCreatePrestation(object|array $presta_data): void {
-		if ($presta_data['prix'] != filter_var($presta_data['prix'], FILTER_SANITIZE_SPECIAL_CHARS)) {
+		if ($presta_data['libelle'] != filter_var($presta_data['libelle'], FILTER_SANITIZE_SPECIAL_CHARS)) {
+			throw new PrestationsServiceException("Le libellé de la prestation contient des caractères spéciaux");
+		}
+		if ($presta_data['tarif'] != filter_var($presta_data['tarif'], FILTER_SANITIZE_SPECIAL_CHARS)) {
 			throw new PrestationsServiceException("Le prix de la prestation contient des caractères spéciaux");
 		}
 		if ($presta_data['description'] != filter_var($presta_data['description'], FILTER_SANITIZE_SPECIAL_CHARS)) {
 			throw new PrestationsServiceException("La description de la prestation contient des caractères spéciaux");
 		}
+
 		$prestation = new Prestation($presta_data);
+		$prestation->id = Uuid::uuid4()->toString();
+		$prestation->image = $presta_data['image']->store('img');
 		$prestation->save();
 	}
 
