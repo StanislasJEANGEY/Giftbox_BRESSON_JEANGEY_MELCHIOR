@@ -28,6 +28,7 @@ header {
     position: absolute; /* Positionne le pseudo-élément par rapport au conteneur */
     top: 50%; /* Position verticale au milieu du bouton */
     right: -10px; /* Ajuste la position horizontale de la séparation */
+    top: 10px;
     transform: translateY(-50%); /* Centre la séparation verticalement */
     font-size: 25px;
 
