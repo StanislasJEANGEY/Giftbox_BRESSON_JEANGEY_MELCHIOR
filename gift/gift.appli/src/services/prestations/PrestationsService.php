@@ -126,5 +126,9 @@ class PrestationsService
 		$prestation->save();
 	}
 
+    public function getAddPrestationToBox(object|array $data){
+        //todo ajouter dans la base données
+    }
+
 
 }

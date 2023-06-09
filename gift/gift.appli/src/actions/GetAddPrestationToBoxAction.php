@@ -2,9 +2,14 @@
 
 namespace gift\app\actions;
 
+use Exception;
 use gift\app\services\prestations\PrestationsService;
+use gift\app\services\prestations\PrestationsServiceException;
+use gift\app\services\utils\CsrfService;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
+use Slim\Exception\HttpBadRequestException;
+use Slim\Routing\RouteContext;
 use Slim\Views\Twig;
 
 class GetAddPrestationToBoxAction extends AbstractAction
@@ -13,10 +18,36 @@ class GetAddPrestationToBoxAction extends AbstractAction
     public function __invoke(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
     {
         $prestationService = new PrestationsService();
-        $prestation = $prestationService->getPrestations();
+        $prestations = $prestationService->getPrestations();
+
+        $routeContext = RouteContext::fromRequest($request);
+        $url = $routeContext->getRouteParser()->urlFor('prestations');
+
+
         $view = Twig::fromRequest($request);
-        return $view->render($response, 'AddPrestationToView.twig', [
-            'prestations' => $prestation
-        ]);
+        if ($request->getMethod() === 'POST') {
+            $data = $request->getParsedBody();
+            try {
+                CsrfService::check($data['csrf_token']);
+            } catch (Exception $e) {
+                throw new HttpBadRequestException($request, $e->getMessage());
+            }
+            try {
+                $prestationService->getAddPrestationToBox($data);
+            } catch (PrestationsServiceException $e) {
+                throw new HttpBadRequestException($request, $e->getMessage());
+            }
+            return $response->withHeader('Location', $url)->withStatus(302);
+        } else {
+            try {
+                $csrf = CsrfService::generate();
+                $view->render($response, 'AddPrestationView.twig', [
+                    'csrf_token' => $csrf, 'prestations' => $prestations
+                ]);
+            } catch (Exception $e) {
+                throw new HttpBadRequestException($request, $e->getMessage());
+            }
+        }
+        return $response;
     }
 }
