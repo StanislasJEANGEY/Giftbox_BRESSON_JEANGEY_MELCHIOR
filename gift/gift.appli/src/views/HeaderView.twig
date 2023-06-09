@@ -3,53 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <title>Mon site</title>
-    <style>
-        /* Styles pour le header et la barre de navigation */
-        header {
-            background-color: #333;
-            color: #fff;
-            padding: 10px;
-        }
-
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        nav ul {
-            list-style: none;
-            display: flex;
-        }
-
-        nav ul li {
-            margin-right: 10px;
-        }
-
-        nav a {
-            color: #fff;
-            text-decoration: none;
-            padding: 5px;
-            font-size: larger;
-        }
-
-        nav ul li a:hover:not(.active) {
-            background-color: #111;
-        }
-
-        .active {
-            background-color: #4CAF50;
-        }
-    </style>
-</head>
+    </head>
 <body>
 <header>
     <nav>
         <ul>
-            <li><a href="{{ url_for('accueil') }}">Accueil</a></li>
-            <li><a href="{{ url_for('categories') }}">Catégories</a></li>
-            <li><a href="{{ url_for('box') }}">Coffret</a></li>
-            <li><a href="{{ url_for('prestations') }}">Prestation</a></li>
+            <li class="header-button"><a href="{{ url_for('accueil') }}">Accueil</a></li>
+            <li class="header-button"><a href="{{ url_for('categories') }}">Catégories</a></li>
+            <li class="header-button"><a href="{{ url_for('box') }}">Coffret</a></li>
+            <li class="header-button"   ><a href="{{ url_for('prestations') }}">Prestation</a></li>
         </ul>
     </nav>
 </header>
