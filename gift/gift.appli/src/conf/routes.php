@@ -26,4 +26,6 @@ return function (App $app) {
     $app->get('/box/{id}/prestations', \gift\app\actions\GetPrestationsByBoxAction::class)->setName("prestations_by_box");
     $app->get('/addPrestationToBox[/]', \gift\app\actions\GetAddPrestationToBoxAction::class)->setName("add_prestation_to_box_get");
     $app->post('/addPrestationToBox[/]', \gift\app\actions\GetAddPrestationToBoxAction::class)->setName("add_prestation_to_box_post");
+    $app->get('/addPrestationToCateg[/]', \gift\app\actions\GetAddPrestationToCategorieAction::class)->setName("add_prestation_to_categorie_get");
+    $app->post('/addPrestationToCateg[/]', \gift\app\actions\GetAddPrestationToCategorieAction::class)->setName("add_prestation_to_categorie_post");
 };
