@@ -20,10 +20,6 @@ class PrestationsService
 		return Prestation::all()->toArray();
 	}
 
-    public function getBox(): array {
-        return Box::all()->toArray();
-    }
-
 	/**
 	 * @throws Exception
 	 */

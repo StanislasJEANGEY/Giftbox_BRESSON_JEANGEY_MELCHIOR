@@ -1,0 +1,15 @@
+{% extends 'SqueletteView.twig' %}
+{% block content %}
+    <h1>Ajouter des Prestations</h1>
+
+    <ul>
+        {% for i in range (1, prestations|length) %}
+            <li>
+                <input type="checkbox" name="checkbox{{ i }}" id="checkbox{{ i }}">
+                <label for="checkbox{{ i }}">{{ prestations[i-1].libelle }}</label>
+            </li>
+        {% endfor %}
+    </ul>
+
+    <a href="{{ url_for('add_prestation_get') }}"><button>Créer une prestation</button></a>
+{% endblock %}
