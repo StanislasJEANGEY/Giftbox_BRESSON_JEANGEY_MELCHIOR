@@ -21,7 +21,7 @@ class GetAddPrestationToBoxAction extends AbstractAction
         $prestations = $prestationService->getPrestations();
 
         $routeContext = RouteContext::fromRequest($request);
-        $url = $routeContext->getRouteParser()->urlFor('prestations');
+        $url = $routeContext->getRouteParser()->urlFor('box_by_id');
 
 
         $view = Twig::fromRequest($request);
@@ -41,7 +41,7 @@ class GetAddPrestationToBoxAction extends AbstractAction
         } else {
             try {
                 $csrf = CsrfService::generate();
-                $view->render($response, 'AddPrestationToView.twig', [
+                $view->render($response, 'AddPrestationToBoxView.twig', [
                     'csrf_token' => $csrf, 'prestations' => $prestations
                 ]);
             } catch (Exception $e) {

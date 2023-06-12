@@ -1,0 +1,21 @@
+{% extends 'SqueletteView.twig' %}
+{% block content %}
+    <h1>Ajouter des Prestations</h1>
+
+    <form action="{{ url_for('add_prestation_to_box_post') }}" method="post">
+        <ul>
+            {% for prestation in prestations %}
+                <li>
+                    <input type="number" name="{{ prestation.id }}" id="{{ prestation.id }}">
+                    <label for="{{ prestation.id }}">{{ prestation.libelle }}</label>
+                </li>
+            {% endfor %}
+        </ul>
+        <input type="submit" value="Ajouter">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+    </form>
+
+    <br>
+
+    <a href="{{ url_for('add_prestation_get') }}"><button>Créer une prestation</button></a>
+{% endblock %}

@@ -15,7 +15,7 @@ class GetAddPrestationToCategorieAction extends AbstractAction
         $prestationService = new PrestationsService();
         $prestation = $prestationService->getPrestations();
         $view = Twig::fromRequest($request);
-        return $view->render($response, 'AddPrestationToView.twig', [
+        return $view->render($response, 'AddPrestationToBoxView.twig', [
             'prestations' => $prestation
         ]);
     }
