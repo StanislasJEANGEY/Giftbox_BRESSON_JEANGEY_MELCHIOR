@@ -10,6 +10,7 @@ use gift\app\services\box\BoxService;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Database\QueryException;
 use Ramsey\Uuid\Uuid;
+use Slim\Psr7\UploadedFile;
 use function MongoDB\BSON\toJSON;
 
 class PrestationsService
@@ -124,11 +125,38 @@ class PrestationsService
 
 		$prestation = new Prestation($presta_data);
 		$prestation->id = Uuid::uuid4()->toString();
-		$prestation->image = $presta_data['image']->store('img');
+		$image = $presta_data['img'];
+		if ($image instanceof UploadedFile) {
+			$prestation->image = $this->uploadImage($image);
+		} else {
+			throw new PrestationsServiceException("L'image n'est pas un fichier valide.");
+		}
 		$prestation->save();
 	}
 
 
+	/**
+	 * @throws PrestationsServiceException
+	 */
+	public function uploadImage(UploadedFile $file): string {
+		if($_FILES['img'] && $_FILES['img']['error'] === UPLOAD_ERR_OK) {
+			$valid_ext = array('jpg','jpeg','png');
+			$check_ext = strtolower(substr(strrchr($_FILES['img']['name'], '.'), 1));
+			if(in_array($check_ext, $valid_ext)) {
+				$upload_dir = 'img/';
+				$upload_file = $upload_dir . $_FILES['img']['name'];
+				if(move_uploaded_file($_FILES['img']['tmp_name'], $upload_file)) {
+					return $upload_file;
+				} else {
+					throw new PrestationsServiceException("Erreur lors de l'upload de l'image");
+				}
+			} else {
+				throw new PrestationsServiceException("Le fichier n'est pas une image");
+			}
+		} else {
+			throw new PrestationsServiceException("Erreur lors de l'upload de l'image");
+		}
+	}
 
 
 }
