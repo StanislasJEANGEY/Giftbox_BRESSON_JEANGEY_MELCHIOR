@@ -41,7 +41,7 @@ class GetAddPrestationToBoxAction extends AbstractAction
         } else {
             try {
                 $csrf = CsrfService::generate();
-                $view->render($response, 'AddPrestationView.twig', [
+                $view->render($response, 'AddPrestationToView.twig', [
                     'csrf_token' => $csrf, 'prestations' => $prestations
                 ]);
             } catch (Exception $e) {
