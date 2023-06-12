@@ -6,9 +6,11 @@ use Exception;
 use gift\app\models\Box;
 use gift\app\models\Prestation;
 use gift\app\models\Categorie;
+use gift\app\services\box\BoxService;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Database\QueryException;
 use Ramsey\Uuid\Uuid;
+use function MongoDB\BSON\toJSON;
 
 class PrestationsService
 {
@@ -126,9 +128,7 @@ class PrestationsService
 		$prestation->save();
 	}
 
-    public function getAddPrestationToBox(object|array $data){
-        //todo ajouter dans la base données
-    }
+
 
 
 }

@@ -11,6 +11,8 @@
                 </li>
             {% endfor %}
         </ul>
+        <input type="hidden" name="idBox" value="{{ idBox }}">
+
         <input type="submit" value="Ajouter">
         <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
     </form>
