@@ -5,8 +5,8 @@
 |------------------------------------------------------------|:-------------:|:------:|
 | 1. Afficher la liste des prestations                       |     Jules     |   OK   |
 | 2. Afficher le détail d'une prestation                     |       ?       |   OK   | 
-| 3. Liste de prestations par catégories                     |       ?       |   OK   |
-| 4. Liste de catégories                                     |       ?       |   OK   |
+| 3. Liste de prestations par catégories                     |   Stanislas   |   OK   |
+| 4. Liste de catégories                                     |   Stanislas   |   OK   |
 | 5. Tri par prix                                            |      ---      |  ---   |
 | 6. Création d'un coffret vide                              | Damien, Jules |   OK   |
 | 7. Ajout de prestations dans le coffret                    |   Stanislas   |  ---   |
