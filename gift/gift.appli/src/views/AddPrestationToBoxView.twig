@@ -1,5 +1,6 @@
 {% extends 'SqueletteView.twig' %}
 {% block content %}
+    <a href="{{ url_for('prestations_by_box', { 'id': idBox }) }}"><button>Retour</button></a>
     <h1>Ajouter des Prestations</h1>
 
     <form action="{{ url_for('add_prestation_to_box_post') }}" method="post">

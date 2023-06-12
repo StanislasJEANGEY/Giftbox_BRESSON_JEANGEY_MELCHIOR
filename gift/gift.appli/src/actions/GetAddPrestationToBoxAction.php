@@ -22,8 +22,6 @@ class GetAddPrestationToBoxAction extends AbstractAction
         $prestationService = new PrestationsService();
         $prestations = $prestationService->getPrestations();
 
-        $routeContext = RouteContext::fromRequest($request);
-        $url = $routeContext->getRouteParser()->urlFor('box_by_id');
 
         $previousURL = $request->getHeaderLine('Referer');
         $idBox = "";
@@ -32,6 +30,9 @@ class GetAddPrestationToBoxAction extends AbstractAction
         if ($index !== false && isset($parts[$index + 1])) {
             $idBox = $parts[$index + 1];
         }
+
+        $routeContext = RouteContext::fromRequest($request);
+        $url = $routeContext->getRouteParser()->urlFor('box_by_id',['id' => $idBox]);
 
         $view = Twig::fromRequest($request);
         if ($request->getMethod() === 'POST') {
