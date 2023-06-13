@@ -5,7 +5,8 @@
         <a href="{{ url_for('box_by_id', { 'id':box.id } ) }}"><button>Retour</button></a>
         <ul>
             {% for presta in liste_presta %}
-                <li><a href="{{ url_for('prestation_by_id', { 'id':presta.id } ) }}"> {{presta.libelle}} </a> </li>
+                <li><a href="{{ url_for('prestation_by_id', { 'id':presta.id } ) }}">{{presta.libelle}} </a></li>
+                <p>Quantité : {{ presta.contenu.quantite }}</p>
                 <br>
             {% endfor %}
         </ul>
