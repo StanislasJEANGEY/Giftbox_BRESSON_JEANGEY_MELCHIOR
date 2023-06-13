@@ -32,7 +32,6 @@ class GetAddPrestationToBoxAction extends AbstractAction
         }
 
         $routeContext = RouteContext::fromRequest($request);
-        $url = $routeContext->getRouteParser()->urlFor('box_by_id',['id' => $idBox]);
 
         $view = Twig::fromRequest($request);
         if ($request->getMethod() === 'POST') {
@@ -43,16 +42,19 @@ class GetAddPrestationToBoxAction extends AbstractAction
                 throw new HttpBadRequestException($request, $e->getMessage());
             }
             try {
-                $boxService->getAddPrestationToBox($data);
+                $boxService->addPrestationToBox($data);
             } catch (PrestationsServiceException $e) {
                 throw new HttpBadRequestException($request, $e->getMessage());
             }
+            $url = $routeContext->getRouteParser()->urlFor('prestations_by_box',['id' => $data['idBox']]);
             return $response->withHeader('Location', $url)->withStatus(302);
         } else {
             try {
                 $csrf = CsrfService::generate();
+                $quantite = $boxService->getPrestationByBoxIdWithQuantite($idBox);
                 $view->render($response, 'AddPrestationToBoxView.twig', [
-                    'csrf_token' => $csrf, 'prestations' => $prestations, 'idBox' => $idBox
+                    'csrf_token' => $csrf, 'prestations' => $prestations, 'idBox' => $idBox,
+                    'presta_quantite' => $quantite
                 ]);
             } catch (Exception $e) {
                 throw new HttpBadRequestException($request, $e->getMessage());

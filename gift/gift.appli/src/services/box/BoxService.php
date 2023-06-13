@@ -39,12 +39,6 @@ class BoxService {
 		return $box;
 	}
 
-	public function addPrestationToBox($idBox, $idPrestation): void {
-		$box = Box::find($idBox);
-		$box->prestations()->attach($idPrestation);
-		$box->save();
-	}
-
     public function getBox(): array {
         return Box::all()->toArray();
     }
@@ -71,17 +65,46 @@ class BoxService {
         }
     }
 
+    public function getPrestationByBoxIdWithQuantite(string $idBox): array {
+        try {
+            return Box::findOrFail($idBox)->prestations()->withPivot('quantite')->get()->toArray();
+        } catch (ModelNotFoundException $e) {
+            throw new PrestationsServiceException("La box $idBox n'existe pas", 404, $e);
+        }
+    }
+
     /**
      * @throws PrestationsServiceException
      */
-    public function getAddPrestationToBox(object|array $data): void {
-		try {
-			$box = Box::findOrFail($data['idBox']);
-			$box->prestations()->attach($data['idPrestation']);
-			$box->save();
-		} catch (ModelNotFoundException $e) {
-			throw new PrestationsServiceException("La box " . $data['idBox'] . " n'existe pas", 404, $e);
-		}
+    public function addPrestationToBox(object|array $data): void
+    {
+        $prestationService = new PrestationsService();
+        $prestations = $prestationService->getPrestations();
+        $idBox = $data['idBox'];
+        $box = Box::findOrFail($data['idBox']);
+        $existing = false;
+        foreach ($prestations as $presta){
+            // Vérifier si une entrée existe déjà
+            $existingEntry = $box::where('id', $idBox)
+                ->whereHas('prestations', function($query) use ($presta) {
+                    $query->where('presta_id', $presta['id']);
+                })->with(['prestations' => function($query) use ($presta) {
+                    $query->where('presta_id', $presta['id']);
+                }])->first();
+
+            if ($data[$presta['id']] > 0) {
+                if ($existingEntry) {
+                    $existingEntry['prestations'][0]['contenu']['quantite'] = $data[$presta['id']];
+                    $existingEntry->save();
+                } else {
+                    $box->prestations()->attach($presta['id'], ['quantite' => $data[$presta['id']]]);
+                }
+            } else {
+                if ($existingEntry) {
+                    $existingEntry->prestations()->detach($presta['id']);
+                }
+            }
+        }
     }
 
 }
