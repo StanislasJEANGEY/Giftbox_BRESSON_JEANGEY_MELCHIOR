@@ -1,16 +1,19 @@
 {% extends "SqueletteView.twig" %}
 {% block content %}
-    <h2>Créer une prestation :</h2>
-    <form class="gift_form" method="post" action="{{ url_for('add_prestation_post') }}">
-        <label for="libelle">Libelle</label>
-        <input type="text" id="libelle" name="libelle" required placeholder="libelle">
-        <label for="tarif">Prix</label>
-        <input type="number" name="tarif" id="tarif" placeholder="tarif" required>
-        <label for="description">Description</label>
-        <input type="text" id="description" name="description" required placeholder="description">
-        <label for="img">Image</label>
-        <input type="file" name="img" id="img" required>
+    <div class="container">
+        <h2 class="heading">Créer une prestation :</h2>
+        <form class="gift_form" method="post" action="{{ url_for('add_prestation_post') }}">
+            <label for="libelle">Libelle</label>
+            <input type="text" id="libelle" name="libelle" required placeholder="libelle">
+            <label for="tarif">Prix</label>
+            <input type="number" name="tarif" id="tarif" placeholder="tarif" required>
+            <label for="description">Description</label>
+            <input type="text" id="description" name="description" required placeholder="description">
+            <label for="img">Image</label>
+            <input type="file" name="img" id="img" required>
 
-        <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
-        <input type="submit" value="Enregistrer">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+            <input type="submit" value="Enregistrer">
+        </form>
+    </div>
 {% endblock %}

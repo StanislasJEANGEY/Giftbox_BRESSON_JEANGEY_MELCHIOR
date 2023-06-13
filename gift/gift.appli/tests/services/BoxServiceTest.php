@@ -5,6 +5,7 @@ namespace gift\test\services\box;
 use gift\app\models\Box;
 use gift\app\services\box\BoxService;
 use gift\app\services\prestations\PrestationsService;
+use gift\app\services\prestations\PrestationsServiceException;
 use Illuminate\Database\Capsule\Manager as DB;
 use PHPUnit\Framework\TestCase;
 
@@ -54,7 +55,10 @@ class BoxServiceTest extends TestCase
             }
         }
 
-        public function testEmptyBox(): string
+    /**
+     * @throws PrestationsServiceException
+     */
+    public function testEmptyBox(): string
         {
             $service = new BoxService();
             $faker = \Faker\Factory::create('fr_FR');

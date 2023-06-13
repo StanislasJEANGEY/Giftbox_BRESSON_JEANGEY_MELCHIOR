@@ -1,17 +1,23 @@
 {% extends 'SqueletteView.twig' %}
 {% block content %}
-    <body>
-        <center><h1>{{box.libelle}}</h1></center>
-        <a href="{{ url_for('box_by_id', { 'id':box.id } ) }}"><button>Retour</button></a>
-        <ul>
-            {% for presta in liste_presta %}
-                <li><a href="{{ url_for('prestation_by_id', { 'id':presta.id } ) }}">{{presta.libelle}} </a></li>
-                <p>Quantité : {{ presta.contenu.quantite }}</p>
-                <br>
-            {% endfor %}
-        </ul>
-        <h3 >Prix Total : <strong>{{ total }} €</strong></h3>
-        <br>
-        <a href="{{ url_for('add_prestation_to_box_get') }}"><button>Ajouter des prestations</button></a>
-    </body>
+    <div class="container">
+        <center><h1 class="heading">{{box.libelle}}</h1></center>
+        <div class="back-button">
+            <a href="{{ url_for('box_by_id', { 'id':box.id } ) }}"><button>Retour</button></a>
+        </div>
+        <div class="list-container">
+            <ul>
+                {% for presta in liste_presta %}
+                    <li>
+                        <strong><a href="{{ url_for('prestation_by_id', { 'id':presta.id } ) }}">{{presta.libelle}}</a></strong>
+                        <p class="quantity">Quantité : {{ presta.contenu.quantite }}</p>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+        <h3 class="total-price">Prix Total : <strong>{{ total }} €</strong></h3>
+        <div class="add-button">
+            <a href="{{ url_for('add_prestation_to_box_get') }}"><button>Ajouter des prestations</button></a>
+        </div>
+    </div>
 {% endblock %}

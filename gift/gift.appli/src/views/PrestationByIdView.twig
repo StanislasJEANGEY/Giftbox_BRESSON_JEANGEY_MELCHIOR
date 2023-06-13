@@ -1,18 +1,23 @@
 {% extends 'SqueletteView.twig' %}
 {% block content %}
-    <body>
-        <center><h1>{{prestation['libelle']}}</h1></center>
-        <a href="{{ url_for(previousURL,  {'id':id_url } ) }}"><button>Retour</button></a>
-        <br>
-        <p>Prix : {{prestation['tarif']}} €</p>
-        <br>
-        <p>Description : {{prestation['description']}}</p>
-        <br>
-        <img src="../../img/{{prestation['img']}}" alt="image de {{prestation.img}}">
-        <br>
-        <br>
-        <a href="{{ url_for('update_prestation_get', { 'id':prestation.id } ) }}"><button>Modifier</button></a>
-        <br>
-        <br>
+    <body class="body-container">
+    <div class="container">
+        <h1 class="heading">{{ prestation['libelle'] }}</h1>
+        <div class="back-button">
+            <a href="{{ url_for(previousURL, {'id': id_url } ) }}"><button>Retour</button></a>
+        </div>
+        <div class="prestation-info">
+            <p>Prix : {{ prestation['tarif'] }} €</p>
+        </div>
+        <div class="prestation-info">
+            <p>Description : {{ prestation['description'] }}</p>
+        </div>
+        <div class="prestation-image">
+            <img src="../../img/{{ prestation['img'] }}" alt="image de {{ prestation.img }}">
+        </div>
+        <div class="update-button">
+            <a href="{{ url_for('update_prestation_get', { 'id': prestation.id } ) }}"><button>Modifier</button></a>
+        </div>
+    </div>
     </body>
 {% endblock %}

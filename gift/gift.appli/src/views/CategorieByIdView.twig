@@ -1,10 +1,13 @@
 {% extends 'SqueletteView.twig' %}
 {% block content %}
-    <body>
-        <center><h1>{{categorie.libelle}}</h1></center>
-        <a href="{{ url_for('categories') }}"><button>Retour</button></a>
-        <br>
-        <p>Description : {{categorie.description}}</p>
-        <h2><a href="{{ url_for('prestations_by_categorie', { 'id': categorie.id } ) }}">Prestations</a></h2>
+    <body class="body-container">
+    <div class="container">
+        <h1 class="heading">{{ categorie.libelle }}</h1>
+        <div class="back-button">
+            <a href="{{ url_for('categories') }}"><button>Retour</button></a>
+        </div>
+        <p class="description">Description: {{ categorie.description }}</p>
+        <h2 class="prestations-heading"><a href="{{ url_for('prestations_by_categorie', { 'id': categorie.id } ) }}">Prestations</a></h2>
+    </div>
     </body>
 {% endblock %}

@@ -1,19 +1,22 @@
 {% extends 'SqueletteView.twig' %}
 {% block content %}
-    <body>
-    <center><h1>{{box.libelle}}</h1></center>
-    <a href="{{ url_for('box') }}"><button>Retour</button></a>
-    <br>
-    <p>Description : {{box.description}}</p>
-    <p>Prix : {{box.montant}}</p>
-    {% if box.kdo == true %}
-        <p>Coffret cadeau : oui</p>
-        <p>Message : {{ box.message_kdo }}</p>
-    {% else %}
-        <p>Coffret cadeau : non</p>
-    {% endif %}
+    <div class="container">
+        <h1 class="heading">{{box.libelle}}</h1>
+        <div class="back-button">
+        <a href="{{ url_for('box') }}"><button>Retour</button></a>
+        </div>
+        <br>
+        <p class="description">Description : {{box.description}}</p>
+        <p class="price">Prix : {{box.montant}}</p>
+        {% if box.kdo == true %}
+            <div class="gift-box">
+                <p>Coffret cadeau : oui</p>
+                <p>Message : {{ box.message_kdo }}</p>
+            </div>
+        {% else %}
+            <p>Coffret cadeau : non</p>
+        {% endif %}
 
-    <h2><a href="{{ url_for('prestations_by_box', { 'id': box.id } ) }}">Prestations</a></h2>
-
-    </body>
+        <h2 class="prestations-heading"><a href="{{ url_for('prestations_by_box', { 'id': box.id } ) }}">Prestations</a></h2>
+    </div>
 {% endblock %}

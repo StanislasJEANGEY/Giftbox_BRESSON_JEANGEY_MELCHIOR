@@ -3,6 +3,11 @@ body {
     margin: 0;
 }
 
+main {
+    margin-top: 60px;
+    margin-bottom: 60px;
+}
+
 footer {
     width: 100vw;
     background-color: #f2f2f2;
@@ -16,14 +21,12 @@ footer {
 header {
     background-color: #333;
     color: #fff;
-    padding-top: 2px;
-    padding-bottom: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
 }
 
-header h1 {
-    margin-left: 30px;
-    font-size: 35px;
-}
 
 section {
     display: flex;
@@ -56,10 +59,6 @@ nav a {
 }
 
 
-div {
-    margin-bottom: 100px;
-    padding: 20px;
-}
 
 .nav-button {
     position: relative;
@@ -88,30 +87,873 @@ div {
     transform: scaleX(1);
 }
 
-.site-name {
-    position: relative;
-    transition: all 0.3s ease;
+header h1 {
+    margin: 0;
 }
 
-.site-name::after {
-    content: "";
-    position: absolute;
-    bottom: 0;
-    left: 0;
+.logo img {
+    width: 60px;
+    height: 60px;
+    filter: invert(1);
+}
+
+.logo{
+    margin-left: 1280px;
+}
+
+
+/* Liste des catégories */
+/* Style général */
+.body-container {
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.heading {
+    text-align: center;
+    color: #333;
+}
+
+.category-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.category-item {
+    margin-bottom: 10px;
+}
+
+.category-link {
+    color: #333;
+    text-decoration: none;
+}
+
+.category-link:hover {
+    text-decoration: underline;
+}
+
+.add-category-button {
+    display: inline-block;
+    margin-top: 20px;
+}
+
+.add-category-button button {
+    background-color: #333;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.add-category-button button:hover {
+    background-color: #555;
+}
+
+
+/* CategorieByIdView */
+/* Style général */
+.body-container {
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.heading {
+    text-align: center;
+    color: #333;
+}
+
+.back-button {
+    display: inline-block;
+    margin-bottom: 10px;
+}
+
+.back-button button {
+    background-color: #333;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.back-button button:hover {
+    background-color: #555;
+}
+
+.description {
+    margin-bottom: 10px;
+}
+
+.prestations-heading {
+    margin-bottom: 10px;
+}
+
+.prestations-heading a {
+    color: #333;
+    text-decoration: none;
+}
+
+.prestations-heading a:hover {
+    text-decoration: underline;
+}
+
+
+/* PrestationByCategorieView */
+/* Style général */
+.body-container {
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.heading {
+    text-align: center;
+    color: #333;
+}
+
+.back-button {
+    display: inline-block;
+    margin-bottom: 10px;
+}
+
+.back-button button {
+    background-color: #333;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.back-button button:hover {
+    background-color: #555;
+}
+
+.prestations-list {
+    margin-bottom: 10px;
+}
+
+.prestations-list li {
+    margin-bottom: 5px;
+}
+
+.prestations-list li a {
+    color: #333;
+    text-decoration: none;
+}
+
+.prestations-list li a:hover {
+    text-decoration: underline;
+}
+
+.add-prestation-button {
+    margin-top: 10px;
+}
+
+.add-prestation-button button {
+    background-color: #333;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.add-prestation-button button:hover {
+    background-color: #555;
+}
+
+
+/* PrestationByIdView */
+/* Style général */
+.body-container {
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.heading {
+    text-align: center;
+    color: #333;
+}
+
+.back-button {
+    display: inline-block;
+    margin-bottom: 10px;
+}
+
+.back-button button {
+    background-color: #333;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.back-button button:hover {
+    background-color: #555;
+}
+
+.prestation-info {
+    margin-bottom: 10px;
+}
+
+.prestation-info p {
+    margin-bottom: 5px;
+}
+
+.prestation-image {
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.prestation-image img {
+    max-width: 100%;
+    height: auto;
+}
+
+.update-button {
+    margin-top: 10px;
+}
+
+.update-button button {
+    background-color: #333;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.update-button button:hover {
+    background-color: #555;
+}
+
+
+/* PrestationView */
+/* Style général */
+body {
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.heading {
+    text-align: center;
+    color: #333;
+}
+
+.prestation-list {
+    margin-bottom: 10px;
+    padding-left: 0;
+}
+
+.prestation-list li {
+    list-style: none;
+}
+
+.prestation-list li a {
+    display: block;
+    text-decoration: none;
+    color: #333;
+    padding: 5px 0;
+}
+
+.prestation-list li a:hover {
+    background-color: #f5f5f5;
+}
+
+.create-button {
+    margin-top: 10px;
+}
+
+.create-button button {
+    background-color: #333;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.create-button button:hover {
+    background-color: #555;
+}
+
+
+/* BoxView */
+/* Style général */
+body {
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.heading {
+    text-align: center;
+    color: #333;
+}
+
+.box-list {
+    margin-bottom: 10px;
+    padding-left: 0;
+}
+
+.box-list li {
+    list-style: none;
+}
+
+.box-list li a {
+    display: block;
+    text-decoration: none;
+    color: #333;
+    padding: 5px 0;
+}
+
+.box-list li a:hover {
+    background-color: #f5f5f5;
+}
+
+.add-button {
+    margin-top: 10px;
+}
+
+.add-button button {
+    background-color: #333;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.add-button button:hover {
+    background-color: #555;
+}
+
+
+/* AddCategoryView */
+/* Style général */
+body {
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.heading {
+    text-align: center;
+    color: #333;
+}
+
+.gift_form {
+    margin-top: 20px;
+}
+
+.gift_form label {
+    display: block;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+.gift_form input[type="text"] {
     width: 100%;
-    height: 2px;
-    background-color: #000;
-    transform: scaleX(0);
-    transition: transform 0.3s ease;
+    padding: 8px;
+    font-size: 16px;
+    border: 1px solid #ccc;
 }
 
-.site-name:focus,
-.site-name:active {
-    outline: none;
-    transform: scale(1.1);
+.gift_form input[type="number"] {
+    width: 100%;
+    padding: 8px;
+    font-size: 16px;
+    border: 1px solid #ccc;
 }
 
-.site-name:focus::after,
-.site-name:active::after {
-    transform: scaleX(1);
+.gift_form input[type="submit"] {
+    background-color: #333;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.gift_form input[type="submit"]:hover {
+    background-color: #555;
+}
+
+
+/* AddPrestationToCategoryView */
+/* Style général */
+body {
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.heading {
+    text-align: center;
+    color: #333;
+}
+
+.prestation_form {
+    margin-top: 20px;
+}
+
+.prestation_form ul {
+    list-style: none;
+    padding: 0;
+}
+
+.prestation_form li {
+    margin-bottom: 10px;
+}
+
+.prestation_form input[type="number"] {
+    margin-right: 10px;
+}
+
+.prestation_form label {
+    color: #333;
+}
+
+.prestation_form input[type="submit"] {
+    background-color: #333;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.prestation_form input[type="submit"]:hover {
+    background-color: #555;
+}
+
+.add_prestation_button {
+    display: block;
+    text-align: center;
+    margin-top: 20px;
+}
+
+
+/* AddPrestationView */
+/* Style général */
+body {
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.heading {
+    text-align: center;
+    color: #333;
+}
+
+.gift_form {
+    margin-top: 20px;
+}
+
+.gift_form label {
+    color: #333;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.gift_form input[type="text"],
+.gift_form input[type="number"],
+.gift_form input[type="file"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.gift_form input[type="submit"] {
+    background-color: #333;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.gift_form input[type="submit"]:hover {
+    background-color: #555;
+}
+
+
+/* UpdatePrestationView */
+/* Style général */
+body {
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.heading {
+    text-align: center;
+    color: #333;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    color: #333;
+    margin-bottom: 5px;
+}
+
+.form-group input[type="text"],
+.form-group select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.button-container {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.button-container button {
+    background-color: #333;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.button-container button:hover {
+    background-color: #555;
+}
+
+
+/* BoxIdView */
+/* Style général */
+body {
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.heading {
+    text-align: center;
+    color: #333;
+}
+
+.button-container {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.button-container button {
+    background-color: #333;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.button-container button:hover {
+    background-color: #555;
+}
+
+.description {
+    margin-bottom: 10px;
+}
+
+.price {
+    margin-bottom: 10px;
+}
+
+.gift-box {
+    margin-bottom: 10px;
+}
+
+.gift-box p {
+    margin-bottom: 5px;
+}
+
+
+/* PrestationByBoxView */
+/* Style général */
+body {
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.heading {
+    text-align: center;
+    color: #333;
+}
+
+.button-container {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.button-container button {
+    background-color: #333;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.button-container button:hover {
+    background-color: #555;
+}
+
+.list-container {
+    margin-top: 20px;
+}
+
+.list-container ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.list-container li {
+    margin-bottom: 10px;
+}
+
+.list-container li a {
+    color: #333;
+    text-decoration: none;
+}
+
+.list-container li a:hover {
+    text-decoration: underline;
+}
+
+.quantity {
+    margin-top: 5px;
+}
+
+.total-price {
+    margin-top: 20px;
+}
+
+.total-price strong {
+    font-weight: bold;
+}
+
+.add-button {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.add-button button {
+    background-color: #333;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.add-button button:hover {
+    background-color: #555;
+}
+
+
+/* AddPrestationToBoxView */
+/* Style général */
+body {
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.button-container {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.button-container button {
+    background-color: #333;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.button-container button:hover {
+    background-color: #555;
+}
+
+.list-container {
+    margin-top: 20px;
+}
+
+.list-container ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.list-container li {
+    margin-bottom: 10px;
+}
+
+.list-container li input[type="number"] {
+    width: 40px;
+}
+
+.list-container li label {
+    margin-left: 10px;
+}
+
+.add-button {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.add-button button {
+    background-color: #333;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.add-button button:hover {
+    background-color: #555;
+}
+
+.submit-button {
+    background-color: #333;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.submit-button:hover {
+    background-color: #555;
+}
+
+
+/* AddBoxView */
+/* Styles pour le formulaire de création de coffret */
+.gift_form {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f5f5f5;
+    border-radius: 5px;
+}
+
+.gift_form h1 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.gift_form label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+.gift_form input[type="text"],
+.gift_form input[type="checkbox"] {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    box-sizing: border-box;
+}
+
+.gift_form input[type="submit"] {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.gift_form input[type="submit"]:hover {
+    background-color: #45a049;
+}
+
+.gift_form input[type="checkbox"] {
+    margin-bottom: 0;
+}
+
+.gift_form::after {
+    content: "";
+    display: table;
+    clear: both;
 }

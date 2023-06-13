@@ -1,15 +1,17 @@
 {% extends "SqueletteView.twig" %}
 {% block content %}
     <body>
-        <center><h1>Prestation</h1></center>
-        <ul>
+    <div class="container">
+        <h1 class="heading">Prestation</h1>
+        <ul class="prestation-list">
             {% for prestation in list_presta %}
-                <li><a href="{{ url_for('prestation_by_id', { 'id':prestation.id} ) }}">{{ prestation['libelle'] }}</a></li>
+                <li><a href="{{ url_for('prestation_by_id', { 'id': prestation.id } ) }}">{{ prestation['libelle'] }}</a></li>
                 <br>
             {% endfor %}
         </ul>
-        <a href="{{ url_for('add_prestation_get') }}"><button>Créer une nouvelle prestation</button></a>
-        <br>
-        <br>
+        <div class="create-button">
+            <a href="{{ url_for('add_prestation_get') }}"><button>Créer une nouvelle prestation</button></a>
+        </div>
+    </div>
     </body>
 {% endblock %}

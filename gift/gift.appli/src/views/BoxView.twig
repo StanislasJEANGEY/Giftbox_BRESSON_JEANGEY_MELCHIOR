@@ -1,13 +1,17 @@
 {% extends "SqueletteView.twig" %}
 {% block content %}
     <body>
-        <center><h1>Coffret</h1></center>
-        <ul>
+    <div class="container">
+        <h1 class="heading">Coffret</h1>
+        <ul class="box-list">
             {% for box in list_box %}
-                <li><a href="{{ url_for('box_by_id', { 'id':box.id} ) }}">{{ box['libelle'] }}</a></li>
+                <li><a href="{{ url_for('box_by_id', { 'id': box.id } ) }}">{{ box['libelle'] }}</a></li>
                 <br>
             {% endfor %}
         </ul>
-        <a href="{{ url_for('add_box_get') }}"><button>Ajouter un coffret</button></a>
+        <div class="add-button">
+            <a href="{{ url_for('add_box_get') }}"><button>Ajouter un coffret</button></a>
+        </div>
+    </div>
     </body>
 {% endblock %}
