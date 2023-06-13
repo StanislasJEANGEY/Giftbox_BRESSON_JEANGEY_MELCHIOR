@@ -49,7 +49,10 @@ class BoxService {
         return Box::all()->toArray();
     }
 
-    public function getBoxById(string $id): array {
+	/**
+	 * @throws PrestationsServiceException
+	 */
+	public function getBoxById(string $id): array {
         try {
             return Box::findOrFail($id)->toArray();
         } catch (ModelNotFoundException $e) {
@@ -57,7 +60,10 @@ class BoxService {
         }
     }
 
-    public function getPrestationByBoxId(string $id): array {
+	/**
+	 * @throws PrestationsServiceException
+	 */
+	public function getPrestationByBoxId(string $id): array {
         try {
             return Box::findOrFail($id)->prestations->toArray();
         } catch (ModelNotFoundException $e) {
@@ -68,14 +74,14 @@ class BoxService {
     /**
      * @throws PrestationsServiceException
      */
-    public function getAddPrestationToBox(object|array $data){
-        $prestationService = new PrestationsService();
-        $prestations = $prestationService->getPrestations();
-        $idBox = $this->getBoxById($data['idbox']);
-        $box = Box::find($idBox);
-        foreach ($prestations as $prestation){
-
-        }
+    public function getAddPrestationToBox(object|array $data): void {
+		try {
+			$box = Box::findOrFail($data['idBox']);
+			$box->prestations()->attach($data['idPrestation']);
+			$box->save();
+		} catch (ModelNotFoundException $e) {
+			throw new PrestationsServiceException("La box " . $data['idBox'] . " n'existe pas", 404, $e);
+		}
     }
 
 }

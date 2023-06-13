@@ -12,8 +12,6 @@
   "autoload": {
     "psr-4" : {
       "gift\\app\\" : "./"
-
     }
-
   }
 }
