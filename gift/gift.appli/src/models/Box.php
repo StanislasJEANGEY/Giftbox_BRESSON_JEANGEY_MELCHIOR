@@ -4,6 +4,9 @@ namespace gift\app\models;
 
 use Illuminate\Database\Eloquent\Model as Model;
 
+/**
+ * @method static findOrFail(array $idBox)
+ */
 class Box extends Model {
 
 	protected $table = 'box';

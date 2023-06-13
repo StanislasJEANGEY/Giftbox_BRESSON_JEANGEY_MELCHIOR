@@ -7,12 +7,21 @@
         <ul>
             {% for prestation in prestations %}
                 <li>
-                    <input type="number" name="{{ prestation.id }}" id="{{ prestation.id }}">
+                    {% set trouve = false %}
+                    {% for presta in presta_quantite %}
+                        {% if presta.id == prestation.id %}
+                            {% set trouve = true %}
+                            <input type="number" name="{{ prestation.id }}" id="{{ prestation.id }}" value="{{ presta.contenu.quantite }}">
+                        {% endif %}
+                    {% endfor %}
+                    {% if not trouve %}
+                        <input type="number" name="{{ prestation.id }}" id="{{ prestation.id }}" value="0">
+                    {% endif %}
                     <label for="{{ prestation.id }}">{{ prestation.libelle }}</label>
                 </li>
             {% endfor %}
         </ul>
-        <input type="hidden" name="idBox" value="{{ idBox }}">
+        <input type="hidden" id="idBox" name="idBox" value="{{ idBox }}">
 
         <input type="submit" value="Ajouter">
         <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
@@ -20,5 +29,5 @@
 
     <br>
 
-    <a href="{{ url_for('add_prestation_to_box_get') }}"><button>Créer une prestation</button></a>
+    <a href="{{ url_for('add_prestation_get') }}"><button>Créer une prestation</button></a>
 {% endblock %}
