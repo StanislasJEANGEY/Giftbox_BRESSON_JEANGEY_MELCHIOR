@@ -1,6 +1,6 @@
 <?php
 
-namespace gift\test\services\prestations;
+namespace gift\test\services\box;
 
 use gift\app\models\Box;
 use gift\app\services\box\BoxService;
@@ -17,7 +17,7 @@ class BoxServiceTest extends TestCase
         parent::setUpBeforeClass();
 
         $db = new DB();
-        $db->addConnection(parse_ini_file(__DIR__ . '/../../../src/conf/gift.db.test.ini'));
+        $db->addConnection(parse_ini_file(__DIR__ . '/../../src/conf/gift.db.test.ini'));
         $db->setAsGlobal();
         $db->bootEloquent();
         $faker = \Faker\Factory::create('fr_FR');
@@ -52,5 +52,38 @@ class BoxServiceTest extends TestCase
             foreach (self::$prestations as $p) {
                 $p->delete();
             }
+        }
+
+        public function testEmptyBox(): string
+        {
+            $service = new BoxService();
+            $faker = \Faker\Factory::create('fr_FR');
+
+            $libelle = $faker->word();
+            $desc = $faker->paragraph(3);
+            $box_data['libelle'] = $libelle;
+            $box_data['description'] = $desc;
+            $box_data['kdo'] = 0;
+
+            $box = $service->createBox($box_data);
+            $this->assertIsArray($box);
+            $this->assertArrayHasKey('id', $box);
+            $this->assertIsString($box['id']);
+
+            $box_inserted = $service->getBoxById($box['id']);
+            self::$boxIds[] = $box_inserted->id;
+
+            $this->assertArrayHasKey('libelle', $box);
+            $this->assertArrayHasKey('description', $box);
+            $this->assertArrayHasKey('message_kdo', $box);
+            $this->assertArrayHasKey('token', $box);
+            $this->assertArrayHasKey('statut', $box);
+            $this->assertArrayHasKey('montant', $box);
+
+            $this->assertSame($libelle, $box['libelle']);
+            $this->assertSame($desc, $box['description']);
+            $this->assertSame('', $box['message_kdo']);
+
+            return $box['id'];
         }
 }

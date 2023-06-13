@@ -2,11 +2,12 @@
 declare(strict_types=1);
 
 namespace gift\test\services\prestations;
-require_once '../../src/vendor/autoload.php';
+//require_once '../../src/vendor/autoload.php';
 
 use gift\app\models\Categorie;
 use gift\app\models\Prestation;
 use gift\app\services\prestations\PrestationsService;
+use gift\app\services\utils\Eloquent;
 use \PHPUnit\Framework\TestCase;
 use Illuminate\Database\Capsule\Manager as DB ;
 
@@ -19,10 +20,7 @@ final class PrestationServiceTest extends TestCase
     {
         parent::setUpBeforeClass();
 
-        $db = new DB();
-        $db->addConnection(parse_ini_file(__DIR__ . '/../../../src/conf/gift.db.test.ini'));
-        $db->setAsGlobal();
-        $db->bootEloquent();
+        Eloquent::init(__DIR__ . '/../../src/conf/gift.db.test.ini');
         $faker = \Faker\Factory::create('fr_FR');
 
         $prestaService = new PrestationsService();
@@ -50,10 +48,10 @@ final class PrestationServiceTest extends TestCase
         }
 
 
-        self::$prestations[0]->categorie()->associate($c1); self::$prestations[0]->save();
-        self::$prestations[1]->categorie()->associate($c1); self::$prestations[1]->save();
-        self::$prestations[2]->categorie()->associate($c2); self::$prestations[2]->save();
-        self::$prestations[3]->categorie()->associate($c2); self::$prestations[3]->save();
+//        self::$prestations[0]->categorie()->associate($c1); self::$prestations[0]->save();
+//        self::$prestations[1]->categorie()->associate($c1); self::$prestations[1]->save();
+//        self::$prestations[2]->categorie()->associate($c2); self::$prestations[2]->save();
+//        self::$prestations[3]->categorie()->associate($c2); self::$prestations[3]->save();
 
 
 

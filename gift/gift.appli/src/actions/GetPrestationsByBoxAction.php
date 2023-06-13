@@ -22,9 +22,13 @@ class GetPrestationsByBoxAction
         $box = $boxService->getBoxById($id);
 
         $prestations = $boxService->getPrestationByBoxId($id);
+        $total = 0;
+        foreach ($prestations as $prestation) {
+            $total += $prestation['tarif'];
+        }
         $view = Twig::fromRequest($request);
         return $view->render($response, 'PrestationByBoxView.twig', [
-            'box' => $box, 'liste_presta' => $prestations, 'id' => $id, 'url' => $url
+            'box' => $box, 'liste_presta' => $prestations, 'id' => $id, 'url' => $url, 'total' => $total
         ]);
     }
 }
