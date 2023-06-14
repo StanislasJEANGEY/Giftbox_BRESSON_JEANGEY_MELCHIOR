@@ -33,7 +33,6 @@ class GetAddPrestationToCategorieAction extends AbstractAction
 		}
 
 		$routeContext = RouteContext::fromRequest($request);
-		$url = $routeContext->getRouteParser()->urlFor('prestations_by_categorie', ['id' => $idCategorie]);
 
 		$view = Twig::fromRequest($request);
 
@@ -62,8 +61,9 @@ class GetAddPrestationToCategorieAction extends AbstractAction
 //				throw new HttpBadRequestException($request, $e->getMessage());
 //			}
 			$prestaService->addPrestationToCategorie($data);
+            $url = $routeContext->getRouteParser()->urlFor('prestations_by_categorie',['id' => $data['idCateg']]);
 
-			//return $response->withHeader('Location', $url)->withStatus(302);
+            return $response->withHeader('Location', $url)->withStatus(302);
 		} else {
 			try {
 				$csrf = CsrfService::generate();
