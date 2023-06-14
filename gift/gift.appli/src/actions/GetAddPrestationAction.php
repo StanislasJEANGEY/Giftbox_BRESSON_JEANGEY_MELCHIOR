@@ -35,8 +35,8 @@ class GetAddPrestationAction extends AbstractAction
 			$data['tarif'] = filter_var($data['tarif'], FILTER_SANITIZE_SPECIAL_CHARS);
 			$data['description'] = filter_var($data['description'], FILTER_SANITIZE_SPECIAL_CHARS);
 
-			$uploadedFiles = $request->getUploadedFiles();
-			$image = $uploadedFiles['img'];
+//			$uploadedFiles = $request->getUploadedFiles();
+//			$image = $uploadedFiles['img'];
 
 			try {
 				CsrfService::check($data['csrf_token']);
@@ -45,7 +45,7 @@ class GetAddPrestationAction extends AbstractAction
 			}
 
 			try {
-				$prestaService->getCreatePrestation($data, $image);
+				$prestaService->getCreatePrestation($data);
 			} catch (PrestationsServiceException $e) {
 				throw new HttpBadRequestException($request, $e->getMessage());
 			}

@@ -108,12 +108,12 @@ class PrestationsService
 	/**
 	 * @throws PrestationsServiceException
 	 */
-	public function getCreatePrestation(array $prestaData, UploadedFile $image): void
+	public function getCreatePrestation(array $prestaData): void
 	{
-		// Vérifier si l'image a été téléchargée sans erreur
-		if ($image->getError() !== UPLOAD_ERR_OK) {
-			throw new PrestationsServiceException("Erreur lors de l'upload de l'image.");
-		}
+//		// Vérifier si l'image a été téléchargée sans erreur
+//		if ($image->getError() !== UPLOAD_ERR_OK) {
+//			throw new PrestationsServiceException("Erreur lors de l'upload de l'image.");
+//		}
 
 		// Récupérer les données de la prestation
 		$libelle = filter_var($prestaData['libelle'], FILTER_SANITIZE_SPECIAL_CHARS);
@@ -133,15 +133,15 @@ class PrestationsService
 		// Définir le répertoire de destination pour les images
 		$uploadDirectory = __DIR__ . '/../../../public/img';
 
-		// Récupérer le nom original et l'extension du fichier image
-		$uploadedFileName = $image->getClientFilename();
-		$extension = pathinfo($uploadedFileName, PATHINFO_EXTENSION);
-
-		// Générer un nom de fichier unique
-		$newFileName = $prestationId . '.' . $extension;
-
-		// Déplacer le fichier téléchargé vers le répertoire de destination avec le nouveau nom de fichier
-		$image->moveTo($uploadDirectory . '/' . $newFileName);
+//		// Récupérer le nom original et l'extension du fichier image
+//		$uploadedFileName = $image->getClientFilename();
+//		$extension = pathinfo($uploadedFileName, PATHINFO_EXTENSION);
+//
+//		// Générer un nom de fichier unique
+//		$newFileName = $prestationId . '.' . $extension;
+//
+//		// Déplacer le fichier téléchargé vers le répertoire de destination avec le nouveau nom de fichier
+//		$image->moveTo($uploadDirectory . '/' . $newFileName);
 
 		// Créer une instance de la prestation avec les données et le chemin de l'image
 		$prestation = new Prestation([
@@ -149,7 +149,8 @@ class PrestationsService
 			'libelle' => $libelle,
 			'tarif' => $tarif,
 			'description' => $description,
-			'image' => $uploadDirectory . '/' . $newFileName
+			//'image' => $uploadDirectory . '/' . $newFileName
+			'image' => ''
 		]);
 
 		$prestation->save();
