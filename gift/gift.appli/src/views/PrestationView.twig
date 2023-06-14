@@ -3,7 +3,7 @@
     <body>
     <div class="container">
         <h1 class="heading">Prestation</h1>
-        <ul class="prestation-list">
+        <ul class="box-list">
             {% for prestation in list_presta %}
                 <li><a href="{{ url_for('prestation_by_id', { 'id': prestation.id } ) }}">{{ prestation['libelle'] }}</a></li>
                 <br>

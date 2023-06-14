@@ -6,22 +6,26 @@
         </div>
         <h1 class="heading">Ajouter des Prestations</h1>
 
-        <form action="{{ url_for('add_prestation_to_box_post') }}" method="post">
+        <form class="add-presta-form" action="{{ url_for('add_prestation_to_box_post') }}" method="post">
             <div class="list-container">
                 <ul>
                     {% for prestation in prestations %}
                         <li>
+                            <center><div>
+                                <label for="{{ prestation.id }}">{{ prestation.libelle }}</label>
+                            </div></center>
+                            <center><div>
                             {% set trouve = false %}
                             {% for presta in presta_quantite %}
                                 {% if presta.id == prestation.id %}
                                     {% set trouve = true %}
-                                    <input type="number" name="{{ prestation.id }}" id="{{ prestation.id }}" value="{{ presta.contenu.quantite }}">
+                                    <input class="add-presta-to-box" type="number" name="{{ prestation.id }}" id="{{ prestation.id }}" value="{{ presta.contenu.quantite }}">
                                 {% endif %}
                             {% endfor %}
                             {% if not trouve %}
                                 <input type="number" name="{{ prestation.id }}" id="{{ prestation.id }}" value="0">
                             {% endif %}
-                            <label for="{{ prestation.id }}">{{ prestation.libelle }}</label>
+                            </div></center>
                         </li>
                     {% endfor %}
                 </ul>

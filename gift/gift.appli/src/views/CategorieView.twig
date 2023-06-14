@@ -1,12 +1,12 @@
 {% extends 'SqueletteView.twig' %}
 {% block content %}
-    <body class="body-container">
+    <body >
     <div class="container">
         <h1 class="heading">Catégories</h1>
-        <ul class="category-list">
+        <ul class="box-list">
             {% for categorie in list_categ %}
-                <li class="category-item">
-                    <a class="category-link" href="{{ url_for('categorie_by_id', { 'id':categorie.id } ) }}">{{ categorie['libelle'] }}</a>
+                <li>
+                    <a href="{{ url_for('categorie_by_id', { 'id':categorie.id } ) }}">{{ categorie['libelle'] }}</a>
                 </li>
             {% endfor %}
         </ul>
