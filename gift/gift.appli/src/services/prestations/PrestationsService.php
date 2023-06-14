@@ -159,21 +159,14 @@ class PrestationsService
 	 * @throws Exception
 	 */
 	public function addPrestationToCategorie(object|array|null $data): void {
+        $prestation = new Prestation();
 		$prestations = $this->getPrestations();
-		$i = 0;
 		foreach ($prestations as $presta) {
-			foreach ($data as $value) {
-				$i++;
-				echo $i;
-				echo "<br>";
-//				if ($presta['id'] == $value) {
-//					echo $data[$presta['id']];
-//					echo "<br>";
-//					$prestations = new Prestation();
-//				    $prestations::where('id', $presta->id)->update(['cat_id' => $data['idCateg']]);
-//				}
-			}
+            $prestation::where('id', $presta['id'])->where('cat_id', $data['idCateg'])->update(['cat_id' => 0]);
 		}
+        foreach ($data as $value) {
+            $prestation::where('id', $value)->update(['cat_id' => $data['idCateg']]);
+        }
 	}
 
 
