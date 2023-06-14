@@ -81,8 +81,7 @@ class BoxService {
         $prestationService = new PrestationsService();
         $prestations = $prestationService->getPrestations();
         $idBox = $data['idBox'];
-        $box = Box::findOrFail($data['idBox']);
-        $existing = false;
+        $box = Box::findOrFail($idBox);
         foreach ($prestations as $presta){
             // Vérifier si une entrée existe déjà
             $existingEntry = $box::where('id', $idBox)
@@ -93,13 +92,15 @@ class BoxService {
                 }])->first();
 
             if ($data[$presta['id']] > 0) {
+                //update
                 if ($existingEntry) {
-                    $existingEntry['prestations'][0]['contenu']['quantite'] = $data[$presta['id']];
-                    $existingEntry->save();
+                    $box->prestations()->updateExistingPivot($presta['id'], ['quantite' => $data[$presta['id']]]);
                 } else {
+                    //insert
                     $box->prestations()->attach($presta['id'], ['quantite' => $data[$presta['id']]]);
                 }
             } else {
+                //delete
                 if ($existingEntry) {
                     $existingEntry->prestations()->detach($presta['id']);
                 }

@@ -23,7 +23,7 @@
                                 {% endif %}
                             {% endfor %}
                             {% if not trouve %}
-                                <input type="number" name="{{ prestation.id }}" id="{{ prestation.id }}" value="0">
+                                <input type="number" name="{{ prestation.id }}" id="{{ prestation.id }}" value="0" min="0">
                             {% endif %}
                             </div></center>
                         </li>
@@ -32,7 +32,7 @@
             </div>
             <input type="hidden" id="idBox" name="idBox" value="{{ idBox }}">
 
-            <input class="submit-button" type="submit" value="Ajouter">
+            <input class="submit-button" type="submit" value="Modifier">
             <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
         </form>
 

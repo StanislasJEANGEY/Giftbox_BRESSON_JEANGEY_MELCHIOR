@@ -47,7 +47,7 @@ class GetAddPrestationToBoxAction extends AbstractAction
                 throw new HttpBadRequestException($request, $e->getMessage());
             }
             $url = $routeContext->getRouteParser()->urlFor('prestations_by_box',['id' => $data['idBox']]);
-            return $response->withHeader('Location', $url)->withStatus(302);
+            //return $response->withHeader('Location', $url)->withStatus(302);
         } else {
             try {
                 $csrf = CsrfService::generate();
