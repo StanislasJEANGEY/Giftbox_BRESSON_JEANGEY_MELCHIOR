@@ -12,15 +12,16 @@ use Slim\Exception\HttpBadRequestException;
 use Slim\Routing\RouteContext;
 use Slim\Views\Twig;
 
-class GetAddPrestationAction extends AbstractAction {
-
+class GetAddPrestationAction extends AbstractAction
+{
 	/**
 	 * @param ServerRequestInterface $request
 	 * @param ResponseInterface $response
 	 * @param array $args
 	 * @return ResponseInterface
 	 */
-	public function __invoke(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface {
+	public function __invoke(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
+	{
 		$prestaService = new PrestationsService();
 
 		$routeContext = RouteContext::fromRequest($request);
@@ -30,20 +31,25 @@ class GetAddPrestationAction extends AbstractAction {
 
 		if ($request->getMethod() === 'POST') {
 			$data = $request->getParsedBody();
-			$data['libelle'] = filter_var($data['libelle'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-			$data['tarif'] = filter_var($data['tarif'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-			$data['description'] = filter_var($data['description'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-			$data['img'] = filter_var($data['img'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+			$data['libelle'] = filter_var($data['libelle'], FILTER_SANITIZE_SPECIAL_CHARS);
+			$data['tarif'] = filter_var($data['tarif'], FILTER_SANITIZE_SPECIAL_CHARS);
+			$data['description'] = filter_var($data['description'], FILTER_SANITIZE_SPECIAL_CHARS);
+
+			$uploadedFiles = $request->getUploadedFiles();
+			$image = $uploadedFiles['img'];
+
 			try {
 				CsrfService::check($data['csrf_token']);
 			} catch (Exception $e) {
 				throw new HttpBadRequestException($request, $e->getMessage());
 			}
+
 			try {
-				$prestaService->getCreatePrestation($data);
+				$prestaService->getCreatePrestation($data, $image);
 			} catch (PrestationsServiceException $e) {
 				throw new HttpBadRequestException($request, $e->getMessage());
 			}
+
 			return $response->withHeader('Location', $url)->withStatus(302);
 		} else {
 			try {
@@ -55,7 +61,7 @@ class GetAddPrestationAction extends AbstractAction {
 				throw new HttpBadRequestException($request, $e->getMessage());
 			}
 		}
+
 		return $response;
 	}
-
 }

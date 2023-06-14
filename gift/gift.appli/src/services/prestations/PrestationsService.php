@@ -3,15 +3,11 @@
 namespace gift\app\services\prestations;
 
 use Exception;
-use gift\app\models\Box;
 use gift\app\models\Prestation;
 use gift\app\models\Categorie;
-use gift\app\services\box\BoxService;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
-use Illuminate\Database\QueryException;
 use Ramsey\Uuid\Uuid;
 use Slim\Psr7\UploadedFile;
-use function MongoDB\BSON\toJSON;
 
 class PrestationsService
 {
@@ -112,51 +108,74 @@ class PrestationsService
 	/**
 	 * @throws PrestationsServiceException
 	 */
-	public function getCreatePrestation(object|array $presta_data): void {
-		if ($presta_data['libelle'] != filter_var($presta_data['libelle'], FILTER_SANITIZE_SPECIAL_CHARS)) {
-			throw new PrestationsServiceException("Le libellé de la prestation contient des caractères spéciaux");
-		}
-		if ($presta_data['tarif'] != filter_var($presta_data['tarif'], FILTER_SANITIZE_SPECIAL_CHARS)) {
-			throw new PrestationsServiceException("Le prix de la prestation contient des caractères spéciaux");
-		}
-		if ($presta_data['description'] != filter_var($presta_data['description'], FILTER_SANITIZE_SPECIAL_CHARS)) {
-			throw new PrestationsServiceException("La description de la prestation contient des caractères spéciaux");
+	public function getCreatePrestation(array $prestaData, UploadedFile $image): void
+	{
+		// Vérifier si l'image a été téléchargée sans erreur
+		if ($image->getError() !== UPLOAD_ERR_OK) {
+			throw new PrestationsServiceException("Erreur lors de l'upload de l'image.");
 		}
 
-		$prestation = new Prestation($presta_data);
-		$prestation->id = Uuid::uuid4()->toString();
-		$image = $presta_data['img'];
-		if ($image instanceof UploadedFile) {
-			$prestation->image = $this->uploadImage($image);
-		} else {
-			throw new PrestationsServiceException("L'image n'est pas un fichier valide.");
+		// Récupérer les données de la prestation
+		$libelle = filter_var($prestaData['libelle'], FILTER_SANITIZE_SPECIAL_CHARS);
+		$tarif = filter_var($prestaData['tarif'], FILTER_SANITIZE_SPECIAL_CHARS);
+		$description = filter_var($prestaData['description'], FILTER_SANITIZE_SPECIAL_CHARS);
+
+		// Effectuer les validations nécessaires sur les données de la prestation
+
+		// Vérifier si les champs requis sont présents
+		if (empty($libelle) || empty($tarif) || empty($description)) {
+			throw new PrestationsServiceException("Certains champs requis sont manquants dans les données de prestation.");
 		}
+
+		// Générer un identifiant unique pour la prestation
+		$prestationId = Uuid::uuid4()->toString();
+
+		// Définir le répertoire de destination pour les images
+		$uploadDirectory = __DIR__ . '/../../../public/img';
+
+		// Récupérer le nom original et l'extension du fichier image
+		$uploadedFileName = $image->getClientFilename();
+		$extension = pathinfo($uploadedFileName, PATHINFO_EXTENSION);
+
+		// Générer un nom de fichier unique
+		$newFileName = $prestationId . '.' . $extension;
+
+		// Déplacer le fichier téléchargé vers le répertoire de destination avec le nouveau nom de fichier
+		$image->moveTo($uploadDirectory . '/' . $newFileName);
+
+		// Créer une instance de la prestation avec les données et le chemin de l'image
+		$prestation = new Prestation([
+			'id' => $prestationId,
+			'libelle' => $libelle,
+			'tarif' => $tarif,
+			'description' => $description,
+			'image' => $uploadDirectory . '/' . $newFileName
+		]);
+
 		$prestation->save();
 	}
 
-
 	/**
-	 * @throws PrestationsServiceException
+	 * @throws Exception
 	 */
-	public function uploadImage(UploadedFile $file): string {
-		if($_FILES['img'] && $_FILES['img']['error'] === UPLOAD_ERR_OK) {
-			$valid_ext = array('jpg','jpeg','png');
-			$check_ext = strtolower(substr(strrchr($_FILES['img']['name'], '.'), 1));
-			if(in_array($check_ext, $valid_ext)) {
-				$upload_dir = 'img/';
-				$upload_file = $upload_dir . $_FILES['img']['name'];
-				if(move_uploaded_file($_FILES['img']['tmp_name'], $upload_file)) {
-					return $upload_file;
-				} else {
-					throw new PrestationsServiceException("Erreur lors de l'upload de l'image");
-				}
-			} else {
-				throw new PrestationsServiceException("Le fichier n'est pas une image");
+	public function addPrestationToCategorie(object|array|null $data): void {
+		$prestations = $this->getPrestations();
+		$i = 0;
+		foreach ($prestations as $presta) {
+			foreach ($data as $value) {
+				$i++;
+				echo $i;
+				echo "<br>";
+//				if ($presta['id'] == $value) {
+//					echo $data[$presta['id']];
+//					echo "<br>";
+//					$prestations = new Prestation();
+//				    $prestations::where('id', $presta->id)->update(['cat_id' => $data['idCateg']]);
+//				}
 			}
-		} else {
-			throw new PrestationsServiceException("Erreur lors de l'upload de l'image");
 		}
 	}
+
 
 
 }

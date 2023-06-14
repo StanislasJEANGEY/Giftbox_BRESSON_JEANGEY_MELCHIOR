@@ -11,20 +11,23 @@ use Psr\Http\Message\ServerRequestInterface;
 use Slim\Exception\HttpBadRequestException;
 use Slim\Routing\RouteContext;
 use Slim\Views\Twig;
+use Slim\Psr7\UploadedFile;
+use Ramsey\Uuid\Uuid;
 
-class GetAddPrestationToCategorieAction extends AbstractAction {
-
+class GetAddPrestationToCategorieAction extends AbstractAction
+{
 	/**
 	 * @throws Exception
 	 */
-	public function __invoke(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface {
+	public function __invoke(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
+	{
 		$prestaService = new PrestationsService();
 		$prestations = $prestaService->getPrestations();
 
 		$previousURL = $request->getHeaderLine('Referer');
 		$idCategorie = "";
 		$parts = explode('/', $previousURL);
-		$index = array_search('categorie', $parts);
+		$index = array_search('categories', $parts);
 		if ($index !== false && isset($parts[$index + 1])) {
 			$idCategorie = $parts[$index + 1];
 		}
@@ -32,42 +35,48 @@ class GetAddPrestationToCategorieAction extends AbstractAction {
 		$routeContext = RouteContext::fromRequest($request);
 		$url = $routeContext->getRouteParser()->urlFor('prestations_by_categorie', ['id' => $idCategorie]);
 
-		$prestationsToAdd = [];
-
 		$view = Twig::fromRequest($request);
 
 		if ($request->getMethod() === 'POST') {
-			foreach ($prestations as $prestation) {
-				if (isset($_POST[$prestation->getId()])) {
-					$prestationsToAdd[] = $prestation;
-				}
-			}
+
+
 			$data = $request->getParsedBody();
-			$data['libelle'] = filter_var($data['libelle'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-			$data['prestations'] = $prestationsToAdd;
+
+//			// Récupérer le fichier image
+//			$uploadedFiles = $request->getUploadedFiles();
+//			$image = $uploadedFiles['img'] ?? null;
+
 			try {
 				CsrfService::check($data['csrf_token']);
 			} catch (Exception $e) {
 				throw new HttpBadRequestException($request, $e->getMessage());
 			}
-			try {
-				$prestaService->getCreatePrestation($data);
-			} catch (PrestationsServiceException $e) {
-				throw new HttpBadRequestException($request, $e->getMessage());
-			}
-			return $response->withHeader('Location', $url)->withStatus(302);
+
+//			try {
+//				if ($image instanceof UploadedFile) {
+//					$prestaService->addPrestationToCategorie($data, $image);
+//				} else {
+//					throw new PrestationsServiceException("Aucune image téléchargée.");
+//				}
+//			} catch (PrestationsServiceException $e) {
+//				throw new HttpBadRequestException($request, $e->getMessage());
+//			}
+			$prestaService->addPrestationToCategorie($data);
+
+			//return $response->withHeader('Location', $url)->withStatus(302);
 		} else {
 			try {
 				$csrf = CsrfService::generate();
 				$view->render($response, 'AddPrestationToCategorieView.twig', [
 					'csrf_token' => $csrf,
-					'prestation' => $prestations,
+					'prestations' => $prestations,
 					'idCategorie' => $idCategorie
 				]);
 			} catch (Exception $e) {
 				throw new HttpBadRequestException($request, $e->getMessage());
 			}
 		}
+
 		return $response;
 	}
 }
