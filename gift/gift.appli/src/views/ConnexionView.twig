@@ -1,0 +1,14 @@
+{% extends 'SqueletteView.twig' %}
+{% block content %}
+    <div class="container">
+        <h1 class="head">Connexion</h1>
+            <form class="gift_form" method="post" action="{{ url_for('connexion_post') }}">
+                <label for="email">Email</label>
+                <input type="text" id="email" name="email" required placeholder="email">
+                <label for="password">Mot de passe</label>
+                <input type="text" id="password" name="password" required placeholder="password">
+
+                <input type="submit" value="Connexion">
+            </form>
+    </div>
+{% endblock %}

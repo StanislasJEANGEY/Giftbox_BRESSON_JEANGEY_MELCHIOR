@@ -28,4 +28,6 @@ return function (App $app) {
     $app->post('/addPrestationToBox[/]', \gift\app\actions\GetAddPrestationToBoxAction::class)->setName("add_prestation_to_box_post");
     $app->get('/addPrestationToCateg[/]', \gift\app\actions\GetAddPrestationToCategorieAction::class)->setName("add_prestation_to_categorie_get");
     $app->post('/addPrestationToCateg[/]', \gift\app\actions\GetAddPrestationToCategorieAction::class)->setName("add_prestation_to_categorie_post");
+	$app->get('/connexion[/]', \gift\app\actions\GetConnexionAction::class)->setName("connexion_get");
+	$app->post('/connexion[/]', \gift\app\actions\GetConnexionAction::class)->setName("connexion_post");
 };
