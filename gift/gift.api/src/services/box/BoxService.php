@@ -21,7 +21,7 @@ class BoxService {
 	 */
 	public function getBoxById(string $id): array {
         try {
-            return Box::findOrFail($id)->toArray();
+            return Box::where('id',$id)->with('prestations')->get()->toArray();
         } catch (ModelNotFoundException $e) {
             throw new PrestationsServiceException("La box $id n'existe pas", 404, $e);
         }
