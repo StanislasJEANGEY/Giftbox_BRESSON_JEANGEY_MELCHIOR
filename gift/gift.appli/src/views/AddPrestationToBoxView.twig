@@ -30,9 +30,12 @@
 
             <div class="button-container">
             <input class="submit-button" type="submit" value="Modifier">
-            <a href="{{ url_for('add_prestation_get') }}" class="create-button"><button>Créer une prestation</button></a>
             </div>
             <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
         </form>
+        <br>
+        <center>
+            <a href="{{ url_for('add_prestation_get') }}" class="create-button"><button>Créer une prestation</button></a>
+        </center>
     </div>
 {% endblock %}

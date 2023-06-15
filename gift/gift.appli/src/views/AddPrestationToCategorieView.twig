@@ -1,33 +1,36 @@
 {% extends 'SqueletteView.twig' %}
 {% block content %}
     <div class="container">
-    <a href="{{ url_for('prestations_by_categorie', { 'id': idCategorie }) }}" class="back-button"><button>Retour</button></a>
-    <center><h1 class="page-title">Ajouter des Prestations</h1></center>
+        <a href="{{ url_for('prestations_by_categorie', { 'id': idCategorie }) }}" class="back-button"><button>Retour</button></a>
+        <center><h1 class="page-title">Ajouter des Prestations</h1></center>
 
-    <form action="{{ url_for('add_prestation_to_categorie_post') }}" method="post" class="add-presta-form">
-        <div class="list-container">
-        <ul>
-            {% for prestation in prestations %}
-                <li>
-                    <label class="prestation-checkbox-label">
-                        {% if prestation.cat_id == idCategorie %}
-                            <input type="checkbox" name="{{prestation.id}}" value="{{ prestation.id }}" checked>
-                        {% else %}
-                            <input type="checkbox" name="{{prestation.id}}" value="{{ prestation.id }}">
-                        {% endif %}
-                        <span class="checkmark"></span>
-                    </label>
-                    <label for="{{ prestation.id }}" class="prestation-label">{{ prestation.libelle }}</label>
-                </li>
-            {% endfor %}
-        </ul>
-        </div>
-        <input type="hidden" id="idCateg" name="idCateg" value="{{ idCategorie }}">
-        <center><div>
-        <input type="submit" value="Modifier" class="submit-button">
-        <a href="{{ url_for('add_prestation_get') }}" class="create-button"><button>Créer une prestation</button></a>
-        </div></center>
-        <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
-    </form>
+        <form action="{{ url_for('add_prestation_to_categorie_post') }}" method="post" class="add-presta-form">
+            <div class="list-container">
+            <ul>
+                {% for prestation in prestations %}
+                    <li>
+                        <label class="prestation-checkbox-label">
+                            {% if prestation.cat_id == idCategorie %}
+                                <input type="checkbox" name="{{prestation.id}}" value="{{ prestation.id }}" checked>
+                            {% else %}
+                                <input type="checkbox" name="{{prestation.id}}" value="{{ prestation.id }}">
+                            {% endif %}
+                            <span class="checkmark"></span>
+                        </label>
+                        <label for="{{ prestation.id }}" class="prestation-label">{{ prestation.libelle }}</label>
+                    </li>
+                {% endfor %}
+            </ul>
+            <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+            </div>
+            <input type="hidden" id="idCateg" name="idCateg" value="{{ idCategorie }}">
+            <center><div>
+            <input type="submit" value="Modifier" class="submit-button">
+            </div></center>
+        </form>
+        <br>
+        <center>
+            <a href="{{ url_for('add_prestation_get') }}" class="create-button"><button>Créer une prestation</button></a>
+        </center>
     </div>
 {% endblock %}
