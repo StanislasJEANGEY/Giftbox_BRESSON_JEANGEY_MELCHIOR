@@ -31,6 +31,7 @@ class GetConnexionAction extends AbstractAction {
 			$data = $request->getParsedBody();
 			$email = $data['email'];
 			$password = $data['password'];
+			$_SESSION['logged_in'] = true;
 			$authService = new AuthentificationService();
 			try {
 				$authService->getConnexion($email, $password);
