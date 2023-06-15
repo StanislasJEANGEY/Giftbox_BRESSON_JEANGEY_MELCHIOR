@@ -51,6 +51,8 @@ class GetAccueilAction extends \gift\api\actions\AbstractAction
     }
   ]
 }';
+        $data = json_decode($data, true);
+        $data = json_encode($data, JSON_PRETTY_PRINT);
         $response->getBody()->write($data);
         return $response->withHeader('Content-Type', 'application/json')->withStatus(200);
 
