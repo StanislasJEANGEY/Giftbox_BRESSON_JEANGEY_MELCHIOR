@@ -7,10 +7,10 @@
 | 2. Afficher le détail d'une prestation                     |       ?       |   OK   | 
 | 3. Liste de prestations par catégories                     |   Stanislas   |   OK   |
 | 4. Liste de catégories                                     |   Stanislas   |   OK   |
-| 5. Tri par prix                                            |      ---      |  ---   |
+| 5. Tri par prix                                            |     Jules     |  ---   |
 | 6. Création d'un coffret vide                              | Damien, Jules |   OK   |
 | 7. Ajout de prestations dans le coffret                    |   Stanislas   |  ---   |
-| 8. Affichage d'un coffret                                  |      ---      |  ---   |
+| 8. Affichage d'un coffret                                  |    Damien     |   OK   |
 | 9. Validation d'un coffret                                 |      ---      |  ---   |
 | 10. Paiement d'un coffret                                  |      ---      |  ---   |
 | 11. Modification d'un coffret : suppression de prestations |      ---      |  ---   |
