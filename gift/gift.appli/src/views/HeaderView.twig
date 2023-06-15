@@ -7,9 +7,13 @@
 <body>
 <header>
     <h1><a class="title-button" href="{{ url_for('accueil') }}">GiftBox</a></h1>
+    <a class="title-button" href="{{ url_for('inscription_get') }}">Inscription</a>
     <!-- Si l'utilisateur n'est pas connecté, afficher le bouton de connexion -->
     {% if not session['logged_in'] %}
     <a class="title-button" href="{{ url_for('connexion_get') }}">Connexion</a>
+        <!-- Sinon, afficher le bouton de déconnexion -->
+    {% else %}
+        <a class="title-button" href="{{ url_for('deconnexion') }}">Déconnexion</a>
     {% endif %}
 </header>
 </body>

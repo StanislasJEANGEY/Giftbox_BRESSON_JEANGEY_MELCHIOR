@@ -7,7 +7,6 @@ use gift\app\models\User;
 
 class AuthentificationService {
 
-	// Fonction pour se connecter
 	/**
 	 * @throws Exception
 	 */
@@ -26,6 +25,16 @@ class AuthentificationService {
 			}
 		}
 		return false;
+	}
+
+	public function getInscription($nom, $prenom, $email, $password): void {
+		$u = new User();
+		$u->nom = $nom;
+		$u->prenom = $prenom;
+		$u->email = $email;
+		$u->password = password_hash($password, PASSWORD_DEFAULT);
+		$u->role = 1;
+		$u->save();
 	}
 
 }

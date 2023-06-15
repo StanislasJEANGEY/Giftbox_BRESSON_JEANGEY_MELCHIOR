@@ -1,0 +1,18 @@
+{% extends 'SqueletteView.twig' %}
+{% block content %}
+    <div class="container">
+        <h1 class="head">Inscription</h1>
+            <form class="gift_form" method="post" action="{{ url_for('inscription_post') }}">
+                <label for="nom">Nom</label>
+                <input type="text" id="nom" name="nom" required placeholder="nom">
+                <label for="prenom">Prénom</label>
+                <input type="text" id="prenom" name="prenom" required placeholder="prenom">
+                <label for="email">Email</label>
+                <input type="text" id="email" name="email" required placeholder="email">
+                <label for="password">Mot de passe</label>
+                <input type="text" id="password" name="password" required placeholder="password">
+                <label for="password2">Confirmer le mot de passe</label>
+                <input type="text" id="password2" name="password2" required placeholder="password2">
+
+                <input type="submit" value="S'inscrire">
+{% endblock %}
