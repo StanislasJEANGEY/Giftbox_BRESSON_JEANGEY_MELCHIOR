@@ -95,7 +95,7 @@ final class PrestationServiceTest extends TestCase
         $this->assertEquals(self::$categories[0]['libelle'], $categorie['libelle']);
         $this->assertEquals(self::$categories[0]['description'], $categorie['description']);
 
-        $this->expectException(\gift\app\services\prestations\ServiceException::class);
+        $this->expectException(\gift\app\services\ServiceException::class);
         $prestationService->getCategorieById(-1);
     }
 
@@ -113,7 +113,7 @@ final class PrestationServiceTest extends TestCase
         $this->assertEquals(self::$prestations[0]['tarif'], $prestation['tarif']);
         $this->assertEquals(self::$prestations[0]['unite'], $prestation['unite']);
 
-        $this->expectException(\gift\app\services\prestations\ServiceException::class);
+        $this->expectException(\gift\app\services\ServiceException::class);
         $prestationService->getPrestationById('AAAAAAA');
     }
 
