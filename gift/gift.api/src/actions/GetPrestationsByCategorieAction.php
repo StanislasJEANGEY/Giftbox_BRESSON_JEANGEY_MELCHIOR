@@ -4,6 +4,7 @@ namespace gift\api\actions;
 
 use Exception;
 use gift\api\services\prestations\PrestationsService;
+use gift\app\services\ServiceException;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 
@@ -14,12 +15,31 @@ class GetPrestationsByCategorieAction extends AbstractAction {
      */
     public function __invoke(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
     {
+        if (!isset($args['id'])) {
+            throw new ServiceException("L'id n'existe pas", 400);
+        }
         $id = $args['id'];
-        $url = 'prestaions_by_categorie';
         $prestaService = new PrestationsService();
-        $categorie = $prestaService->getCategorieById($id);
-
         $prestations = $prestaService->getPrestationByCategorieId($id);
-        return //TODO: return json
+
+        $dataJson = [
+            "type" => "collection",
+            "count" => count($prestations),
+            "prestations" => []
+        ];
+
+        foreach ($prestations as $prestation) {
+            $dataJson["prestations"][] = [
+                "prestations" => $prestation,
+                "links" => [
+                    "self" => ["href" => "/prestations/" . $prestation["id"] . "/"]
+                ]
+            ];
+        }
+
+        $dataJson = json_encode($dataJson, JSON_PRETTY_PRINT);
+        $dataJson = str_replace('\\/', '/', $dataJson); // Remplace les "\" par "/"
+        $response->getBody()->write($dataJson);
+        return $response->withHeader("Content-Type", "application/json");
     }
 }

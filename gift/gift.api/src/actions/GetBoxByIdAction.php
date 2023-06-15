@@ -4,7 +4,7 @@ namespace gift\api\actions;
 
 use Exception;
 use gift\api\services\box\BoxService;
-use gift\app\services\prestations\ServiceException;
+use gift\app\services\ServiceException;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 
@@ -50,8 +50,8 @@ class GetBoxByIdAction extends AbstractAction
             $dataJson['box']['prestations'][] = $prestaJson;
         }
 
-//        $dataJson = json_encode($box, JSON_PRETTY_PRINT);
         $dataJson = json_encode($dataJson, JSON_PRETTY_PRINT);
+        $dataJson = str_replace('\\/', '/', $dataJson); // Remplace les "\" par "/"
         $response->getBody()->write($dataJson);
         return $response->withHeader('Content-Type', 'application/json');
     }
