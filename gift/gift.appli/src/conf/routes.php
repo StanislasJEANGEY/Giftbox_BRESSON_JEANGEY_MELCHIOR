@@ -30,4 +30,6 @@ return function (App $app) {
     $app->post('/addPrestationToCateg[/]', \gift\app\actions\GetAddPrestationToCategorieAction::class)->setName("add_prestation_to_categorie_post");
 	$app->get('/connexion[/]', \gift\app\actions\GetConnexionAction::class)->setName("connexion_get");
 	$app->post('/connexion[/]', \gift\app\actions\GetConnexionAction::class)->setName("connexion_post");
+	$app->get('/inscription[/]', \gift\app\actions\GetInscriptionAction::class)->setName("inscription_get");
+	$app->post('/inscription[/]', \gift\app\actions\GetInscriptionAction::class)->setName("inscription_post");
 };
