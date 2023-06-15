@@ -1,5 +1,9 @@
 # Giftbox_BRESSON_JEANGEY_MELCHIOR
 
+Identifiants de connexion :
+- Admin : admin / admin
+- User : user / user
+
 ### Fonctionnalités du projet :
 | Fonctionnalités                                            |    Auteur     | Status |
 |------------------------------------------------------------|:-------------:|:------:|
