@@ -7,14 +7,11 @@
         <h1 class="heading">Ajouter des Prestations</h1>
 
         <form class="add-presta-form" action="{{ url_for('add_prestation_to_box_post') }}" method="post">
-            <div class="list-container">
+            <div class="list-container-presta">
                 <ul>
                     {% for prestation in prestations %}
-                        <li>
-                            <center><div>
+                        <li class="list-separation">
                                 <label for="{{ prestation.id }}">{{ prestation.libelle }}</label>
-                            </div></center>
-                            <center><div>
                             {% set trouve = false %}
                             {% for presta in presta_quantite %}
                                 {% if presta.id == prestation.id %}
@@ -25,19 +22,17 @@
                             {% if not trouve %}
                                 <input type="number" name="{{ prestation.id }}" id="{{ prestation.id }}" value="0" min="0">
                             {% endif %}
-                            </div></center>
                         </li>
                     {% endfor %}
                 </ul>
             </div>
             <input type="hidden" id="idBox" name="idBox" value="{{ idBox }}">
 
+            <div class="button-container">
             <input class="submit-button" type="submit" value="Modifier">
+            <a href="{{ url_for('add_prestation_get') }}" class="create-button"><button>Créer une prestation</button></a>
+            </div>
             <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
         </form>
-
-        <div class="button-container">
-            <a href="{{ url_for('add_prestation_get') }}"><button>Créer une prestation</button></a>
-        </div>
     </div>
 {% endblock %}

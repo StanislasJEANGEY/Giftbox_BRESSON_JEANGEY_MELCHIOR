@@ -11,9 +11,10 @@ main {
 footer {
     width: 100vw;
     background-color: #f2f2f2;
-    padding: 10px;
+    padding-bottom: 8px;
+    padding-top: 15px;
     text-align: center;
-    position: fixed;
+    position: static;
     bottom: 0;
     left: 0;
 }
@@ -27,6 +28,12 @@ header {
     padding: 10px;
 }
 
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
 
 section {
     display: flex;
@@ -89,7 +96,9 @@ nav a {
 
 .title-button{
     position: relative;
-    display: inline-block;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     padding: 10px;
     transition: all 0.3s ease;
     color: white;
@@ -423,6 +432,7 @@ body {
 
 .create-button {
     margin-top: 10px;
+    margin-left: 15px;
 }
 
 .create-button button {
@@ -910,7 +920,7 @@ body {
 .add-presta-form input[type="number"] {
     width: 100%;
     padding: 8px;
-    margin-bottom: 15px;
+    /*margin-bottom: 10px;*/
     border: 1px solid #ccc;
     border-radius: 3px;
     box-sizing: content-box;
@@ -1001,4 +1011,31 @@ body {
     content: "";
     display: table;
     clear: both;
+}
+
+.list-container-presta li {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.list-container-presta li label {
+    width: 200px; /* Ajustez la largeur selon vos besoins */
+    font-size: 23px;
+}
+
+.list-container-presta li input[type="number"] {
+    width: 100px; /* Ajustez la largeur selon vos besoins */
+}
+
+.list-separation{
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.list-container-presta{
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
