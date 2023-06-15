@@ -184,4 +184,8 @@ INSERT INTO `prestation` (`id`, `libelle`, `description`, `url`, `unite`, `tarif
 ('e8785174-b670-4c8b-ba0a-b779aa69b4c1',	'Planètes Laser',	'Laser game : Gilet électronique et pistolet laser comme matériel, vous voilà équipé.',	NULL,	NULL,	15.00,	'laser.jpg',	4),
 ('6ad840b8-62df-49fe-8220-0b840f8c3d9e',	'Fort Aventure',	'Découvrez Fort Aventure à Bainville-sur-Madon, un site Accropierre unique en Lorraine ! Des Parcours Acrobatiques pour petits et grands, Jeu Mission Aventure, Crypte de Crapahute, Tyrolienne, Saut à l\'élastique inversé, Toboggan géant... et bien plus encore.',	NULL,	NULL,	25.00,	'fort.jpg',	4);
 
+INSERT INTO `user` (`id`, `nom`, `prenom`, `email`, `password`, `role`) VALUES
+(1, 'admin', 'admin', 'admin@mail.com', 'admin', 2),
+(2, 'user', 'user', 'user@mail.com', 'user', 1);
+
 -- 2023-04-07 14:50:24
