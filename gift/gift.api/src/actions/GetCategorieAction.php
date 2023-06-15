@@ -23,7 +23,7 @@ class GetCategorieAction extends AbstractAction
 
         foreach ($categories as $category) {
             $dataJson['categories'][] = [
-                'categorie' => $category,
+                'categories' => $category,
                 'links' => [
                     'self' => ['href' => '/categories/' . $category['id'] . '/']
                 ]

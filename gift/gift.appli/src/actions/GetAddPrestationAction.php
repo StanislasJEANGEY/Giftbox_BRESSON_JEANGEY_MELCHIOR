@@ -4,7 +4,7 @@ namespace gift\app\actions;
 
 use Exception;
 use gift\app\services\prestations\PrestationsService;
-use gift\app\services\prestations\PrestationsServiceException;
+use gift\app\services\ServiceException;
 use gift\app\services\utils\CsrfService;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -46,7 +46,7 @@ class GetAddPrestationAction extends AbstractAction
 
 			try {
 				$prestaService->getCreatePrestation($data);
-			} catch (PrestationsServiceException $e) {
+			} catch (ServiceException $e) {
 				throw new HttpBadRequestException($request, $e->getMessage());
 			}
 

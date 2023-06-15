@@ -5,7 +5,7 @@ namespace gift\test\services\box;
 use gift\app\models\Box;
 use gift\app\services\box\BoxService;
 use gift\app\services\prestations\PrestationsService;
-use gift\app\services\prestations\PrestationsServiceException;
+use gift\app\services\prestations\ServiceException;
 use Illuminate\Database\Capsule\Manager as DB;
 use PHPUnit\Framework\TestCase;
 
@@ -56,7 +56,7 @@ class BoxServiceTest extends TestCase
         }
 
     /**
-     * @throws PrestationsServiceException
+     * @throws ServiceException
      */
     public function testEmptyBox(): string
         {

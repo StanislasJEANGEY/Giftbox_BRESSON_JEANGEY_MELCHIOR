@@ -5,7 +5,7 @@ namespace gift\app\actions;
 use Exception;
 use gift\app\services\box\BoxService;
 use gift\app\services\prestations\PrestationsService;
-use gift\app\services\prestations\PrestationsServiceException;
+use gift\app\services\ServiceException;
 use gift\app\services\utils\CsrfService;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -20,7 +20,12 @@ class GetAddPrestationToBoxAction extends AbstractAction
     {
         $boxService = new BoxService();
         $prestationService = new PrestationsService();
-        $prestations = $prestationService->getPrestations();
+        try {
+            $prestations = $prestationService->getPrestations();
+        } catch (ServiceException $e) {
+            throw new HttpBadRequestException($request, $e->getMessage());
+
+        }
 
 
         $previousURL = $request->getHeaderLine('Referer');
@@ -43,7 +48,7 @@ class GetAddPrestationToBoxAction extends AbstractAction
             }
             try {
                 $boxService->addPrestationToBox($data);
-            } catch (PrestationsServiceException $e) {
+            } catch (ServiceException $e) {
                 throw new HttpBadRequestException($request, $e->getMessage());
             }
             $url = $routeContext->getRouteParser()->urlFor('prestations_by_box',['id' => $data['idBox']]);

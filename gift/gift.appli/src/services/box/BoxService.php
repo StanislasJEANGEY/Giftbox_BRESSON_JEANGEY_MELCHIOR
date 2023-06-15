@@ -5,7 +5,7 @@ namespace gift\app\services\box;
 use Exception;
 use gift\app\models\Box;
 use gift\app\services\prestations\PrestationsService;
-use gift\app\services\prestations\PrestationsServiceException;
+use gift\app\services\ServiceException;
 use gift\app\services\utils\CsrfService;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Ramsey\Uuid\Uuid;
@@ -44,24 +44,24 @@ class BoxService {
     }
 
 	/**
-	 * @throws PrestationsServiceException
+	 * @throws ServiceException
 	 */
 	public function getBoxById(string $id): array {
         try {
             return Box::findOrFail($id)->toArray();
         } catch (ModelNotFoundException $e) {
-            throw new PrestationsServiceException("La box $id n'existe pas", 404, $e);
+            throw new ServiceException("La box $id n'existe pas", 404, $e);
         }
     }
 
 	/**
-	 * @throws PrestationsServiceException
+	 * @throws ServiceException
 	 */
 	public function getPrestationByBoxId(string $id): array {
         try {
             return Box::findOrFail($id)->prestations->toArray();
         } catch (ModelNotFoundException $e) {
-            throw new PrestationsServiceException("La box $id n'existe pas", 404, $e);
+            throw new ServiceException("La box $id n'existe pas", 404, $e);
         }
     }
 
@@ -69,12 +69,12 @@ class BoxService {
         try {
             return Box::findOrFail($idBox)->prestations()->withPivot('quantite')->get()->toArray();
         } catch (ModelNotFoundException $e) {
-            throw new PrestationsServiceException("La box $idBox n'existe pas", 404, $e);
+            throw new ServiceException("La box $idBox n'existe pas", 404, $e);
         }
     }
 
     /**
-     * @throws PrestationsServiceException
+     * @throws ServiceException
      */
     public function addPrestationToBox(object|array $data): void
     {

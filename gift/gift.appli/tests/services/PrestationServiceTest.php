@@ -48,10 +48,10 @@ final class PrestationServiceTest extends TestCase
         }
 
 
-//        self::$prestations[0]->categorie()->associate($c1); self::$prestations[0]->save();
-//        self::$prestations[1]->categorie()->associate($c1); self::$prestations[1]->save();
-//        self::$prestations[2]->categorie()->associate($c2); self::$prestations[2]->save();
-//        self::$prestations[3]->categorie()->associate($c2); self::$prestations[3]->save();
+//        self::$prestations[0]->categories()->associate($c1); self::$prestations[0]->save();
+//        self::$prestations[1]->categories()->associate($c1); self::$prestations[1]->save();
+//        self::$prestations[2]->categories()->associate($c2); self::$prestations[2]->save();
+//        self::$prestations[3]->categories()->associate($c2); self::$prestations[3]->save();
 
 
 
@@ -95,7 +95,7 @@ final class PrestationServiceTest extends TestCase
         $this->assertEquals(self::$categories[0]['libelle'], $categorie['libelle']);
         $this->assertEquals(self::$categories[0]['description'], $categorie['description']);
 
-        $this->expectException(\gift\app\services\prestations\PrestationsServiceException::class);
+        $this->expectException(\gift\app\services\prestations\ServiceException::class);
         $prestationService->getCategorieById(-1);
     }
 
@@ -113,7 +113,7 @@ final class PrestationServiceTest extends TestCase
         $this->assertEquals(self::$prestations[0]['tarif'], $prestation['tarif']);
         $this->assertEquals(self::$prestations[0]['unite'], $prestation['unite']);
 
-        $this->expectException(\gift\app\services\prestations\PrestationsServiceException::class);
+        $this->expectException(\gift\app\services\prestations\ServiceException::class);
         $prestationService->getPrestationById('AAAAAAA');
     }
 

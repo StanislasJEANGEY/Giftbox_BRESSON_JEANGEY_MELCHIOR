@@ -3,8 +3,9 @@
 namespace gift\app\actions;
 
 use Exception;
+use gift\app\services\categories\CategorieService;
 use gift\app\services\prestations\PrestationsService;
-use gift\app\services\prestations\PrestationsServiceException;
+use gift\app\services\ServiceException;
 use gift\app\services\utils\CsrfService;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -21,7 +22,7 @@ class GetAddCategorieAction extends AbstractAction {
 	 * @return ResponseInterface
 	 */
 	public function __invoke(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface {
-		$prestaService = new PrestationsService();
+		$categorieService = new CategorieService();
 
 		$routeContext = RouteContext::fromRequest($request);
 		$url = $routeContext->getRouteParser()->urlFor('categories');
@@ -38,8 +39,8 @@ class GetAddCategorieAction extends AbstractAction {
 				throw new HttpBadRequestException($request, $e->getMessage());
 			}
 			try {
-				$prestaService->getCreateCategorie($data);
-			} catch (PrestationsServiceException $e) {
+				$categorieService->getCreateCategorie($data);
+			} catch (ServiceException $e) {
 				throw new HttpBadRequestException($request, $e->getMessage());
 			}
 			return $response->withHeader('Location', $url)->withStatus(302);

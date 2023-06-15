@@ -3,8 +3,9 @@
 namespace gift\app\actions;
 
 use Exception;
+use gift\app\services\categories\CategorieService;
 use gift\app\services\prestations\PrestationsService;
-use gift\app\services\prestations\PrestationsServiceException;
+use gift\app\services\ServiceException;
 use gift\app\services\utils\CsrfService;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -21,7 +22,8 @@ class GetAddPrestationToCategorieAction extends AbstractAction
 	 */
 	public function __invoke(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
 	{
-		$prestaService = new PrestationsService();
+		$categService = new CategorieService();
+        $prestaService = new PrestationsService();
 		$prestations = $prestaService->getPrestations();
 
 		$previousURL = $request->getHeaderLine('Referer');
@@ -53,14 +55,14 @@ class GetAddPrestationToCategorieAction extends AbstractAction
 
 //			try {
 //				if ($image instanceof UploadedFile) {
-//					$prestaService->addPrestationToCategorie($data, $image);
+//					$categService->addPrestationToCategorie($data, $image);
 //				} else {
-//					throw new PrestationsServiceException("Aucune image téléchargée.");
+//					throw new ServiceException("Aucune image téléchargée.");
 //				}
-//			} catch (PrestationsServiceException $e) {
+//			} catch (ServiceException $e) {
 //				throw new HttpBadRequestException($request, $e->getMessage());
 //			}
-			$prestaService->addPrestationToCategorie($data);
+			$categService->addPrestationToCategorie($data);
             $url = $routeContext->getRouteParser()->urlFor('prestations_by_categorie',['id' => $data['idCateg']]);
 
             return $response->withHeader('Location', $url)->withStatus(302);

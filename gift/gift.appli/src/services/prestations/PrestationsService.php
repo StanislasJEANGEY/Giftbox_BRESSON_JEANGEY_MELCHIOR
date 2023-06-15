@@ -5,29 +5,19 @@ namespace gift\app\services\prestations;
 use Exception;
 use gift\app\models\Prestation;
 use gift\app\models\Categorie;
+use gift\app\services\ServiceException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Ramsey\Uuid\Uuid;
-use Slim\Psr7\UploadedFile;
 
 class PrestationsService
 {
-    public function getCategories(): array {
-        return Categorie::all()->toArray();
-    }
 
-	public function getPrestations(): array {
-		return Prestation::all()->toArray();
-	}
-
-	/**
-	 * @throws Exception
-	 */
-	public function getCategorieById(int $id): array {
-        try {
-            return Categorie::findOrFail($id)->toArray();
-        } catch (ModelNotFoundException $e) {
-            throw new PrestationsServiceException("La catégorie $id n'existe pas", 404, $e);
-        }
+    /**
+     * @throws ServiceException
+     */
+    public function getPrestations(): array
+    {
+        return Prestation::all()->toArray();
     }
 
 	/**
@@ -37,7 +27,7 @@ class PrestationsService
         try {
             return Prestation::findOrFail($id)->toArray();
         } catch (ModelNotFoundException $e) {
-            throw new PrestationsServiceException("Prestation $id n'existe pas", 404, $e);
+            throw new ServiceException("Prestation $id n'existe pas", 404, $e);
         }
     }
 
@@ -48,7 +38,7 @@ class PrestationsService
         try {
             return Categorie::findOrFail($id)->prestations->toArray();
         } catch (ModelNotFoundException $e) {
-            throw new PrestationsServiceException("La catégorie $id n'existe pas", 404, $e);
+            throw new ServiceException("La catégorie $id n'existe pas", 404, $e);
         }
     }
 
@@ -61,12 +51,12 @@ class PrestationsService
 			$prestation->update($attributs);
 			return $prestation->toArray();
 		} catch (ModelNotFoundException $e) {
-			throw new PrestationsServiceException("Prestation $id n'existe pas", 404, $e);
+			throw new ServiceException("Prestation $id n'existe pas", 404, $e);
 		}
 	}
 
 	/**
-	 * @throws PrestationsServiceException
+	 * @throws ServiceException
 	 */
 	public function setPrestationCategorie(int $id, int $categorieId) : void {
 		try {
@@ -75,44 +65,20 @@ class PrestationsService
 			$prestation->categorie()->associate($categorie);
 			$prestation->save();
 		} catch (ModelNotFoundException $e) {
-			throw new PrestationsServiceException("Prestation $id ou catégorie $categorieId n'existe pas", 404, $e);
+			throw new ServiceException("Prestation $id ou catégorie $categorieId n'existe pas", 404, $e);
 		}
 	}
 
-	/**
-	 * @throws PrestationsServiceException
-	 */
-	public function getCreateCategorie(array $categ_data) : void {
-        if ($categ_data['libelle'] != filter_var($categ_data['libelle'], FILTER_SANITIZE_SPECIAL_CHARS)) {
-            throw new PrestationsServiceException("Le libellé de la catégorie contient des caractères spéciaux");
-        }
-        if ($categ_data['description'] != filter_var($categ_data['description'], FILTER_SANITIZE_SPECIAL_CHARS)) {
-            throw new PrestationsServiceException("La description de la catégorie contient des caractères spéciaux");
-        }
-        $categorie = new Categorie($categ_data);
-        $categorie->save();
-    }
+
 
 	/**
-	 * @throws PrestationsServiceException
-	 */
-	public function getDeleteCategorie(int $id) : void {
-		try {
-			$categorie = Categorie::findOrFail($id);
-			$categorie->delete();
-		} catch (ModelNotFoundException $e) {
-			throw new PrestationsServiceException("La catégorie $id n'existe pas", 404, $e);
-		}
-	}
-
-	/**
-	 * @throws PrestationsServiceException
+	 * @throws ServiceException
 	 */
 	public function getCreatePrestation(array $prestaData): void
 	{
 //		// Vérifier si l'image a été téléchargée sans erreur
 //		if ($image->getError() !== UPLOAD_ERR_OK) {
-//			throw new PrestationsServiceException("Erreur lors de l'upload de l'image.");
+//			throw new ServiceException("Erreur lors de l'upload de l'image.");
 //		}
 
 		// Récupérer les données de la prestation
@@ -124,7 +90,7 @@ class PrestationsService
 
 		// Vérifier si les champs requis sont présents
 		if (empty($libelle) || empty($tarif) || empty($description)) {
-			throw new PrestationsServiceException("Certains champs requis sont manquants dans les données de prestation.");
+			throw new ServiceException("Certains champs requis sont manquants dans les données de prestation.");
 		}
 
 		// Générer un identifiant unique pour la prestation
@@ -156,19 +122,7 @@ class PrestationsService
 		$prestation->save();
 	}
 
-	/**
-	 * @throws Exception
-	 */
-	public function addPrestationToCategorie(object|array|null $data): void {
-        $prestation = new Prestation();
-		$prestations = $this->getPrestations();
-		foreach ($prestations as $presta) {
-            $prestation::where('id', $presta['id'])->where('cat_id', $data['idCateg'])->update(['cat_id' => 0]);
-		}
-        foreach ($data as $value) {
-            $prestation::where('id', $value)->update(['cat_id' => $data['idCateg']]);
-        }
-	}
+
 
 
 

@@ -9,24 +9,10 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class PrestationsService
 {
-    public function getCategories(): array {
-        return Categorie::all()->toArray();
-    }
-
 	public function getPrestations(): array {
 		return Prestation::all()->toArray();
 	}
 
-	/**
-	 * @throws Exception
-	 */
-	public function getCategorieById(int $id): array {
-        try {
-            return Categorie::findOrFail($id)->toArray();
-        } catch (ModelNotFoundException $e) {
-            throw new PrestationsServiceException("La catégorie $id n'existe pas", 404, $e);
-        }
-    }
 
 	/**
 	 * @throws Exception

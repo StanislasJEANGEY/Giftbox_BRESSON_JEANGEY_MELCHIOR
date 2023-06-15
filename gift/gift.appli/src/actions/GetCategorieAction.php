@@ -2,6 +2,7 @@
 
 namespace gift\app\actions;
 
+use gift\app\services\categories\CategorieService;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use gift\app\services\prestations\PrestationsService as PrestationsService;
@@ -18,8 +19,8 @@ class GetCategorieAction extends AbstractAction
      * @throws LoaderError
      */
     public function __invoke(ServerRequestInterface $request, ResponseInterface $response, array $args) : ResponseInterface {
-        $prestaService = new PrestationsService();
-        $categories = $prestaService->getCategories();
+        $categService = new CategorieService();
+        $categories = $categService->getCategories();
 
         $view = Twig::fromRequest($request);
         return $view->render($response, 'CategorieView.twig', [
