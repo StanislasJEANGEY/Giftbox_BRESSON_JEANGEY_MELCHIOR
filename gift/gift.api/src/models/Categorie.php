@@ -7,7 +7,7 @@ namespace gift\api\models;
  */
 class Categorie extends \Illuminate\Database\Eloquent\Model {
 
-	protected $table = 'categories';
+	protected $table = 'categorie';
 	protected $primaryKey = 'id';
 	public $timestamps = false;
 	protected $fillable = ['id', 'libelle', 'description'];

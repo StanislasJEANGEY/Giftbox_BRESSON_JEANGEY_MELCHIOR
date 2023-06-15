@@ -13,8 +13,25 @@ class GetPrestationAction extends AbstractAction {
 		$prestaService = new PrestationsService();
 		$prestations = $prestaService->getPrestations();
 
+        $dataJson = [
+            "type" => "collection",
+            "count" => count($prestations),
+            "prestations" => []
+        ];
 
-		return //TODO: return json
-	}
+        foreach ($prestations as $prestation) {
+            $dataJson["prestations"][] = [
+                "prestations" => $prestation,
+                "links" => [
+                    "self" => ["href" => "/prestations/" . $prestation["id"] . "/"]
+                ]
+            ];
+        }
+
+        $dataJson = json_encode($dataJson, JSON_PRETTY_PRINT);
+        $dataJson = str_replace('\\/', '/', $dataJson); // Remplace les "\" par "/"
+        $response->getBody()->write($dataJson);
+        return $response->withHeader("Content-Type", "application/json");
+    }
 
 }

@@ -2,37 +2,37 @@
 
 namespace gift\api\actions;
 
+use gift\api\services\categories\CategorieService;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
-use gift\api\services\prestations\PrestationsService as PrestationsService;
 
 
 class GetCategorieAction extends AbstractAction
 {
     public function __invoke(ServerRequestInterface $request, ResponseInterface $response, array $args) : ResponseInterface
     {
-        $prestaService = new PrestationsService();
-        $categories = $prestaService->getCategories();
+        $categService = new CategorieService();
+        $categories = $categService->getCategories();
 
 
         $dataJson = [
-            'type' => 'collection',
-            'count' => count($categories),
-            'categories' => []
+            "type" => "collection",
+            "count" => count($categories),
+            "categories" => []
         ];
 
         foreach ($categories as $category) {
-            $dataJson['categories'][] = [
-                'categories' => $category,
-                'links' => [
-                    'self' => ['href' => '/categories/' . $category['id'] . '/']
+            $dataJson["categories"][] = [
+                "categories" => $category,
+                "links" => [
+                    "self" => ["href" => "/categories/" . $category["id"] . "/"]
                 ]
             ];
         }
 
         $dataJson = json_encode($dataJson, JSON_PRETTY_PRINT);
-
+        $dataJson = str_replace('\\/', '/', $dataJson); // Remplace les "\" par "/"
         $response->getBody()->write($dataJson);
-        return $response->withHeader('Content-Type', 'application/json');
+        return $response->withHeader("Content-Type", "application/json");
     }
 }
