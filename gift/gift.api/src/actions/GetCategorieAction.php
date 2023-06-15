@@ -33,6 +33,6 @@ class GetCategorieAction extends AbstractAction
         $dataJson = json_encode($dataJson, JSON_PRETTY_PRINT);
         $dataJson = str_replace('\\/', '/', $dataJson); // Remplace les "\" par "/"
         $response->getBody()->write($dataJson);
-        return $response->withHeader("Content-Type", "application/json");
+        return $response->withHeader("Content-Type", "application/json")->withStatus(200);
     }
 }
