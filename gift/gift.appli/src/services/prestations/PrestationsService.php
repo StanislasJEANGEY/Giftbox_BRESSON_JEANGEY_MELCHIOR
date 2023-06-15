@@ -12,9 +12,6 @@ use Ramsey\Uuid\Uuid;
 class PrestationsService
 {
 
-    /**
-     * @throws ServiceException
-     */
     public function getPrestations(): array
     {
         return Prestation::all()->toArray();

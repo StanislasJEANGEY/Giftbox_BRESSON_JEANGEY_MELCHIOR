@@ -3,7 +3,7 @@
 namespace gift\app\services\categories;
 
 use Exception;
-use gift\api\models\Categorie;
+use gift\app\models\Categorie;
 use gift\app\models\Prestation;
 use gift\app\services\prestations\PrestationsService;
 use gift\app\services\ServiceException;
