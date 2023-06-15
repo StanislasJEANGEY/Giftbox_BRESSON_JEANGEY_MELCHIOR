@@ -14,5 +14,4 @@
 
 vendor
 composer.lock
-gift.db.conf.ini
 gift.db.test.ini
