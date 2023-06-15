@@ -32,4 +32,6 @@ return function (App $app) {
 	$app->post('/connexion[/]', \gift\app\actions\GetConnexionAction::class)->setName("connexion_post");
 	$app->get('/inscription[/]', \gift\app\actions\GetInscriptionAction::class)->setName("inscription_get");
 	$app->post('/inscription[/]', \gift\app\actions\GetInscriptionAction::class)->setName("inscription_post");
+	$app->get('/deconnexion[/]', \gift\app\actions\GetDeconnexionAction::class)->setName("deconnexion_get");
+	$app->post('/deconnexion[/]', \gift\app\actions\GetDeconnexionAction::class)->setName("deconnexion_post");
 };

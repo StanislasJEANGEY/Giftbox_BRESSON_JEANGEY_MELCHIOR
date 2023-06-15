@@ -21,6 +21,7 @@ class AuthentificationService {
 				$_SESSION['prenom'] = $u->prenom;
 				$_SESSION['email'] = $u->email;
 				$_SESSION['role'] = $u->role;
+				$_SESSION['logged_in'] = true;
 				return true;
 			}
 		}
@@ -35,6 +36,10 @@ class AuthentificationService {
 		$u->password = password_hash($password, PASSWORD_DEFAULT);
 		$u->role = 1;
 		$u->save();
+	}
+
+	public function getDeconnexion(): void {
+		session_destroy();
 	}
 
 }

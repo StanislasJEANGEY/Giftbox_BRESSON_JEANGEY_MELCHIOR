@@ -3,6 +3,15 @@
     <body>
     <div class="container">
         <h1 class="heading">Prestation</h1>
+        <div class="sort">
+            <div class="sort-by">
+                <p>Trier par prix :</p>
+            </div>
+            <div class="sort-button">
+                <a><button>Croissant</button></a>
+                <a><button>Décroissant</button></a>
+            </div>
+        </div>
         <ul class="box-list">
             {% for prestation in list_presta %}
                 <li><a href="{{ url_for('prestation_by_id', { 'id': prestation.id } ) }}">{{ prestation['libelle'] }}</a></li>
