@@ -3,11 +3,9 @@
 namespace gift\api\services\prestations;
 
 use Exception;
-use gift\app\models\Prestation;
-use gift\app\models\Categorie;
+use gift\api\models\Prestation;
+use gift\api\models\Categorie;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
-use Ramsey\Uuid\Uuid;
-use Slim\Psr7\UploadedFile;
 
 class PrestationsService
 {

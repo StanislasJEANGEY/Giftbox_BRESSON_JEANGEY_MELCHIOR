@@ -2,12 +2,10 @@
 
 namespace gift\api\actions;
 use Exception;
-use gift\app\services\box\BoxService;
-use gift\app\services\prestations\PrestationsService;
+use gift\api\services\box\BoxService;
 use gift\app\services\prestations\PrestationsServiceException;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
-use Slim\Views\Twig;
 
 class GetBoxByIdAction extends AbstractAction{
 
@@ -24,6 +22,6 @@ class GetBoxByIdAction extends AbstractAction{
         $box = $boxService->getBoxById($id);
 
         return //TODO: return json
-        ]);
+
     }
 }

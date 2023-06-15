@@ -3,12 +3,10 @@
 namespace gift\api\services\box;
 
 use Exception;
-use gift\app\models\Box;
-use gift\app\services\prestations\PrestationsService;
-use gift\app\services\prestations\PrestationsServiceException;
-use gift\app\services\utils\CsrfService;
+use gift\api\models\Box;
+use gift\api\services\prestations\PrestationsService;
+use gift\api\services\prestations\PrestationsServiceException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
-use Ramsey\Uuid\Uuid;
 
 class BoxService {
 

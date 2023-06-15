@@ -4,23 +4,35 @@ namespace gift\api\actions;
 
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
-use gift\app\services\prestations\PrestationsService as PrestationsService;
-use Slim\Views\Twig;
-use Twig\Error\LoaderError;
-use Twig\Error\RuntimeError;
-use Twig\Error\SyntaxError;
+use gift\api\services\prestations\PrestationsService as PrestationsService;
+
 
 class GetCategorieAction extends AbstractAction
 {
-    /**
-     * @throws SyntaxError
-     * @throws RuntimeError
-     * @throws LoaderError
-     */
-    public function __invoke(ServerRequestInterface $request, ResponseInterface $response, array $args) : ResponseInterface {
+    public function __invoke(ServerRequestInterface $request, ResponseInterface $response, array $args) : ResponseInterface
+    {
         $prestaService = new PrestationsService();
         $categories = $prestaService->getCategories();
 
-        return //TODO: return json
+
+        $dataJson = [
+            'type' => 'collection',
+            'count' => count($categories),
+            'categories' => []
+        ];
+
+        foreach ($categories as $category) {
+            $dataJson['categories'][] = [
+                'categorie' => $category,
+                'links' => [
+                    'self' => ['href' => '/categories/' . $category['id'] . '/']
+                ]
+            ];
+        }
+
+        $dataJson = json_encode($dataJson, JSON_PRETTY_PRINT);
+
+        $response->getBody()->write($dataJson);
+        return $response->withHeader('Content-Type', 'application/json');
     }
 }

@@ -5,7 +5,7 @@ require_once __DIR__ . '/../src/vendor/autoload.php';
 
 require_once __DIR__ . '/../src/services/utils/Eloquent.php';
 
-use gift\app\services\utils\Eloquent;
+use gift\api\services\utils\Eloquent;
 
 Eloquent::init(__DIR__ . '/../src/conf/gift.db.conf.ini');
 

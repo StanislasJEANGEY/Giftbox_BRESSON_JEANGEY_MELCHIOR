@@ -3,11 +3,10 @@
 namespace gift\api\actions;
 
 use Exception;
-use gift\app\services\prestations\PrestationsService;
-use gift\app\services\prestations\PrestationsServiceException;
+use gift\api\services\prestations\PrestationsService;
+use gift\api\services\prestations\PrestationsServiceException;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
-use Slim\Views\Twig;
 
 class GetPrestationsByIdAction extends AbstractAction {
 
