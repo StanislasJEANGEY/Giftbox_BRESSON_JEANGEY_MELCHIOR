@@ -7,14 +7,19 @@
             <div class="sort-by">
                 <p>Trier par prix :</p>
             </div>
-            <div class="back-button">
-                <a href="{{ url_for('prestations', {'tri': 'asc'}) }}"><button>Croissant</button></a>
-                <a href="{{ url_for('prestations', {'tri': 'desc'}) }}"><button>Décroissant</button></a>
+            <div class="list-button">
+                <form action="{{ url_for('prestations') }}" method="GET">
+                    <select name="tri" onchange="this.form.submit()">
+                        <option value="">Aucun</option>
+                        <option value="asc"{% if tri == 'asc' %} selected{% endif %}>Croissant</option>
+                        <option value="desc"{% if tri == 'desc' %} selected{% endif %}>Décroissant</option>
+                    </select>
+                </form>
             </div>
         </div>
         <ul class="box-list">
             {% for prestation in list_presta %}
-                <li><a href="{{ url_for('prestation_by_id', { 'id': prestation.id } ) }}">{{ prestation['libelle'] }}</a></li>
+                <li><a href="{{ url_for('prestation_by_id', { 'id': prestation.id } ) }}">{{ prestation['libelle'] }} - {{ prestation['tarif'] }} €</a></li>
                 <br>
             {% endfor %}
         </ul>

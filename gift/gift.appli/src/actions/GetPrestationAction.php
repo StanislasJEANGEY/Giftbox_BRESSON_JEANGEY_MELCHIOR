@@ -22,7 +22,8 @@ class GetPrestationAction extends AbstractAction {
 	 */
 	public function __invoke(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface {
 		$prestaService = new PrestationsService();
-        $tri = $args['tri'] ?? '';
+        $tri = $request->getQueryParams()['tri'] ?? '';
+
 
         if ($tri == 'asc'){
             $prestations = $prestaService->getPrestationsByPrixCroissant();
@@ -34,7 +35,7 @@ class GetPrestationAction extends AbstractAction {
 
         $view = Twig::fromRequest($request);
 		$view->render($response, 'PrestationView.twig', [
-			'list_presta' => $prestations
+			'list_presta' => $prestations, 'tri' => $tri
 		]);
 		return $response;
 	}
