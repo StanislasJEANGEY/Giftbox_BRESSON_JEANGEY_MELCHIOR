@@ -11,7 +11,7 @@ Identifiants de connexion :
 | 2. Afficher le détail d'une prestation                     | Damien, Jules |   OK   | 
 | 3. Liste de prestations par catégories                     |   Stanislas   |   OK   |
 | 4. Liste de catégories                                     |   Stanislas   |   OK   |
-| 5. Tri par prix                                            |    Damien     |  ---   |
+| 5. Tri par prix                                            |    Damien     |   OK   |
 | 6. Création d'un coffret vide                              | Damien, Jules |   OK   |
 | 7. Ajout de prestations dans le coffret                    |   Stanislas   |  ---   |
 | 8. Affichage d'un coffret                                  |    Damien     |   OK   |

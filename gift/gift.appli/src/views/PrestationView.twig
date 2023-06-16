@@ -7,9 +7,9 @@
             <div class="sort-by">
                 <p>Trier par prix :</p>
             </div>
-            <div class="sort-button">
-                <a><button>Croissant</button></a>
-                <a><button>Décroissant</button></a>
+            <div class="back-button">
+                <a href="{{ url_for('prestations', {'tri': 'asc'}) }}"><button>Croissant</button></a>
+                <a href="{{ url_for('prestations', {'tri': 'desc'}) }}"><button>Décroissant</button></a>
             </div>
         </div>
         <ul class="box-list">

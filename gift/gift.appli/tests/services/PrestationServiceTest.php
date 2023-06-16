@@ -1,122 +1,141 @@
 <?php
-declare(strict_types=1);
 
-namespace gift\test\services\prestations;
-//require_once '../../src/vendor/autoload.php';
+namespace Tests\Unit\Services\Prestations;
 
+use Exception;
 use gift\app\models\Categorie;
 use gift\app\models\Prestation;
 use gift\app\services\prestations\PrestationsService;
+use gift\app\services\ServiceException;
 use gift\app\services\utils\Eloquent;
-use \PHPUnit\Framework\TestCase;
-use Illuminate\Database\Capsule\Manager as DB ;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+use PHPUnit\Framework\TestCase;
+use Ramsey\Uuid\Uuid;
 
-final class PrestationServiceTest extends TestCase
+class PrestationServiceTest extends TestCase
 {
+    protected PrestationsService $prestationsService;
 
-    private static array $prestations  = [];
-    private static array $categories = [];
-    public static function setUpBeforeClass(): void
+    protected function setUp(): void
     {
-        parent::setUpBeforeClass();
-
+        parent::setUp();
         Eloquent::init(__DIR__ . '/../../src/conf/gift.db.test.ini');
-        $faker = \Faker\Factory::create('fr_FR');
-
-        $prestaService = new PrestationsService();
-
-
-        $c1= $prestaService->getCreateCategorie([
-            'libelle' => $faker->word(),
-            'description' => $faker->paragraph(3)
-        ]);
-        $c2=$prestaService->getCreateCategorie([
-            'libelle' => $faker->word(),
-            'description' => $faker->paragraph(4)
-        ]);
-        self::$categories= [$c1, $c2];
-
-        for ($i=1; $i<=4; $i++) {
-            $p=$prestaService->getCreatePrestation([
-                'id' => $faker->uuid(),
-                'libelle' => $faker->word(),
-                'description' => $faker->paragraph(3),
-                'tarif' => $faker->randomFloat(2, 20, 200),
-                'unite' => $faker->numberBetween(1, 3)
-            ]);
-            self::$prestations[] = $p;
-        }
-
-
-//        self::$prestations[0]->categories()->associate($c1); self::$prestations[0]->save();
-//        self::$prestations[1]->categories()->associate($c1); self::$prestations[1]->save();
-//        self::$prestations[2]->categories()->associate($c2); self::$prestations[2]->save();
-//        self::$prestations[3]->categories()->associate($c2); self::$prestations[3]->save();
-
-
-
-    }
-
-    public static function tearDownAfterClass(): void
-    {
-        foreach (self::$categories as $c) {
-            $c->delete();
-        }
-        foreach (self::$prestations as $prestation) {
-            $prestation->delete();
-        }
-
-    }
-
-
-    public function testgetCategories(): void {
-
-        $prestationService = new PrestationsService();
-        $categories = $prestationService->getCategories();
-
-        $this->assertEquals(count(self::$categories), count($categories));
-        $this->assertEquals(self::$categories[0]['id'], $categories[0]['id']);
-        $this->assertEquals(self::$categories[0]['libelle'], $categories[0]['libelle']);
-        $this->assertEquals(self::$categories[0]['description'], $categories[0]['description']);
-        $this->assertEquals(self::$categories[1]['libelle'], $categories[1]['libelle']);
-        $this->assertEquals(self::$categories[1]['description'], $categories[1]['description']);
-        $this->assertEquals(self::$categories[1]['id'], $categories[1]['id']);
+        $this->prestationsService = new PrestationsService();
     }
 
     /**
-     * @throws \Exception
+     * @throws Exception
      */
-    public function testgetCategorieById(): void {
+    public function testGetPrestationByCategorieId()
+    {
+        $categorie = new Categorie();
+        $categorie->save();
 
-        $prestationService = new PrestationsService();
-        $categorie = $prestationService->getCategorieById(self::$categories[0]['id']);
+        $prestation1 = new Prestation([
+            'id' => Uuid::uuid4()->toString(),
+            'libelle' => 'Prestation 1',
+            'tarif' => 10.0,
+            'description' => 'Description 1',
+            'categorie_id' => $categorie->id
+        ]);
+        $prestation1->save();
 
-        $this->assertEquals(self::$categories[0]['id'], $categorie['id']);
-        $this->assertEquals(self::$categories[0]['libelle'], $categorie['libelle']);
-        $this->assertEquals(self::$categories[0]['description'], $categorie['description']);
+        $prestation2 = new Prestation([
+            'id' => Uuid::uuid4()->toString(),
+            'libelle' => 'Prestation 2',
+            'tarif' => 15.0,
+            'description' => 'Description 2',
+            'categorie_id' => $categorie->id
+        ]);
+        $prestation2->save();
 
-        $this->expectException(\gift\app\services\ServiceException::class);
-        $prestationService->getCategorieById(-1);
+        $result = $this->prestationsService->getPrestationByCategorieId($categorie->id);
+
+        $this->assertIsArray($result);
+    }
+
+    public function testGetPrestationById()
+    {
+        $prestation = new Prestation([
+            'id' => Uuid::uuid4()->toString(),
+            'libelle' => 'Prestation test',
+            'tarif' => 10.0,
+            'description' => 'Description test'
+        ]);
+        $prestation->save();
+
+        $result = $this->prestationsService->getPrestationById($prestation->id);
+
+        $this->assertIsArray($result);
+        $this->assertEquals($prestation->id, $result['id']);
+        $this->assertEquals($prestation->libelle, $result['libelle']);
+        $this->assertEquals($prestation->tarif, $result['tarif']);
+        $this->assertEquals($prestation->description, $result['description']);
     }
 
     /**
-     * @throws \Exception
+     * @throws Exception
      */
-    public function testgetPrestationById(): void
+    public function testGetUpdatePrestation()
     {
-        $prestationService = new PrestationsService();
-        $prestation = $prestationService->getPrestationById(self::$prestations[0]['id']);
+        $prestation = new Prestation([
+            'id' => Uuid::uuid4()->toString(),
+            'libelle' => 'Prestation test',
+            'tarif' => 10.0,
+            'description' => 'Description test'
+        ]);
+        $prestation->save();
 
-        $this->assertEquals(self::$prestations[0]['id'], $prestation['id']);
-        $this->assertEquals(self::$prestations[0]['libelle'], $prestation['libelle']);
-        $this->assertEquals(self::$prestations[0]['description'], $prestation['description']);
-        $this->assertEquals(self::$prestations[0]['tarif'], $prestation['tarif']);
-        $this->assertEquals(self::$prestations[0]['unite'], $prestation['unite']);
+        $newLibelle = 'Nouveau libellé';
+        $newTarif = 20.0;
+        $newDescription = 'Nouvelle description';
 
-        $this->expectException(\gift\app\services\ServiceException::class);
-        $prestationService->getPrestationById('AAAAAAA');
+        $result = $this->prestationsService->getUpdatePrestation($prestation->id, [
+            'libelle' => $newLibelle,
+            'tarif' => $newTarif,
+            'description' => $newDescription
+        ]);
+
+        $this->assertIsArray($result);
+        $this->assertEquals($prestation->id, $result['id']);
+        $this->assertEquals($newLibelle, $result['libelle']);
+        $this->assertEquals($newTarif, $result['tarif']);
+        $this->assertEquals($newDescription, $result['description']);
     }
 
+    /**
+     * @throws ServiceException
+     */
+    public function testGetCreatePrestation()
+    {
+        $prestaData = [
+            'libelle' => 'Nouvelle prestation',
+            'tarif' => 10.0,
+            'description' => 'Description de la nouvelle prestation'
+        ];
 
+        $this->prestationsService->getCreatePrestation($prestaData);
 
+        $prestations = Prestation::all();
+
+        $this->assertEquals($prestaData['libelle'], $prestations[0]->libelle);
+        $this->assertEquals($prestaData['tarif'], $prestations[0]->tarif);
+        $this->assertEquals($prestaData['description'], $prestations[0]->description);
+    }
+
+    public function testGetPrestations()
+    {
+        $prestations = $this->prestationsService->getPrestations();
+
+        $this->assertIsArray($prestations);
+        $this->assertNotEmpty($prestations);
+    }
+
+    protected function tearDown(): void
+    {
+//        Prestation::truncate();
+//        Categorie::truncate();
+
+        parent::tearDown();
+    }
 }

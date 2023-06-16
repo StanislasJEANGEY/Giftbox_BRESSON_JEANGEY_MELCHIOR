@@ -55,7 +55,7 @@ class PrestationsService
 	/**
 	 * @throws ServiceException
 	 */
-	public function setPrestationCategorie(int $id, int $categorieId) : void {
+	public function setPrestationCategorie(string $id, int $categorieId) : void {
 		try {
 			$prestation = Prestation::findOrFail($id);
 			$categorie = Categorie::findOrFail($categorieId);
@@ -118,6 +118,18 @@ class PrestationsService
 
 		$prestation->save();
 	}
+
+    // méthode pour trier les prestations par prix croissant
+    public function getPrestationsByPrixCroissant(): array
+    {
+        return Prestation::orderBy('tarif', 'asc')->get()->toArray();
+    }
+
+    // méthode pour trier les prestations par prix décroissant
+    public function getPrestationsByPrixDecroissant(): array
+    {
+        return Prestation::orderBy('tarif', 'desc')->get()->toArray();
+    }
 
 
 
