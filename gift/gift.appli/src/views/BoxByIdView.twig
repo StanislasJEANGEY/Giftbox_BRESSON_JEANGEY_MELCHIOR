@@ -35,8 +35,14 @@
             {% endif %}
             {% if box.statut == 3 %}
                 <div class="update-button">
-                    <a href="{{ url_for('paiement_box_get', { 'id': box.id } ) }}">
-                        <button>Générer URL</button>
+                    <a onclick="GenererURL()"><button>Générer URL</button>
+                        <script>
+                            function GenererURL() {
+                                let url = "{{ url_for('box_by_id', { 'id': box.id } ) }}";
+                                let text = "URL d'accès à votre coffret : " + url;
+                                alert(text);
+                            }
+                        </script>
                     </a>
                 </div>
             {% endif %}
