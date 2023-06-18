@@ -2,6 +2,14 @@
 {% block content %}
     <center><h1>Créer un Coffret</h1></center>
     <form class="gift_form" method="post" action="{{ url_for('add_box_post') }}">
+        <label for="box">Coffret prédéfinit</label>
+        <select id="box" name="box" >
+            <option value="">Aucune</option>
+            {% for b in box %}
+                <option value="{{ b.id }}">{{ b.libelle }}</option>
+            {% endfor %}
+        </select>
+
         <label for="libelle">Libellé</label>
         <input type="text" id="libelle" name="libelle" required placeholder="libelle">
 
