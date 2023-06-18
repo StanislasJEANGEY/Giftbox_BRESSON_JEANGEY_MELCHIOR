@@ -47,12 +47,14 @@ class BoxService {
             $box->user_id = -1;
         }
 		$box->save();
-        if (isset($data['box'])) {
-            $presta = $this->getPrestationByBoxId($data['box']);
-            foreach ($presta as $p) {
-                $box->prestations()->attach($p['id'], ['quantite' => $p['contenu']['quantite']]);
-                $box->montant += $p['tarif'] * $p['contenu']['quantite'];
-                $box->save();
+        if ($data['box'] != 'null') {
+            if (isset($data['box'])) {
+                $presta = $this->getPrestationByBoxId($data['box']);
+                foreach ($presta as $p) {
+                    $box->prestations()->attach($p['id'], ['quantite' => $p['contenu']['quantite']]);
+                    $box->montant += $p['tarif'] * $p['contenu']['quantite'];
+                    $box->save();
+                }
             }
         }
 
@@ -152,8 +154,9 @@ class BoxService {
     public function checkBox($idBox): bool
     {
         $box = Box::findOrFail($idBox);
+	    $nbCategorie = $box->prestations()->distinct()->count('cat_id');
         $nbPresta = $box->prestations()->count();
-        if($nbPresta < 2){
+        if($nbPresta < 2 || $nbCategorie < 2){
             return false;
         }
         return true;
