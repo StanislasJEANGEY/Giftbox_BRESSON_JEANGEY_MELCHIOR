@@ -17,7 +17,10 @@ CREATE TABLE `box`
     `message_kdo` text           NOT NULL DEFAULT '',
     `statut`      int(11)        NOT NULL DEFAULT 1,
     `created_at`  datetime       NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE current_timestamp(),
-    `updated_at`  datetime       NOT NULL
+    `updated_at`  datetime       NOT NULL,
+    `user_id`     int(11)        NOT NULL,
+    PRIMARY KEY (`id`),
+    FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
 ) ENGINE = InnoDB
   DEFAULT CHARSET = utf8;
 
@@ -65,7 +68,7 @@ CREATE TABLE `user`
     `prenom`   VARCHAR(255),
     `email`    VARCHAR(255) unique NOT NULL,
     `password` VARCHAR(255)        NOT NULL,
-    `role`     int(11)        NOT NULL DEFAULT 1
+    `role`     int(11)             NOT NULL DEFAULT 1
 ) ENGINE = InnoDB
   DEFAULT CHARSET = utf8;
 

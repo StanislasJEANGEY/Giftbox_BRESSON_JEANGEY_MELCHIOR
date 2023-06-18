@@ -14,6 +14,9 @@
         <label for="message">Message cadeau</label>
         <input type="text" id="message" name="message_kdo" placeholder="message">
 
+        <label for="validite">Validitation définitive ?</label>
+        <input type="checkbox" id="validite" name="validite" value=0>
+
         <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
         <input type="submit" value="Enregistrer">
     </form>

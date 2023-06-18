@@ -1,13 +1,15 @@
 {% extends 'SqueletteView.twig' %}
 {% block content %}
     <div class="container">
-        <h1 class="heading">{{box.libelle}}</h1>
+        <h1 class="heading">{{ box.libelle }}</h1>
         <div class="back-button">
-        <a href="{{ url_for('box') }}"><button>Retour</button></a>
+            <a href="{{ url_for('box') }}">
+                <button>Retour</button>
+            </a>
         </div>
         <br>
-        <p class="description">Description : {{box.description}}</p>
-        <p class="price">Prix : {{box.montant}}</p>
+        <p class="description">Description : {{ box.description }}</p>
+        <p class="price">Prix : {{ box.montant }}</p>
         {% if box.kdo == true %}
             <div class="gift-box">
                 <p>Coffret cadeau : oui</p>
@@ -16,7 +18,15 @@
         {% else %}
             <p>Coffret cadeau : non</p>
         {% endif %}
+{#        {% if boxStatut != box.VALIDATED and box['user_id'] == session['id'] %}#}
+                <div class="update-button">
+                    <a href="{{ url_for('update_box_get', { 'id': box.id } ) }}">
+                        <button>Modifier</button>
+                    </a>
+                </div>
+{#        {% endif %}#}
 
-        <h2 class="prestations-heading"><a href="{{ url_for('prestations_by_box', { 'id': box.id } ) }}">Prestations</a></h2>
+        <h2 class="prestations-heading"><a href="{{ url_for('prestations_by_box', { 'id': box.id } ) }}">Prestations</a>
+        </h2>
     </div>
 {% endblock %}

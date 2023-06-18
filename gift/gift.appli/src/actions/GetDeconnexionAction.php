@@ -10,7 +10,8 @@ use Slim\Routing\RouteContext;
 class GetDeconnexionAction extends AbstractAction {
 
 	public function __invoke(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface {
-		unset($_SESSION['logged_in']);
+		$authService = new AuthentificationService();
+		$authService->getDeconnexion();
 
 		$routeContext = RouteContext::fromRequest($request);
 		$url = $routeContext->getRouteParser()->urlFor('accueil');

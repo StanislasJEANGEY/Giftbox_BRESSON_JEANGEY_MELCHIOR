@@ -20,6 +20,10 @@ class Box extends Model {
 	const DELIVRED = 4;
 	const USED = 5;
 
+	protected $fillable = [
+		'id', 'nom', 'description', 'prix', 'statut', 'user_id'
+	];
+
 	public function prestations() : \Illuminate\Database\Eloquent\Relations\BelongsToMany {
 		return $this->belongsToMany(Prestation::class, 'box2presta', 'box_id', 'presta_id') -> withPivot('quantite') -> as('contenu');
 	}

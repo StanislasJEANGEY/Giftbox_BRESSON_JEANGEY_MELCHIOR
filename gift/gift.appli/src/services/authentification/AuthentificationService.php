@@ -2,44 +2,42 @@
 
 namespace gift\app\services\authentification;
 
-use Exception;
 use gift\app\models\User;
 
-class AuthentificationService {
+class AuthentificationService
+{
+	public function getConnexion(string $email, string $password): bool
+	{
+		$user = User::where('email', $email)->first();
 
-	/**
-	 * @throws Exception
-	 */
-	public function getConnexion($email, $password): bool {
-		$u = User::select('*')
-			->where('email', '=', $email)
-			->first();
-		if ($u != null) {
-			if (password_verify($password, $u->password)) {
-				$_SESSION['id'] = $u->id;
-				$_SESSION['nom'] = $u->nom;
-				$_SESSION['prenom'] = $u->prenom;
-				$_SESSION['email'] = $u->email;
-				$_SESSION['role'] = $u->role;
-				$_SESSION['logged_in'] = true;
-				return true;
-			}
+		if ($user && password_verify($password, $user->password)) {
+			$_SESSION['id'] = $user->id;
+			$_SESSION['nom'] = $user->nom;
+			$_SESSION['prenom'] = $user->prenom;
+			$_SESSION['email'] = $user->email;
+			$_SESSION['role'] = $user->role;
+			$_SESSION['logged_in'] = true;
+			return true;
 		}
+
 		return false;
 	}
 
-	public function getInscription($nom, $prenom, $email, $password): void {
-		$u = new User();
-		$u->nom = $nom;
-		$u->prenom = $prenom;
-		$u->email = $email;
-		$u->password = password_hash($password, PASSWORD_DEFAULT);
-		$u->role = 1;
-		$u->save();
+	public function getInscription(string $nom, string $prenom, string $email, string $password): void
+	{
+		$user = new User();
+		$user->nom = $nom;
+		$user->prenom = $prenom;
+		$user->email = $email;
+		$user->password = password_hash($password, PASSWORD_DEFAULT);
+		$user->role = 1;
+		$user->save();
 	}
 
-	public function getDeconnexion(): void {
+	public function getDeconnexion(): void
+	{
+		session_unset();
 		session_destroy();
+		session_regenerate_id(true);
 	}
-
 }

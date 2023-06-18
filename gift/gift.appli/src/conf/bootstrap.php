@@ -10,6 +10,9 @@ require_once __DIR__ . '/../vendor/autoload.php';
 $app = AppFactory::create();
 
 $twig = Twig::create(__DIR__ . '/../views/', ['cache' => false]);
+
+$twig->getEnvironment()->addGlobal('session', $_SESSION);
+
 $app->add (TwigMiddleware::create($app, $twig));
 
 $app->addRoutingMiddleware();
