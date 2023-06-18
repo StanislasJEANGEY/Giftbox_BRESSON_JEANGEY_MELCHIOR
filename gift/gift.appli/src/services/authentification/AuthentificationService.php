@@ -52,11 +52,10 @@ class AuthentificationService
     //méthode pour savoir si un utilisateur est admin
     public function isAdmin(): bool
     {
-        if (isset($_SESSION['role'])) {
-            $role = $_SESSION['role'];
-            if ($role == 2) {
-                return true;
-            }
+        $user = $this->getCurrentUser();
+        echo ($user);
+        if ($user['role'] == 2) {
+            return true;
         }
         return false;
     }
