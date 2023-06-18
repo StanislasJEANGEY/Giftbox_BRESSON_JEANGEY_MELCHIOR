@@ -140,4 +140,15 @@ class BoxService {
         return Box::where('user_id', $idUser)->get()->toArray();
     }
 
+    //Verfifie le nombre de presatation et de categorie dans la box
+    public function checkBox($idBox): bool
+    {
+        $box = Box::findOrFail($idBox);
+        $nbPresta = $box->prestations()->count();
+        if($nbPresta < 2){
+            return false;
+        }
+        return true;
+    }
+
 }

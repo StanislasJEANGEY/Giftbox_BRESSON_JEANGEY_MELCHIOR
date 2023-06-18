@@ -17,10 +17,11 @@ class GetBoxPersoAction extends AbstractAction
         $authService = new AuthentificationService();
         $userID = $authService->getCurrentUser();
         $box = $boxService->getBoxPerso($userID['id']);
+        $estConnecte = $authService->getCurrentUser();
 
         $view = Twig::fromRequest($request);
         return $view->render($response, 'BoxPersoView.twig', [
-            'list_box' => $box
+            'list_box' => $box, 'estConnecte' => $estConnecte
         ]);
     }
 }

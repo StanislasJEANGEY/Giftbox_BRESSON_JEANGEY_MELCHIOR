@@ -35,6 +35,12 @@ class GetBoxUpdateAction extends AbstractAction {
 		$url = $routeContext->getRouteParser()->urlFor('box');
 		$box = $boxService->getBoxById($id);
 		$boxStatut = $box['statut'];
+        //verifie si la box contient au moins 2 prestations et 2 catégorie différente
+        if ($boxService->checkBox($id)) {
+            $nonValid = true;
+        } else {
+            $nonValid = false;
+        }
 		if ($request->getMethod() === 'POST') {
 			if ($box['statut'] != Box::VALIDATED) {
 				$boxService->getUpdateBox($id, $request->getParsedBody());
@@ -44,7 +50,7 @@ class GetBoxUpdateAction extends AbstractAction {
 		}
 		$view = Twig::fromRequest($request);
 		return $view->render($response, 'UpdateBoxView.twig', [
-			'box' => $box, 'boxStatut' => $boxStatut, 'estConnecte' => $estConnecte
+			'box' => $box, 'boxStatut' => $boxStatut, 'estConnecte' => $estConnecte, 'nonValid' => $nonValid
 		]);
 	}
 }
