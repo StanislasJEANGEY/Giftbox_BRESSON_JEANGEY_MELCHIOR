@@ -1,8 +1,45 @@
-# Giftbox_BRESSON_JEANGEY_MELCHIOR
+# Giftbox - Projet d'architecture logiciel
 
-Identifiants de connexion :
-- Admin : admin / admin
-- User : user / user
+### Membres :
+- Damien MELCHIOR
+- Jules BRESSON
+- Stanislas JEANGEY
+
+# ! A l'intention du correcteur !
+Nous avons rencontré des problèmes de stabilité sur docketu. Les dockers en cours d'exécution venaient à 
+planter et impossible d'y accéder, ni de les redémarrer. Obligé de demander l'intervention de l'administrateur
+réseau pour arrêter de forces les services docker et les redémarrer. Nous allons voir ce problème en détail 
+avec l'administrateur réseau lundi 19/06 pour que la correction (et également la SAE) se déroule sans encombres.  
+Merci de votre compréhension.
+
+### URL docketu : 
+htttp://docketu.iutnc.univ-lorraine.fr:18080
+
+<br>
+
+### URL dépôt git : 
+https://github.com/StanislasJEANGEY/Giftbox_BRESSON_JEANGEY_MELCHIOR.git
+
+<br>
+
+### Installation et mise en place du projet :
+1. Cloner le dépôt git
+2. Aller sur son serveur de base de données et créer une base de données nommée `giftbox`
+3. Importer le fichier `giftbox.schema.sql` dans la base de données `giftbox` puis le fichier `giftbox.data.sql`
+4. Remplir les fichiers `gift.db.conf.ini` qui se trouve dans le dossier `gift/gift.api/src/conf/` et `gift/gift.appli/src/conf/` avec les informations de connexion à votre base de données
+5. Configurer son serveur web pour qu'il pointe vers le dossier `public` du projet (que ce soit pour l'api ou l'appli)
+
+<br>
+
+Identifiants de connexion sur notre application Giftbox :
+- Admin : 
+  - Identifiant : admin@mail.com
+  - Mot de passe : admin
+- User : 
+  - Identifiant : user@mail.com
+  - Mot de passe : user
+
+<br>
 
 ### Fonctionnalités du projet :
 | Fonctionnalités                                            |          Auteur          | Status |
