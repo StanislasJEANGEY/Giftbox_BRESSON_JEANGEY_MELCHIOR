@@ -30,6 +30,7 @@ return function (App $app) {
     $app->get('/categories/{id}/prestations', \gift\app\actions\GetPrestationsByCategorieAction::class)->setName("prestations_by_categorie");
 
     $app->get('/box[/]', \gift\app\actions\GetBoxAction::class)->setName("box");
+    $app->get('/box/perso[/]', \gift\app\actions\GetBoxPersoAction::class)->setName("box_perso");
     $app->get('/box/add[/]', \gift\app\actions\GetAddBoxAction::class)->setName("add_box_get");
     $app->post('/box/add[/]', \gift\app\actions\GetAddBoxAction::class)->setName("add_box_post");
     $app->get('/box/{id}[/]', \gift\app\actions\GetBoxByIdAction::class)->setName("box_by_id");

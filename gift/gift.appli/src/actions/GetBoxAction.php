@@ -24,9 +24,21 @@ class GetBoxAction
         $authService = new AuthentificationService();
         $estConnecte = $authService->getCurrentUser();
 
+        $userID = $authService->getCurrentUser();
+        if(isset($userID)){
+            $connected = true;
+        }else{
+            $connected = false;
+        }
+
+        if ($authService->isAdmin()) {
+            $admin = true;
+        } else {
+            $admin = false;
+        }
         $view = Twig::fromRequest($request);
         return $view->render($response, 'BoxView.twig', [
-            'list_box' => $categories, 'estConnecte' => $estConnecte
+            'list_box' => $categories, 'connected' => $connected, 'admin' => $admin
         ]);
     }
 }

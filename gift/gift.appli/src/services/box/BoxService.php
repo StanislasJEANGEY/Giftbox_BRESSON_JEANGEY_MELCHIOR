@@ -123,4 +123,9 @@ class BoxService {
 		}
 	}
 
+    public function getBoxPerso($idUser)
+    {
+        return Box::where('user_id', $idUser)->get()->toArray();
+    }
+
 }
