@@ -1,0 +1,48 @@
+{% extends 'SqueletteView.twig' %}
+
+{% block content %}
+    <div class="container">
+        <div class="back-button">
+            <a href="{{ url_for('box_by_id', {'id': box.id}) }}">
+                <button>Retour</button>
+            </a>
+        </div>
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                <div class="card mt-5">
+                    <div class="card-body">
+                        <h1 class="card-title text-center mb-4">Paiement</h1>
+
+                        {% if error %}
+                            <div class="alert alert-danger">{{ error }}</div>
+                        {% endif %}
+
+                        <form method="POST" action="{{ url_for('paiement_box_post', { 'id': box.id }) }}">
+                            <div class="mb-3">
+                                <label for="cardholder" class="form-label">Titulaire de la carte</label>
+                                <input type="text" id="cardholder" name="cardholder" class="form-control" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="cardnumber" class="form-label">Numéro de carte</label>
+                                <input type="text" id="cardnumber" name="cardnumber" class="form-control" required>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="expirydate" class="form-label">Date d'expiration</label>
+                                    <input type="text" id="expirydate" name="expirydate" class="form-control" required>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="cvv" class="form-label">Code CVV</label>
+                                    <input type="text" id="cvv" name="cvv" class="form-control" required>
+                                </div>
+                            </div>
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-primary">Valider le paiement</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -159,4 +159,12 @@ class BoxService {
         return true;
     }
 
+    //update le statut de la box
+    public function updateStatut($idBox, $statut): void
+    {
+        $box = Box::findOrFail($idBox);
+        $box->statut = $statut;
+        $box->save();
+    }
+
 }

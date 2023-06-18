@@ -49,4 +49,8 @@ return function (App $app) {
     $app->post('/inscription[/]', \gift\app\actions\GetInscriptionAction::class)->setName("inscription_post");
     $app->get('/deconnexion[/]', \gift\app\actions\GetDeconnexionAction::class)->setName("deconnexion_get");
     $app->post('/deconnexion[/]', \gift\app\actions\GetDeconnexionAction::class)->setName("deconnexion_post");
+
+    $app->get('/paiementBox/{id}[/]', \gift\app\actions\GetPaiementBoxAction::class)->setName("paiement_box_get");
+    $app->post('/paiementBox/{id}[/]', \gift\app\actions\GetPaiementBoxAction::class)->setName("paiement_box_post");
+
 };

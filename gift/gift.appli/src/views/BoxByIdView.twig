@@ -3,7 +3,7 @@
     <div class="container">
         <h1 class="heading">{{ box.libelle }}</h1>
         <div class="back-button">
-            <a href="{{ url_for('box') }}">
+            <a href="{{ url_for(url) }}">
                 <button>Retour</button>
             </a>
         </div>
@@ -19,10 +19,24 @@
             <p>Coffret cadeau : non</p>
         {% endif %}
         {% if estProprio == true %}
-            {% if box.statut != 2  %}
+            {% if box.statut == 1  %}
                 <div class="update-button">
                     <a href="{{ url_for('update_box_get', { 'id': box.id } ) }}">
                         <button>Modifier</button>
+                    </a>
+                </div>
+            {% endif %}
+            {% if box.statut == 2 %}
+                <div class="update-button">
+                    <a href="{{ url_for('paiement_box_get', { 'id': box.id } ) }}">
+                        <button>Accéder au paiement</button>
+                    </a>
+                </div>
+            {% endif %}
+            {% if box.statut == 3 %}
+                <div class="update-button">
+                    <a href="{{ url_for('paiement_box_get', { 'id': box.id } ) }}">
+                        <button>Générer URL</button>
                     </a>
                 </div>
             {% endif %}
