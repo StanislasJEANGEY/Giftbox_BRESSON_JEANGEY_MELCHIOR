@@ -19,7 +19,7 @@ Identifiants de connexion :
 | 10. Paiement d'un coffret                                  |          Damien          |   OK   |
 | 11. Modification d'un coffret : suppression de prestations |        Stanislas         |   OK   |
 | 12. Modification d'un coffret : modification des quantités |        Stanislas         |   OK   |
-| 13. Génération de l'URL d'accès                            |          Jules           |  DEB   |
+| 13. Génération de l'URL d'accès                            |          Jules           |   OK   |
 | 14. Accès au coffret                                       |        Stanislas         |   OK   |
 | 15. Signin                                                 |          Jules           |   OK   |
 | 16. Register                                               |          Jules           |   OK   |
