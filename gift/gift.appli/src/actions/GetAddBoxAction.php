@@ -43,9 +43,16 @@ class GetAddBoxAction extends AbstractAction
         } else {
             try{
                 $csrf = CsrfService::generate();
-                $box = $boxService->getBox();
+                $boxs = $boxService->getBox();
+                $params = $request->getQueryParams();
+                if (isset($params['box'])) {
+                    $box = $boxService->getBoxById($params['box']);
+                } else {
+                    $box = null;
+                }
                 $view->render($response, 'AddBoxView.twig', [
-                    'csrf_token' => $csrf, 'estConnecte' => $estConnecte, 'box' => $box
+                    'csrf_token' => $csrf, 'estConnecte' => $estConnecte,
+                    'boxs' => $boxs, 'box' => $box
                 ]);
             } catch (Exception $e) {
                 throw new HttpBadRequestException($request, $e->getMessage());

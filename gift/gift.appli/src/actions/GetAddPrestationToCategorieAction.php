@@ -76,7 +76,7 @@ class GetAddPrestationToCategorieAction extends AbstractAction
 					'csrf_token' => $csrf,
 					'prestations' => $prestations,
 					'idCategorie' => $idCategorie,
-                    'estConnecte' => $estConnecte
+                    'estConnecte' => $estConnecte,
 				]);
 			} catch (Exception $e) {
 				throw new HttpBadRequestException($request, $e->getMessage());

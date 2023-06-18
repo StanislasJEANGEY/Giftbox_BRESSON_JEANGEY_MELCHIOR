@@ -2,6 +2,11 @@
 {% block content %}
     <div class="container">
         <h2 class="heading">Créer une catégorie :</h2>
+        <div class="back-button">
+            <a href="{{ url_for('categories') }}">
+                <button>Retour</button>
+            </a>
+        </div>
         <form class="gift_form" method="post" action="{{ url_for('add_categorie_post') }}">
             <label for="libelle">Libellé</label>
             <input type="text" id="libelle" name="libelle" required placeholder="libellé">

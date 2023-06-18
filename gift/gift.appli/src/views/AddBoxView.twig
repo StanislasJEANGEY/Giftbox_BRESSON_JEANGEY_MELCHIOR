@@ -1,12 +1,22 @@
 {%  extends "SqueletteView.twig" %}
 {% block content %}
+    <div class="container">
     <center><h1>Créer un Coffret</h1></center>
+    <div class="back-button">
+        <a href="{{ url_for('box_perso') }}">
+            <button>Retour</button>
+        </a>
+    </div>
     <form class="gift_form" method="post" action="{{ url_for('add_box_post') }}">
         <label for="box">Coffret prédéfinit</label>
         <select id="box" name="box" >
             <option value="">Aucune</option>
-            {% for b in box %}
-                <option value="{{ b.id }}">{{ b.libelle }}</option>
+            {% for b in boxs %}
+                {% if b.id == box.id %}
+                    <option value="{{ b.id }}" selected>{{ b.libelle }}</option>
+                {% else %}
+                    <option value="{{ b.id }}">{{ b.libelle }}</option>
+                {% endif %}
             {% endfor %}
         </select>
 
@@ -27,4 +37,5 @@
         <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
         <input type="submit" value="Enregistrer">
     </form>
+    </div>
 {% endblock %}
