@@ -18,6 +18,7 @@ class  GetAccueilAction
      */
     public function __invoke(ServerRequestInterface $request, ResponseInterface $response, array $args) : ResponseInterface {
 
+		var_dump($_SESSION['id']);
         $view = Twig::fromRequest($request);
         return $view->render($response, 'AccueilView.twig');
     }

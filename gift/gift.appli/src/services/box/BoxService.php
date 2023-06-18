@@ -65,7 +65,10 @@ class BoxService {
         }
     }
 
-    public function getPrestationByBoxIdWithQuantite(string $idBox): array {
+	/**
+	 * @throws ServiceException
+	 */
+	public function getPrestationByBoxIdWithQuantite(string $idBox): array {
         try {
             return Box::findOrFail($idBox)->prestations()->withPivot('quantite')->get()->toArray();
         } catch (ModelNotFoundException $e) {
@@ -107,5 +110,17 @@ class BoxService {
             }
         }
     }
+
+	/**
+	 * @throws ServiceException
+	 */
+	public function getUpdateBox(mixed $id, array $attributs): void {
+		try {
+			$box = Box::findOrFail($id);
+			$box->update($attributs);
+		} catch (ModelNotFoundException $e) {
+			throw new ServiceException("La box $id n'existe pas", 404, $e);
+		}
+	}
 
 }
