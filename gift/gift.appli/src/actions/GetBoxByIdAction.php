@@ -25,11 +25,16 @@ class GetBoxByIdAction extends AbstractAction{
         $authService = new AuthentificationService();
         $estConnecte = $authService->getCurrentUser();
 
-        if ($box['user_id'] == $estConnecte['id']) {
-            $estProprio = true;
+        if (isset($_SESSION['user_id'])) {
+            if ($box['user_id'] == $estConnecte['id']) {
+                $estProprio = true;
+            } else {
+                $estProprio = false;
+            }
         } else {
             $estProprio = false;
         }
+
         $view = Twig::fromRequest($request);
         return $view->render($response, 'BoxByIdView.twig', [
             'box' => $box, 'estConnecte' => $estConnecte,
