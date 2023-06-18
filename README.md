@@ -13,7 +13,7 @@ Identifiants de connexion :
 | 4. Liste de catégories                                     |   Stanislas   |   OK   |
 | 5. Tri par prix                                            |    Damien     |   OK   |
 | 6. Création d'un coffret vide                              | Damien, Jules |   OK   |
-| 7. Ajout de prestations dans le coffret                    |   Stanislas   |  ---   |
+| 7. Ajout de prestations dans le coffret                    |   Stanislas   |   OK   |
 | 8. Affichage d'un coffret                                  |    Damien     |   OK   |
 | 9. Validation d'un coffret                                 |      ---      |  ---   |
 | 10. Paiement d'un coffret                                  |      ---      |  ---   |
@@ -22,7 +22,7 @@ Identifiants de connexion :
 | 13. Génération de l'URL d'accès                            |      ---      |  ---   |
 | 14. Accès au coffret                                       |   Stanislas   |   OK   |
 | 15. Signin                                                 |     Jules     |   OK   |
-| 16. Register                                               |     Jules     |  ---   |
+| 16. Register                                               |     Jules     |   OK   |
 | 17. Accéder à ses coffrets                                 |      ---      |  ---   |
 | 18. Afficher les box prédéfinies                           |      ---      |  ---   |
 | 19. Créer un coffret prérempli à partir d'une box          |      ---      |  ---   |
