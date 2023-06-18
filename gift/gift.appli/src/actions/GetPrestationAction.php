@@ -2,6 +2,7 @@
 
 namespace gift\app\actions;
 
+use gift\app\services\authentification\AuthentificationService;
 use gift\app\services\prestations\PrestationsService;
 use gift\app\services\ServiceException;
 use Psr\Http\Message\ResponseInterface;
@@ -23,6 +24,8 @@ class GetPrestationAction extends AbstractAction {
 	public function __invoke(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface {
 		$prestaService = new PrestationsService();
         $tri = $request->getQueryParams()['tri'] ?? '';
+        $authService = new AuthentificationService();
+        $estConnecte = $authService->getCurrentUser();
 
 
         if ($tri == 'asc'){
@@ -35,7 +38,7 @@ class GetPrestationAction extends AbstractAction {
 
         $view = Twig::fromRequest($request);
 		$view->render($response, 'PrestationView.twig', [
-			'list_presta' => $prestations, 'tri' => $tri
+			'list_presta' => $prestations, 'tri' => $tri, 'estConnecte' => $estConnecte
 		]);
 		return $response;
 	}

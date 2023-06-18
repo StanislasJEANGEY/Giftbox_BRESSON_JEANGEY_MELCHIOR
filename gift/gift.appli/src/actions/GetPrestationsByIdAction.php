@@ -3,6 +3,7 @@
 namespace gift\app\actions;
 
 use Exception;
+use gift\app\services\authentification\AuthentificationService;
 use gift\app\services\prestations\PrestationsService;
 use gift\app\services\ServiceException;
 use Psr\Http\Message\ResponseInterface;
@@ -24,6 +25,8 @@ class GetPrestationsByIdAction extends AbstractAction {
         $id = $args['id'];
         $prestaService = new PrestationsService();
         $prestation = $prestaService->getPrestationById($id);
+        $authService = new AuthentificationService();
+        $estConnecte = $authService->getCurrentUser();
 
         $view = Twig::fromRequest($request);
 
@@ -47,7 +50,7 @@ class GetPrestationsByIdAction extends AbstractAction {
             $url = 'prestations';
         }
         return $view->render($response, 'PrestationByIdView.twig', [
-            'prestation' => $prestation, 'previousURL' => $url, 'id_url' => $id_url
+            'prestation' => $prestation, 'previousURL' => $url, 'id_url' => $id_url, 'estConnecte' => $estConnecte
         ]);
 	}
 }

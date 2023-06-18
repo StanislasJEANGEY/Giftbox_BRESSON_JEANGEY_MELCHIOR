@@ -3,6 +3,7 @@
 namespace gift\app\actions;
 
 use Exception;
+use gift\app\services\authentification\AuthentificationService;
 use gift\app\services\categories\CategorieService;
 use gift\app\services\prestations\PrestationsService;
 use gift\app\services\ServiceException;
@@ -25,6 +26,8 @@ class GetAddPrestationToCategorieAction extends AbstractAction
 		$categService = new CategorieService();
         $prestaService = new PrestationsService();
 		$prestations = $prestaService->getPrestations();
+        $authService = new AuthentificationService();
+        $estConnecte = $authService->getCurrentUser();
 
 		$previousURL = $request->getHeaderLine('Referer');
 		$idCategorie = "";
@@ -72,7 +75,8 @@ class GetAddPrestationToCategorieAction extends AbstractAction
 				$view->render($response, 'AddPrestationToCategorieView.twig', [
 					'csrf_token' => $csrf,
 					'prestations' => $prestations,
-					'idCategorie' => $idCategorie
+					'idCategorie' => $idCategorie,
+                    'estConnecte' => $estConnecte
 				]);
 			} catch (Exception $e) {
 				throw new HttpBadRequestException($request, $e->getMessage());

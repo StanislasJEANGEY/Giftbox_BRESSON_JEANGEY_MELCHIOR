@@ -2,6 +2,7 @@
 
 namespace gift\app\actions;
 use Exception;
+use gift\app\services\authentification\AuthentificationService;
 use gift\app\services\categories\CategorieService;
 use gift\app\services\prestations\PrestationsService;
 use gift\app\services\ServiceException;
@@ -23,11 +24,13 @@ class GetCategorieByIdAction extends AbstractAction
         $id = $args['id'];
         $categService = new CategorieService();
         $categorie = $categService->getCategorieById($id);
+        $authService = new AuthentificationService();
+        $estConnecte = $authService->getCurrentUser();
 
 
         $view = Twig::fromRequest($request);
         return $view->render($response, 'CategorieByIdView.twig', [
-            'categories' => $categorie
+            'categories' => $categorie, 'estConnecte' => $estConnecte
         ]);
 
     }

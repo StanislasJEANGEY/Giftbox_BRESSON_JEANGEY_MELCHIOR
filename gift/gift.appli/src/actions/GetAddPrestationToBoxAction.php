@@ -3,6 +3,7 @@
 namespace gift\app\actions;
 
 use Exception;
+use gift\app\services\authentification\AuthentificationService;
 use gift\app\services\box\BoxService;
 use gift\app\services\prestations\PrestationsService;
 use gift\app\services\ServiceException;
@@ -20,6 +21,8 @@ class GetAddPrestationToBoxAction extends AbstractAction
     {
         $boxService = new BoxService();
         $prestationService = new PrestationsService();
+        $authService = new AuthentificationService();
+        $estConnecte = $authService->getCurrentUser();
         try {
             $prestations = $prestationService->getPrestations();
         } catch (ServiceException $e) {
@@ -59,7 +62,7 @@ class GetAddPrestationToBoxAction extends AbstractAction
                 $quantite = $boxService->getPrestationByBoxIdWithQuantite($idBox);
                 $view->render($response, 'AddPrestationToBoxView.twig', [
                     'csrf_token' => $csrf, 'prestations' => $prestations, 'idBox' => $idBox,
-                    'presta_quantite' => $quantite
+                    'presta_quantite' => $quantite, 'estConnecte' => $estConnecte
                 ]);
             } catch (Exception $e) {
                 throw new HttpBadRequestException($request, $e->getMessage());

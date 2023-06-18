@@ -3,6 +3,7 @@
 namespace gift\app\actions;
 
 use Exception;
+use gift\app\services\authentification\AuthentificationService;
 use gift\app\services\box\BoxService;
 use gift\app\services\utils\CsrfService;
 use Psr\Http\Message\ResponseInterface;
@@ -18,6 +19,8 @@ class GetAddBoxAction extends AbstractAction
         $boxService = new BoxService();
         $routeContext = RouteContext::fromRequest($request);
         $url = $routeContext->getRouteParser()->urlFor('box');
+        $authService = new AuthentificationService();
+        $estConnecte = $authService->getCurrentUser();
 
         $view = Twig::fromRequest($request);
 
@@ -41,7 +44,7 @@ class GetAddBoxAction extends AbstractAction
             try{
                 $csrf = CsrfService::generate();
                 $view->render($response, 'AddBoxView.twig', [
-                    'csrf_token' => $csrf
+                    'csrf_token' => $csrf, 'estConnecte' => $estConnecte
                 ]);
             } catch (Exception $e) {
                 throw new HttpBadRequestException($request, $e->getMessage());

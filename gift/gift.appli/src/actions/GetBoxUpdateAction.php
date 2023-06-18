@@ -3,6 +3,7 @@
 namespace gift\app\actions;
 
 use gift\app\models\Box;
+use gift\app\services\authentification\AuthentificationService;
 use gift\app\services\box\BoxService;
 use gift\app\services\ServiceException;
 use Psr\Http\Message\ResponseInterface;
@@ -26,6 +27,8 @@ class GetBoxUpdateAction extends AbstractAction {
 	 * @throws SyntaxError
 	 */
 	public function __invoke(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface {
+        $authService = new AuthentificationService();
+        $estConnecte = $authService->getCurrentUser();
 		$id = $args['id'];
 		$boxService = new BoxService();
 		$routeContext = RouteContext::fromRequest($request);
@@ -41,7 +44,7 @@ class GetBoxUpdateAction extends AbstractAction {
 		}
 		$view = Twig::fromRequest($request);
 		return $view->render($response, 'UpdateBoxView.twig', [
-			'box' => $box, 'boxStatut' => $boxStatut
+			'box' => $box, 'boxStatut' => $boxStatut, 'estConnecte' => $estConnecte
 		]);
 	}
 }

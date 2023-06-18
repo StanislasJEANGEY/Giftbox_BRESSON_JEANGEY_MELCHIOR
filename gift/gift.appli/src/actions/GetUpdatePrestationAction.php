@@ -3,6 +3,7 @@
 namespace gift\app\actions;
 
 use Exception;
+use gift\app\services\authentification\AuthentificationService;
 use gift\app\services\categories\CategorieService;
 use gift\app\services\prestations\PrestationsService;
 use gift\app\services\ServiceException;
@@ -19,6 +20,8 @@ class GetUpdatePrestationAction extends AbstractAction {
 		if (!isset($args['id'])) {
 			throw new ServiceException("L'id n'existe pas", 400);
 		}
+        $authService = new AuthentificationService();
+        $estConnecte = $authService->getCurrentUser();
 		$id = $args['id'];
 		$prestaService = new PrestationsService();
 		$prestation = $prestaService->getPrestationById($id);
@@ -31,7 +34,7 @@ class GetUpdatePrestationAction extends AbstractAction {
 		}
         $view = Twig::fromRequest($request);
         return $view->render($response, 'UpdatePrestationView.twig', [
-            'liste_categ' => $categories, 'prestation' => $prestation
+            'liste_categ' => $categories, 'prestation' => $prestation, 'estConnecte' => $estConnecte
         ]);
 	}
 }

@@ -3,6 +3,7 @@
 namespace gift\app\actions;
 
 use Exception;
+use gift\app\services\authentification\AuthentificationService;
 use gift\app\services\categories\CategorieService;
 use gift\app\services\prestations\PrestationsService;
 use gift\app\services\ServiceException;
@@ -26,6 +27,8 @@ class GetAddCategorieAction extends AbstractAction {
 
 		$routeContext = RouteContext::fromRequest($request);
 		$url = $routeContext->getRouteParser()->urlFor('categories');
+        $authService = new AuthentificationService();
+        $estConnecte = $authService->getCurrentUser();
 
 		$view = Twig::fromRequest($request);
 
@@ -48,7 +51,7 @@ class GetAddCategorieAction extends AbstractAction {
 			try {
 				$csrf = CsrfService::generate();
 				$view->render($response, 'AddCategorieView.twig', [
-					'csrf_token' => $csrf
+					'csrf_token' => $csrf, 'estConnecte' => $estConnecte
 				]);
 			} catch (Exception $e) {
 				throw new HttpBadRequestException($request, $e->getMessage());

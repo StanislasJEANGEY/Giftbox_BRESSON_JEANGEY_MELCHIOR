@@ -1,6 +1,7 @@
 <?php
 namespace gift\app\actions;
 use Exception;
+use gift\app\services\authentification\AuthentificationService;
 use gift\app\services\box\BoxService;
 use gift\app\services\prestations\PrestationsService;
 use gift\app\services\ServiceException;
@@ -21,10 +22,12 @@ class GetBoxByIdAction extends AbstractAction{
         $id = $args['id'];
         $boxService = new BoxService();
         $box = $boxService->getBoxById($id);
+        $authService = new AuthentificationService();
+        $estConnecte = $authService->getCurrentUser();
 
         $view = Twig::fromRequest($request);
         return $view->render($response, 'BoxByIdView.twig', [
-            'box' => $box
+            'box' => $box, 'estConnecte' => $estConnecte
         ]);
     }
 }

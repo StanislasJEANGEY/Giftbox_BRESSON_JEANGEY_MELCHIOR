@@ -2,6 +2,7 @@
 
 namespace gift\app\actions;
 
+use gift\app\services\authentification\AuthentificationService;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use gift\app\services\box\BoxService as BoxService;
@@ -20,10 +21,12 @@ class GetBoxAction
     public function __invoke(ServerRequestInterface $request, ResponseInterface $response, array $args) : ResponseInterface {
         $boxService = new BoxService();
         $categories = $boxService->getBox();
+        $authService = new AuthentificationService();
+        $estConnecte = $authService->getCurrentUser();
 
         $view = Twig::fromRequest($request);
         return $view->render($response, 'BoxView.twig', [
-            'list_box' => $categories
+            'list_box' => $categories, 'estConnecte' => $estConnecte
         ]);
     }
 }

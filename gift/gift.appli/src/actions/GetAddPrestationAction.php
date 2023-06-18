@@ -3,6 +3,7 @@
 namespace gift\app\actions;
 
 use Exception;
+use gift\app\services\authentification\AuthentificationService;
 use gift\app\services\prestations\PrestationsService;
 use gift\app\services\ServiceException;
 use gift\app\services\utils\CsrfService;
@@ -23,6 +24,8 @@ class GetAddPrestationAction extends AbstractAction
 	public function __invoke(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
 	{
 		$prestaService = new PrestationsService();
+        $authService = new AuthentificationService();
+        $estConnecte = $authService->getCurrentUser();
 
 		$routeContext = RouteContext::fromRequest($request);
 		$url = $routeContext->getRouteParser()->urlFor('prestations');
@@ -55,7 +58,7 @@ class GetAddPrestationAction extends AbstractAction
 			try {
 				$csrf = CsrfService::generate();
 				$view->render($response, 'AddPrestationView.twig', [
-					'csrf_token' => $csrf
+					'csrf_token' => $csrf, 'estConnecte' => $estConnecte
 				]);
 			} catch (Exception $e) {
 				throw new HttpBadRequestException($request, $e->getMessage());
