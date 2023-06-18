@@ -152,8 +152,9 @@ class BoxService {
     public function checkBox($idBox): bool
     {
         $box = Box::findOrFail($idBox);
+	    $nbCategorie = $box->prestations()->distinct()->count('cat_id');
         $nbPresta = $box->prestations()->count();
-        if($nbPresta < 2){
+        if($nbPresta < 2 || $nbCategorie < 2){
             return false;
         }
         return true;
