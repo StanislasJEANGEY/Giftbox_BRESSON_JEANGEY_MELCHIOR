@@ -47,12 +47,14 @@ class BoxService {
             $box->user_id = -1;
         }
 		$box->save();
-        if (isset($data['box'])) {
-            $presta = $this->getPrestationByBoxId($data['box']);
-            foreach ($presta as $p) {
-                $box->prestations()->attach($p['id'], ['quantite' => $p['contenu']['quantite']]);
-                $box->montant += $p['tarif'] * $p['contenu']['quantite'];
-                $box->save();
+        if ($data['box'] != 'null') {
+            if (isset($data['box'])) {
+                $presta = $this->getPrestationByBoxId($data['box']);
+                foreach ($presta as $p) {
+                    $box->prestations()->attach($p['id'], ['quantite' => $p['contenu']['quantite']]);
+                    $box->montant += $p['tarif'] * $p['contenu']['quantite'];
+                    $box->save();
+                }
             }
         }
 

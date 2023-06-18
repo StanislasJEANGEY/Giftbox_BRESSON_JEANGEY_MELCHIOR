@@ -15,7 +15,7 @@
                 </li>
             {% endfor %}
         </ul>
-        {% if admin == true %}
+        {% if estConnecte.role == 2 %}
             <div class="add-button">
                 <a href="{{ url_for('add_box_get') }}">
                     <button>Ajouter un coffret</button>
