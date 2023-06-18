@@ -36,7 +36,7 @@ class GetBoxAction
 
         $view = Twig::fromRequest($request);
         return $view->render($response, 'BoxView.twig', [
-            'list_box' => $categories, 'connected' => $connected
+            'list_box' => $categories, 'connected' => $connected, 'estConnecte' => $estConnecte
         ]);
     }
 }
