@@ -40,4 +40,15 @@ class AuthentificationService
 		session_destroy();
 		session_regenerate_id(true);
 	}
+
+    public function getCurrentUser(): ?User
+    {
+        // Récupérer l'utilisateur actuellement connecté
+        if (isset($_SESSION['user_id'])) {
+            $userId = $_SESSION['user_id'];
+            return User::find($userId);
+        }
+
+        return null;
+    }
 }
