@@ -27,6 +27,9 @@
                 </div>
             {% endif %}
         {% endif %}
+        <a href="{{ url_for('add_box_get') ~ '?box=' ~ box.id }}">
+            <button>Créer un Coffret depuis celui-ci</button>
+        </a>
 
         <h2 class="prestations-heading"><a href="{{ url_for('prestations_by_box', { 'id': box.id } ) }}">Prestations</a>
         </h2>

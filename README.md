@@ -27,7 +27,7 @@ Identifiants de connexion :
 | 18. Afficher les box prédéfinies                           |          Damien          |   OK   |
 | 19. Créer un coffret prérempli à partir d'une box          |        Stanislas         |   OK   |
 | 21. Api : liste des prestations                            |        Stanislas         |   OK   |
-| 20. Créer un coffret prérempli à partir d'une box affichée |        Stanislas         |  DEB   |
+| 20. Créer un coffret prérempli à partir d'une box affichée |        Stanislas         |   OK   |
 | 22. Api : liste des catégories                             |        Stanislas         |   OK   |
 | 23. Api : liste des prestations d'une catégorie            |        Stanislas         |   OK   |
 | 24. Api : accès à un coffret                               |        Stanislas         |   OK   |

@@ -5,8 +5,13 @@
         <label for="box">Coffret prédéfinit</label>
         <select id="box" name="box" >
             <option value="">Aucune</option>
-            {% for b in box %}
-                <option value="{{ b.id }}">{{ b.libelle }}</option>
+            {% for b in boxs %}
+                {% if b.id == box.id %}
+                    <option value="{{ b.id }}" selected>{{ b.libelle }}</option>
+                {% else %}
+                    <option value="{{ b.id }}">{{ b.libelle }}</option>
+                {% endif %}
+{#                <option value="{{ b.id }}">{{ b.libelle }}</option>#}
             {% endfor %}
         </select>
 
