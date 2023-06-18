@@ -3,16 +3,16 @@
     <center><h1>Coffret {{ box['libelle'] }}</h1></center>
     <form class="gift_form" method="post" action="{{ url_for('update_box_post', { 'id': box.id }) }}">
         <label for="libelle">Libellé</label>
-        <input type="text" id="libelle" name="libelle" required placeholder="{{ box.libelle }}">
+        <input type="text" id="libelle" name="libelle" required value="{{ box.libelle }}">
 
         <label for="description">Description</label>
-        <input type="text" id="description" name="description" required placeholder="{{ box.description }}">
+        <input type="text" id="description" name="description" required value="{{ box.description }}">
 
 
         <label for="kdo">Cadeau <input type="checkbox" id="kdo" name="kdo" value=0></label>
 
         <label for="message">Message cadeau</label>
-        <input type="text" id="message" name="message_kdo" placeholder="{{ box.message }}">
+        <input type="text" id="message" name="message_kdo" value="{{ box.message }}">
 
         {% if nonValid == false %}
         <label for="validite">Validation définitive ?<input type="checkbox" id="validite" name="validite" value=0 disabled data-toggle="tooltip" data-placement="top" title="Il faut au moins 2 prestations dans la box pour la valider"></label>

@@ -34,7 +34,6 @@ class GetBoxAction
             $connected = false;
             $admin = false;
         }
-        echo $admin;
 
 
         $view = Twig::fromRequest($request);
