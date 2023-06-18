@@ -23,9 +23,9 @@ Identifiants de connexion :
 | 14. Accès au coffret                                       |   Stanislas   |   OK   |
 | 15. Signin                                                 |     Jules     |   OK   |
 | 16. Register                                               |     Jules     |   OK   |
-| 17. Accéder à ses coffrets                                 |   Stanislas   |  DEB   |
+| 17. Accéder à ses coffrets                                 |   Stanislas   |   OK   |
 | 18. Afficher les box prédéfinies                           |    Damien     |   OK   |
-| 19. Créer un coffret prérempli à partir d'une box          |      ---      |  ---   |
+| 19. Créer un coffret prérempli à partir d'une box          |    Damien     |   OK   |
 | 20. Créer un coffret prérempli à partir d'une box affichée |      ---      |  ---   |
 | 21. Api : liste des prestations                            |   Stanislas   |   OK   |
 | 22. Api : liste des catégories                             |   Stanislas   |   OK   |
