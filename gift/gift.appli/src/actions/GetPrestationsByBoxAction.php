@@ -36,13 +36,18 @@ class GetPrestationsByBoxAction
             } else {
                 $admin = false;
             }
+            if ($box['user_id'] == $user['id']) {
+                $estProprio = true;
+            } else {
+                $estProprio = false;
+            }
         } else {
             $admin = false;
         }
         $view = Twig::fromRequest($request);
         return $view->render($response, 'PrestationByBoxView.twig', [
             'box' => $box, 'liste_presta' => $prestations, 'id' => $id, 'url' => $url, 'total' => $total, 'estConnecte' => $estConnecte,
-            'admin' => $admin
+            'admin' => $admin, 'estProprio' => $estProprio
         ]);
     }
 }
