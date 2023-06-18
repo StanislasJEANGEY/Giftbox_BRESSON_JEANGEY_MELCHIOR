@@ -19,11 +19,18 @@ class GetBoxByIdAction extends AbstractAction{
         if (!isset($args['id'])) {
             throw new ServiceException("L'id n'existe pas", 400);
         }
+        $previousURL = $request->getHeaderLine('Referer');
         $id = $args['id'];
         $boxService = new BoxService();
         $box = $boxService->getBoxById($id);
         $authService = new AuthentificationService();
         $estConnecte = $authService->getCurrentUser();
+
+        if (str_contains($previousURL, 'perso')){
+            $url = 'box_perso';
+        } else {
+            $url = 'box';
+        }
 
         if (isset($_SESSION['user_id'])) {
             if ($box['user_id'] == $estConnecte['id']) {
@@ -38,7 +45,7 @@ class GetBoxByIdAction extends AbstractAction{
         $view = Twig::fromRequest($request);
         return $view->render($response, 'BoxByIdView.twig', [
             'box' => $box, 'estConnecte' => $estConnecte,
-            'estProprio' => $estProprio]
+            'estProprio' => $estProprio, 'url' => $url]
         );
     }
 }

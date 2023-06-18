@@ -46,7 +46,7 @@ class GetBoxUpdateAction extends AbstractAction {
 		}
 		$view = Twig::fromRequest($request);
 		return $view->render($response, 'UpdateBoxView.twig', [
-			'box' => $box, 'boxStatut' => $boxStatut, 'estConnecte' => $estConnecte, 'valid' => $valid
+			'box' => $box, 'boxStatut' => $boxStatut, 'estConnecte' => $estConnecte, 'valid' => $valid, 'id' => $id
 		]);
 	}
 }

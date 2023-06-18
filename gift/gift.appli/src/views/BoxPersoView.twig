@@ -3,7 +3,11 @@
     <body>
     <div class="container">
         <h1 class="heading">Mes Coffrets</h1>
-
+        <div class="back-button">
+            <a href="{{ url_for('box') }}">
+                <button>Retour</button>
+            </a>
+        </div>
         <ul class="box-list">
             {% for box in list_box %}
                 <li>

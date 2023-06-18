@@ -1,6 +1,12 @@
 {% extends "SqueletteView.twig" %}
 {% block content %}
+    <div class="container">
     <center><h1>Coffret {{ box['libelle'] }}</h1></center>
+    <div class="back-button">
+        <a href="{{ url_for('box_by_id', {'id': id}) }}">
+            <button>Retour</button>
+        </a>
+    </div>
     <form class="gift_form" method="post" action="{{ url_for('update_box_post', { 'id': box.id }) }}">
         <label for="libelle">Libellé</label>
         <input type="text" id="libelle" name="libelle" required value="{{ box.libelle }}">
@@ -22,4 +28,5 @@
         <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
         <input type="submit" value="Enregistrer">
     </form>
+    </div>
 {% endblock %}
