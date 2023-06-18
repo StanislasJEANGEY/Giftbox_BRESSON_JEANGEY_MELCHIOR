@@ -13,11 +13,10 @@
 
         <label for="message">Message cadeau</label>
         <input type="text" id="message" name="message_kdo" value="{{ box.message }}">
-
-        {% if nonValid == false %}
-        <label for="validite">Validation définitive ?<input type="checkbox" id="validite" name="validite" value=0 disabled data-toggle="tooltip" data-placement="top" title="Il faut au moins 2 prestations dans la box pour la valider"></label>
+        {% if valid == false %}
+        <label for="statut">Validation définitive ?<input type="checkbox" id="statut" name="statut" value=0 disabled data-toggle="tooltip" data-placement="top" title="Il faut au moins 2 prestations dans la box pour la valider"></label>
         {% else %}
-        <label for="validite">Validation définitive ?<input type="checkbox" id="validite" name="validite" value=0></label>
+        <label for="statut">Validation définitive ?<input type="checkbox" id="statut" name="statut" value=2></label>
         {% endif %}
 
         <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
