@@ -27,15 +27,17 @@ class GetBoxAction
         $userID = $authService->getCurrentUser();
         if(isset($userID)){
             $connected = true;
+            if ($authService->isAdmin()) {
+                $admin = true;
+            } else {
+                $admin = false;
+            }
         }else{
             $connected = false;
-        }
-
-        if ($authService->isAdmin()) {
-            $admin = true;
-        } else {
             $admin = false;
         }
+
+
         $view = Twig::fromRequest($request);
         return $view->render($response, 'BoxView.twig', [
             'list_box' => $categories, 'connected' => $connected, 'admin' => $admin
