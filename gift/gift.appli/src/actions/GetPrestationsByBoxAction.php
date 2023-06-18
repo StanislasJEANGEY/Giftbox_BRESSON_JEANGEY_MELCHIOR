@@ -29,9 +29,20 @@ class GetPrestationsByBoxAction
         foreach ($prestations as $prestation) {
             $total += $prestation['tarif'];
         }
+        if (isset($_SESSION['user_id'])) {
+            $user = $authService->getCurrentUser();
+            if ($user['role'] == 2) {
+                $admin = true;
+            } else {
+                $admin = false;
+            }
+        } else {
+            $admin = false;
+        }
         $view = Twig::fromRequest($request);
         return $view->render($response, 'PrestationByBoxView.twig', [
-            'box' => $box, 'liste_presta' => $prestations, 'id' => $id, 'url' => $url, 'total' => $total, 'estConnecte' => $estConnecte
+            'box' => $box, 'liste_presta' => $prestations, 'id' => $id, 'url' => $url, 'total' => $total, 'estConnecte' => $estConnecte,
+            'admin' => $admin
         ]);
     }
 }

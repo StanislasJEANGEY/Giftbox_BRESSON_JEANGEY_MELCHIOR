@@ -2,7 +2,7 @@
 {% block content %}
     <body>
     <div class="container">
-        <h1 class="heading">Coffret</h1>
+        <h1 class="heading">Coffret Prédéfinit</h1>
         {% if connected == true %}
             <a href="{{ url_for('box_perso') }}">
                 <button>Mes Coffrets</button>
@@ -15,13 +15,11 @@
                 </li>
             {% endfor %}
         </ul>
-        {% if admin == true %}
-            <div class="add-button">
-                <a href="{{ url_for('add_box_get') }}">
-                    <button>Ajouter un coffret</button>
-                </a>
-            </div>
-        {% endif %}
+        <div class="add-button">
+            <a href="{{ url_for('add_box_get') }}">
+                <button>Ajouter un coffret</button>
+            </a>
+        </div>
     </div>
     </body>
 {% endblock %}

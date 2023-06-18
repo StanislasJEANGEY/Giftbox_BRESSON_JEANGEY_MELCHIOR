@@ -53,7 +53,6 @@ class AuthentificationService
     public function isAdmin(): bool
     {
         $user = $this->getCurrentUser();
-        echo ($user);
         if ($user['role'] == 2) {
             return true;
         }

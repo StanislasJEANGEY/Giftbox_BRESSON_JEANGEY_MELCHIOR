@@ -4,6 +4,7 @@ namespace gift\app\services\box;
 
 use Exception;
 use gift\app\models\Box;
+use gift\app\services\authentification\AuthentificationService;
 use gift\app\services\prestations\PrestationsService;
 use gift\app\services\ServiceException;
 use gift\app\services\utils\CsrfService;
@@ -34,6 +35,17 @@ class BoxService {
         $box->token = $csrfService->generate();
 		$box->statut = Box::CREATED;
 		$box->id = Uuid::uuid4()->toString();
+        if(isset($_SESSION['user_id'])){
+            $authService = new AuthentificationService();
+            $user = $authService->getCurrentUser();
+            if ($user['role'] == 2) {
+                $box->user_id = 0;
+            } else {
+                $box->user_id = $user['id'];
+            }
+        } else {
+            $box->user_id = -1;
+        }
 		$box->save();
 
 		return $box;
