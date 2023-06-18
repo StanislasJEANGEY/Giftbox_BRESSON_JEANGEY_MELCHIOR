@@ -8,6 +8,13 @@ use Psr\Http\Message\ServerRequestInterface;
 class GetAccueilAction extends \gift\api\actions\AbstractAction
 {
 
+	/**
+	 * Méthode qui permet d'afficher la page d'accueil
+	 * @param ServerRequestInterface $request
+	 * @param ResponseInterface $response
+	 * @param array $args
+	 * @return ResponseInterface
+	 */
     public function __invoke(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
     {
         $data = '

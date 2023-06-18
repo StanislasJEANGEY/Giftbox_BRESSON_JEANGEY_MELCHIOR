@@ -2,17 +2,23 @@
 
 namespace gift\api\actions;
 
-use Exception;
 use gift\api\services\box\BoxService;
+use gift\api\services\prestations\PrestationsServiceException;
 use gift\app\services\ServiceException;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 
 class GetBoxByIdAction extends AbstractAction
 {
-    /**
-     * @throws ServiceException | Exception
-     */
+	/**
+	 * Méthode qui permet d'afficher la page d'une box en particulier
+	 * @param ServerRequestInterface $request
+	 * @param ResponseInterface $response
+	 * @param array $args
+	 * @return ResponseInterface
+	 * @throws ServiceException
+	 * @throws PrestationsServiceException
+	 */
     public function __invoke(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
     {
         if (!isset($args['id'])) {

@@ -6,6 +6,11 @@ use Illuminate\Database\Capsule\Manager as Capsule;
 
 class Eloquent {
 
+	/**
+	 * Méthode permettant d'initialiser Eloquent
+	 * @param $filename
+	 * @return void
+	 */
     public static function init($filename): void {
         $capsule = new Capsule;
 

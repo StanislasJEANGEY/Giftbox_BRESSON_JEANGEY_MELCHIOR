@@ -6,7 +6,6 @@ use gift\app\services\authentification\AuthentificationService;
 use gift\app\services\categories\CategorieService;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
-use gift\app\services\prestations\PrestationsService as PrestationsService;
 use Slim\Views\Twig;
 use Twig\Error\LoaderError;
 use Twig\Error\RuntimeError;
@@ -14,11 +13,16 @@ use Twig\Error\SyntaxError;
 
 class GetCategorieAction extends AbstractAction
 {
-    /**
-     * @throws SyntaxError
-     * @throws RuntimeError
-     * @throws LoaderError
-     */
+	/**
+	 * Méthode qui permet d'afficher la page des catégories
+	 * @param ServerRequestInterface $request
+	 * @param ResponseInterface $response
+	 * @param array $args
+	 * @return ResponseInterface
+	 * @throws LoaderError
+	 * @throws RuntimeError
+	 * @throws SyntaxError
+	 */
     public function __invoke(ServerRequestInterface $request, ResponseInterface $response, array $args) : ResponseInterface {
         $categService = new CategorieService();
         $categories = $categService->getCategories();

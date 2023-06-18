@@ -14,9 +14,14 @@ use Twig\Error\SyntaxError;
 class GetInscriptionAction extends AbstractAction {
 
 	/**
+	 * Méthode qui permet d'afficher la page d'inscription
+	 * @param ServerRequestInterface $request
+	 * @param ResponseInterface $response
+	 * @param array $args
+	 * @return ResponseInterface
+	 * @throws LoaderError
 	 * @throws RuntimeError
 	 * @throws SyntaxError
-	 * @throws LoaderError
 	 */
 	public function __invoke(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface {
 		$view = Twig::fromRequest($request);

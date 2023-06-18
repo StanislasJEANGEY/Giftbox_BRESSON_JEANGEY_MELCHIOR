@@ -2,7 +2,6 @@
 
 namespace gift\app\services\box;
 
-use Exception;
 use gift\app\models\Box;
 use gift\app\services\authentification\AuthentificationService;
 use gift\app\services\prestations\PrestationsService;
@@ -14,7 +13,10 @@ use Ramsey\Uuid\Uuid;
 class BoxService {
 
 	/**
-	 * @throws Exception
+	 * Méthode permettant de créer un coffret
+	 * @param $data
+	 * @return bool|Box
+	 * @throws ServiceException
 	 */
 	public function createBox($data): bool|Box {
 		// On vérifie que les données obligatoires sont présentes.
@@ -61,11 +63,18 @@ class BoxService {
 		return $box;
 	}
 
+	/**
+	 * Méthode permettant de récupérer tous les coffrets
+	 * @return array
+	 */
     public function getBox(): array {
         return Box::where('user_id',0)->get()->toArray();
     }
 
 	/**
+	 * Méthode permettant de récupérer un coffret en particulier
+	 * @param string $id
+	 * @return array
 	 * @throws ServiceException
 	 */
 	public function getBoxById(string $id): array {
@@ -77,6 +86,9 @@ class BoxService {
     }
 
 	/**
+	 * Méthode permettant de récupérer les prestations d'un coffret en particulier
+	 * @param string $id
+	 * @return array
 	 * @throws ServiceException
 	 */
 	public function getPrestationByBoxId(string $id): array {
@@ -88,6 +100,9 @@ class BoxService {
     }
 
 	/**
+	 * Méthode permettant de récupérer les prestations d'un coffret en particulier avec la quantité
+	 * @param string $idBox
+	 * @return array
 	 * @throws ServiceException
 	 */
 	public function getPrestationByBoxIdWithQuantite(string $idBox): array {
@@ -98,9 +113,11 @@ class BoxService {
         }
     }
 
-    /**
-     * @throws ServiceException
-     */
+	/**
+	 * Méthode permettant d'ajouter une prestation à un coffret
+	 * @param object|array $data
+	 * @return void
+	 */
     public function addPrestationToBox(object|array $data): void
     {
         $prestationService = new PrestationsService();
@@ -134,6 +151,10 @@ class BoxService {
     }
 
 	/**
+	 * Méthode permettant de mettre à jour un coffret
+	 * @param mixed $id
+	 * @param array $attributs
+	 * @return void
 	 * @throws ServiceException
 	 */
 	public function getUpdateBox(mixed $id, array $attributs): void {
@@ -145,12 +166,20 @@ class BoxService {
 		}
 	}
 
-    public function getBoxPerso($idUser)
-    {
+	/**
+	 * Méthode permettant d'afficher les coffrets créés par un utilisateur
+	 * @param $idUser
+	 * @return mixed
+	 */
+    public function getBoxPerso($idUser): mixed {
         return Box::where('user_id', $idUser)->get()->toArray();
     }
 
-    //Verfifie le nombre de presatation et de categorie dans la box
+	/**
+	 * Méthode permettant de vérifier les conditions de validation d'un coffret
+	 * @param $idBox
+	 * @return bool
+	 */
     public function checkBox($idBox): bool
     {
         $box = Box::findOrFail($idBox);
@@ -162,7 +191,12 @@ class BoxService {
         return true;
     }
 
-    //update le statut de la box
+	/**
+	 * Méthode permettant de mettre à jour le statut d'un coffret
+	 * @param $idBox
+	 * @param $statut
+	 * @return void
+	 */
     public function updateStatut($idBox, $statut): void
     {
         $box = Box::findOrFail($idBox);

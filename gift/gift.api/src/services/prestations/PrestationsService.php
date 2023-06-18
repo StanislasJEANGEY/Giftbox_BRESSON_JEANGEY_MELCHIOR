@@ -9,13 +9,19 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class PrestationsService
 {
+	/**
+	 * Méthode pour récupérer toutes les prestations
+	 * @throws Exception
+	 */
 	public function getPrestations(): array {
 		return Prestation::all()->toArray();
 	}
 
-
 	/**
-	 * @throws Exception
+	 * Méthode pour récupérer une prestation par son id
+	 * @param string $id
+	 * @return array
+	 * @throws PrestationsServiceException
 	 */
 	public function getPrestationById(string $id): array {
         try {
@@ -26,7 +32,10 @@ class PrestationsService
     }
 
 	/**
-	 * @throws Exception
+	 * Méthode pour récupérer la prestation d'une catégorie en particulier
+	 * @param int $id
+	 * @return array
+	 * @throws PrestationsServiceException
 	 */
 	public function getPrestationByCategorieId(int $id): array {
         try {

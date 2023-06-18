@@ -2,7 +2,6 @@
 
 namespace gift\app\services\prestations;
 
-use Exception;
 use gift\app\models\Prestation;
 use gift\app\models\Categorie;
 use gift\app\services\ServiceException;
@@ -12,13 +11,19 @@ use Ramsey\Uuid\Uuid;
 class PrestationsService
 {
 
-    public function getPrestations(): array
-    {
+	/**
+	 * Méthode permettant de récupérer toutes les prestations
+	 * @return array
+	 */
+    public function getPrestations(): array {
         return Prestation::all()->toArray();
     }
 
 	/**
-	 * @throws Exception
+	 * Méthode permettant de récupérer une prestation en particulier
+	 * @param string $id
+	 * @return array
+	 * @throws ServiceException
 	 */
 	public function getPrestationById(string $id): array {
         try {
@@ -29,7 +34,10 @@ class PrestationsService
     }
 
 	/**
-	 * @throws Exception
+	 * Méthode permettant de récupérer toutes les prestations d'une catégorie en particulier
+	 * @param int $id
+	 * @return array
+	 * @throws ServiceException
 	 */
 	public function getPrestationByCategorieId(int $id): array {
         try {
@@ -40,7 +48,11 @@ class PrestationsService
     }
 
 	/**
-	 * @throws Exception
+	 * Méthode permettant de mettre à jour une prestation
+	 * @param string $id
+	 * @param array $attributs
+	 * @return array
+	 * @throws ServiceException
 	 */
 	public function getUpdatePrestation(string $id, array $attributs): array {
 		try {
@@ -53,31 +65,13 @@ class PrestationsService
 	}
 
 	/**
-	 * @throws ServiceException
-	 */
-	public function setPrestationCategorie(string $id, int $categorieId) : void {
-		try {
-			$prestation = Prestation::findOrFail($id);
-			$categorie = Categorie::findOrFail($categorieId);
-			$prestation->categorie()->associate($categorie);
-			$prestation->save();
-		} catch (ModelNotFoundException $e) {
-			throw new ServiceException("Prestation $id ou catégorie $categorieId n'existe pas", 404, $e);
-		}
-	}
-
-
-
-	/**
+	 * Méthode permettant de créer une prestation
+	 * @param array $prestaData
+	 * @return void
 	 * @throws ServiceException
 	 */
 	public function getCreatePrestation(array $prestaData): void
 	{
-//		// Vérifier si l'image a été téléchargée sans erreur
-//		if ($image->getError() !== UPLOAD_ERR_OK) {
-//			throw new ServiceException("Erreur lors de l'upload de l'image.");
-//		}
-
 		// Récupérer les données de la prestation
 		$libelle = filter_var($prestaData['libelle'], FILTER_SANITIZE_SPECIAL_CHARS);
 		$tarif = filter_var($prestaData['tarif'], FILTER_SANITIZE_SPECIAL_CHARS);
@@ -93,39 +87,31 @@ class PrestationsService
 		// Générer un identifiant unique pour la prestation
 		$prestationId = Uuid::uuid4()->toString();
 
-		// Définir le répertoire de destination pour les images
-		$uploadDirectory = __DIR__ . '/../../../public/img';
-
-//		// Récupérer le nom original et l'extension du fichier image
-//		$uploadedFileName = $image->getClientFilename();
-//		$extension = pathinfo($uploadedFileName, PATHINFO_EXTENSION);
-//
-//		// Générer un nom de fichier unique
-//		$newFileName = $prestationId . '.' . $extension;
-//
-//		// Déplacer le fichier téléchargé vers le répertoire de destination avec le nouveau nom de fichier
-//		$image->moveTo($uploadDirectory . '/' . $newFileName);
-
 		// Créer une instance de la prestation avec les données et le chemin de l'image
 		$prestation = new Prestation([
 			'id' => $prestationId,
 			'libelle' => $libelle,
 			'tarif' => $tarif,
 			'description' => $description,
-			//'image' => $uploadDirectory . '/' . $newFileName
 			'image' => ''
 		]);
 
 		$prestation->save();
 	}
 
-    // méthode pour trier les prestations par prix croissant
+	/**
+	 * Méthode permettant de trier les prestations par prix croissant
+	 * @return array
+	 */
     public function getPrestationsByPrixCroissant(): array
     {
         return Prestation::orderBy('tarif', 'asc')->get()->toArray();
     }
 
-    // méthode pour trier les prestations par prix décroissant
+	/**
+	 * Méthode permettant de trier les prestations par prix décroissant
+	 * @return array
+	 */
     public function getPrestationsByPrixDecroissant(): array
     {
         return Prestation::orderBy('tarif', 'desc')->get()->toArray();

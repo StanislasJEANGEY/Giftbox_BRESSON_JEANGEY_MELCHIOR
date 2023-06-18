@@ -13,11 +13,16 @@ use Twig\Error\SyntaxError;
 
 class GetBoxAction
 {
-    /**
-     * @throws SyntaxError
-     * @throws RuntimeError
-     * @throws LoaderError
-     */
+	/**
+	 * Méthode qui permet d'afficher la page des box
+	 * @param ServerRequestInterface $request
+	 * @param ResponseInterface $response
+	 * @param array $args
+	 * @return ResponseInterface
+	 * @throws LoaderError
+	 * @throws RuntimeError
+	 * @throws SyntaxError
+	 */
     public function __invoke(ServerRequestInterface $request, ResponseInterface $response, array $args) : ResponseInterface {
         $boxService = new BoxService();
         $categories = $boxService->getBox();

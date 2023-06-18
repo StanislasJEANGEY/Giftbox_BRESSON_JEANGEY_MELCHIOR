@@ -4,6 +4,7 @@ namespace gift\app\actions;
 
 use gift\app\services\authentification\AuthentificationService;
 use gift\app\services\box\BoxService;
+use gift\app\services\ServiceException;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Slim\Routing\RouteContext;
@@ -15,12 +16,17 @@ use Twig\Error\SyntaxError;
 class GetPaiementBoxAction extends AbstractAction
 {
 
-
-    /**
-     * @throws SyntaxError
-     * @throws RuntimeError
-     * @throws LoaderError
-     */
+	/**
+	 * Méthode qui permet d'afficher la page de paiement d'une box
+	 * @param ServerRequestInterface $request
+	 * @param ResponseInterface $response
+	 * @param array $args
+	 * @return ResponseInterface
+	 * @throws LoaderError
+	 * @throws RuntimeError
+	 * @throws SyntaxError
+	 * @throws ServiceException
+	 */
     public function __invoke(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
     {
         $view = Twig::fromRequest($request);

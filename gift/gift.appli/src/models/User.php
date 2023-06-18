@@ -4,6 +4,9 @@ namespace gift\app\models;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * @method static findOrFail(int $id)
+ */
 class User extends Model {
 
 	protected $table = 'user';
