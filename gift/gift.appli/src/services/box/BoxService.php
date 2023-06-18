@@ -40,7 +40,7 @@ class BoxService {
 	}
 
     public function getBox(): array {
-        return Box::all()->toArray();
+        return Box::where('user_id',0)->get()->toArray();
     }
 
 	/**
