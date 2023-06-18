@@ -4,11 +4,8 @@ namespace gift\app\actions;
 
 use gift\app\services\authentification\AuthentificationService;
 use gift\app\services\prestations\PrestationsService;
-use gift\app\services\ServiceException;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
-use Slim\Exception\HttpBadRequestException;
-use Slim\Routing\RouteContext;
 use Slim\Views\Twig;
 use Twig\Error\LoaderError;
 use Twig\Error\RuntimeError;
@@ -17,9 +14,14 @@ use Twig\Error\SyntaxError;
 class GetPrestationAction extends AbstractAction {
 
 	/**
-	 * @throws SyntaxError
-	 * @throws RuntimeError
+	 * Méthode qui permet d'afficher la page des prestations
+	 * @param ServerRequestInterface $request
+	 * @param ResponseInterface $response
+	 * @param array $args
+	 * @return ResponseInterface
 	 * @throws LoaderError
+	 * @throws RuntimeError
+	 * @throws SyntaxError
 	 */
 	public function __invoke(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface {
 		$prestaService = new PrestationsService();

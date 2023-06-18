@@ -10,9 +10,15 @@ use Psr\Http\Message\ServerRequestInterface;
 
 class GetPrestationsByCategorieAction extends AbstractAction {
 
-    /**
-     * @throws Exception
-     */
+	/**
+	 * Méthode qui retourne toutes les prestations d'une catégorie en particulier
+	 * @param ServerRequestInterface $request
+	 * @param ResponseInterface $response
+	 * @param array $args
+	 * @return ResponseInterface
+	 * @throws ServiceException
+	 * @throws Exception
+	 */
     public function __invoke(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
     {
         if (!isset($args['id'])) {

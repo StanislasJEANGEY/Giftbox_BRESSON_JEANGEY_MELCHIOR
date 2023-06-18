@@ -14,6 +14,13 @@ use Slim\Views\Twig;
 
 class GetAddBoxAction extends AbstractAction
 {
+	/**
+	 * Méthode qui permet d'afficher la page d'ajout de box
+	 * @param ServerRequestInterface $request
+	 * @param ResponseInterface $response
+	 * @param array $args
+	 * @return ResponseInterface
+	 */
     public function __invoke(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
     {
         $boxService = new BoxService();

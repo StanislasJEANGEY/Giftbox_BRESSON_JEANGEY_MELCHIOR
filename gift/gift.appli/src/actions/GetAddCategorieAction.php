@@ -5,7 +5,6 @@ namespace gift\app\actions;
 use Exception;
 use gift\app\services\authentification\AuthentificationService;
 use gift\app\services\categories\CategorieService;
-use gift\app\services\prestations\PrestationsService;
 use gift\app\services\ServiceException;
 use gift\app\services\utils\CsrfService;
 use Psr\Http\Message\ResponseInterface;
@@ -17,6 +16,7 @@ use Slim\Views\Twig;
 class GetAddCategorieAction extends AbstractAction {
 
 	/**
+	 * Méthode qui permet d'afficher la page d'ajout d'une catégorie
 	 * @param ServerRequestInterface $request
 	 * @param ResponseInterface $response
 	 * @param array $args

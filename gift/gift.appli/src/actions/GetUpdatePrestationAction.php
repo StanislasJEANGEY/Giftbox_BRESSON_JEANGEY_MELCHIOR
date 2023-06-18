@@ -10,10 +10,22 @@ use gift\app\services\ServiceException;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Slim\Views\Twig;
+use Twig\Error\LoaderError;
+use Twig\Error\RuntimeError;
+use Twig\Error\SyntaxError;
 
 class GetUpdatePrestationAction extends AbstractAction {
 
 	/**
+	 * Méthode qui permet d'afficher la page de modification d'une prestation
+	 * @param ServerRequestInterface $request
+	 * @param ResponseInterface $response
+	 * @param array $args
+	 * @return ResponseInterface
+	 * @throws ServiceException
+	 * @throws LoaderError
+	 * @throws RuntimeError
+	 * @throws SyntaxError
 	 * @throws Exception
 	 */
 	public function __invoke(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface {

@@ -6,19 +6,21 @@ use Exception;
 use gift\app\services\authentification\AuthentificationService;
 use gift\app\services\categories\CategorieService;
 use gift\app\services\prestations\PrestationsService;
-use gift\app\services\ServiceException;
 use gift\app\services\utils\CsrfService;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Slim\Exception\HttpBadRequestException;
 use Slim\Routing\RouteContext;
 use Slim\Views\Twig;
-use Slim\Psr7\UploadedFile;
-use Ramsey\Uuid\Uuid;
 
 class GetAddPrestationToCategorieAction extends AbstractAction
 {
 	/**
+	 * Méthode qui permet d'afficher la page d'ajout d'une prestation à une catégorie
+	 * @param ServerRequestInterface $request
+	 * @param ResponseInterface $response
+	 * @param array $args
+	 * @return ResponseInterface
 	 * @throws Exception
 	 */
 	public function __invoke(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
@@ -46,25 +48,12 @@ class GetAddPrestationToCategorieAction extends AbstractAction
 
 			$data = $request->getParsedBody();
 
-//			// Récupérer le fichier image
-//			$uploadedFiles = $request->getUploadedFiles();
-//			$image = $uploadedFiles['img'] ?? null;
-
 			try {
 				CsrfService::check($data['csrf_token']);
 			} catch (Exception $e) {
 				throw new HttpBadRequestException($request, $e->getMessage());
 			}
 
-//			try {
-//				if ($image instanceof UploadedFile) {
-//					$categService->addPrestationToCategorie($data, $image);
-//				} else {
-//					throw new ServiceException("Aucune image téléchargée.");
-//				}
-//			} catch (ServiceException $e) {
-//				throw new HttpBadRequestException($request, $e->getMessage());
-//			}
 			$categService->addPrestationToCategorie($data);
             $url = $routeContext->getRouteParser()->urlFor('prestations_by_categorie',['id' => $data['idCateg']]);
 

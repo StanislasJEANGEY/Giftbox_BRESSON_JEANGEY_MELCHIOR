@@ -9,13 +9,20 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class CategorieService
 {
+	/**
+	 * Méthode pour récupérer toutes les catégories
+	 * @throws Exception
+	 */
     public function getCategories(): array {
         return Categorie::all()->toArray();
     }
 
-    /**
-     * @throws Exception
-     */
+	/**
+	 * Méthode pour récupérer une catégorie par son id
+	 * @param int $id
+	 * @return array
+	 * @throws PrestationsServiceException
+	 */
     public function getCategorieById(int $id): array {
         try {
             return Categorie::findOrFail($id)->toArray();

@@ -16,6 +16,7 @@ use Slim\Views\Twig;
 class GetAddPrestationAction extends AbstractAction
 {
 	/**
+	 * Méthode qui permet d'afficher la page d'ajout d'une prestation
 	 * @param ServerRequestInterface $request
 	 * @param ResponseInterface $response
 	 * @param array $args

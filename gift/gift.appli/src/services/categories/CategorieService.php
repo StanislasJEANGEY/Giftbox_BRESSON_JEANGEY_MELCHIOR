@@ -11,13 +11,20 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class CategorieService
 {
+	/**
+	 * Méthode permettant de récupérer toutes les catégories
+	 * @return array
+	 */
     public function getCategories(): array {
         return Categorie::all()->toArray();
     }
 
-    /**
-     * @throws Exception
-     */
+	/**
+	 * Méthode permettant de récupérer une catégorie en particulier
+	 * @param int $id
+	 * @return array
+	 * @throws ServiceException
+	 */
     public function getCategorieById(int $id): array {
         try {
             return Categorie::findOrFail($id)->toArray();
@@ -26,9 +33,12 @@ class CategorieService
         }
     }
 
-    /**
-     * @throws ServiceException
-     */
+	/**
+	 * Méthode permettant de créer une catégorie
+	 * @param array $categ_data
+	 * @return void
+	 * @throws ServiceException
+	 */
     public function getCreateCategorie(array $categ_data) : void {
         if ($categ_data['libelle'] != filter_var($categ_data['libelle'], FILTER_SANITIZE_SPECIAL_CHARS)) {
             throw new ServiceException("Le libellé de la catégorie contient des caractères spéciaux");
@@ -40,9 +50,12 @@ class CategorieService
         $categorie->save();
     }
 
-    /**
-     * @throws ServiceException
-     */
+	/**
+	 * Méthode permettant de supprimer une catégorie
+	 * @param int $id
+	 * @return void
+	 * @throws ServiceException
+	 */
     public function getDeleteCategorie(int $id) : void {
         try {
             $categorie = Categorie::findOrFail($id);
@@ -52,9 +65,11 @@ class CategorieService
         }
     }
 
-    /**
-     * @throws Exception
-     */
+	/**
+	 * Méthode permettant d'ajouter une prestation à une catégorie
+	 * @param object|array|null $data
+	 * @return void
+	 */
     public function addPrestationToCategorie(object|array|null $data): void {
         $prestation = new Prestation();
         $prestaService = new PrestationsService();

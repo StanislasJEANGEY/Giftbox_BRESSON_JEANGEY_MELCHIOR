@@ -7,6 +7,8 @@ use Exception;
 class CsrfService
 {
 	/**
+	 * Méthode permettant de générer un token CSRF
+	 * @return string
 	 * @throws Exception
 	 */
 	public static function generate():string{
@@ -16,6 +18,9 @@ class CsrfService
     }
 
 	/**
+	 * Méthode permettant de vérifier si le token CSRF est valide
+	 * @param string|null $token
+	 * @return void
 	 * @throws CsrfException
 	 */
 	public static function check(?string $token): void {

@@ -17,6 +17,13 @@ use Slim\Views\Twig;
 class GetAddPrestationToBoxAction extends AbstractAction
 {
 
+	/**
+	 * Méthode qui permet d'afficher la page d'ajout d'une prestation à une box
+	 * @param ServerRequestInterface $request
+	 * @param ResponseInterface $response
+	 * @param array $args
+	 * @return ResponseInterface
+	 */
     public function __invoke(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
     {
         $boxService = new BoxService();

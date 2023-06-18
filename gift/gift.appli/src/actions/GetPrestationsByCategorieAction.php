@@ -9,12 +9,23 @@ use gift\app\services\prestations\PrestationsService;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Slim\Views\Twig;
+use Twig\Error\LoaderError;
+use Twig\Error\RuntimeError;
+use Twig\Error\SyntaxError;
 
 class GetPrestationsByCategorieAction extends AbstractAction {
 
-    /**
-     * @throws Exception
-     */
+	/**
+	 * Méthode qui permet d'afficher la page des prestations par catégorie
+	 * @param ServerRequestInterface $request
+	 * @param ResponseInterface $response
+	 * @param array $args
+	 * @return ResponseInterface
+	 * @throws LoaderError
+	 * @throws RuntimeError
+	 * @throws SyntaxError
+	 * @throws Exception
+	 */
     public function __invoke(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
     {
         $authService = new AuthentificationService();

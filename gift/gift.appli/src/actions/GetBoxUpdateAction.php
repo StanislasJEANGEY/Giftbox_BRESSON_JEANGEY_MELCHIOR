@@ -17,6 +17,7 @@ use Twig\Error\SyntaxError;
 class GetBoxUpdateAction extends AbstractAction {
 
 	/**
+	 * Méthode qui permet d'afficher la page de mise à jour d'une box
 	 * @param ServerRequestInterface $request
 	 * @param ResponseInterface $response
 	 * @param array $args

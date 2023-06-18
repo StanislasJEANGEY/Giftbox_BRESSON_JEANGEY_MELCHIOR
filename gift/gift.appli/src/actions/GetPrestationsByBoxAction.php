@@ -2,19 +2,29 @@
 
 namespace gift\app\actions;
 
-use Exception;
 use gift\app\services\authentification\AuthentificationService;
 use gift\app\services\box\BoxService;
-use gift\app\services\prestations\PrestationsService;
+use gift\app\services\ServiceException;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Slim\Views\Twig;
+use Twig\Error\LoaderError;
+use Twig\Error\RuntimeError;
+use Twig\Error\SyntaxError;
 
 class GetPrestationsByBoxAction
 {
-    /**
-     * @throws Exception
-     */
+	/**
+	 * Méthode qui permet d'afficher la page des prestations d'une box
+	 * @param ServerRequestInterface $request
+	 * @param ResponseInterface $response
+	 * @param array $args
+	 * @return ResponseInterface
+	 * @throws LoaderError
+	 * @throws RuntimeError
+	 * @throws SyntaxError
+	 * @throws ServiceException
+	 */
     public function __invoke(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
     {
         $id = $args['id'];

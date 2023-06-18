@@ -8,6 +8,7 @@ class CsrfException extends Exception
 {
 
 	/**
+	 * Méthode permettant de construire l'excpetion CSRFException
 	 * @param string $message
 	 * @param int $code
 	 * @param Exception|null $previous

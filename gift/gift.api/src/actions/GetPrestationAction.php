@@ -8,7 +8,13 @@ use Psr\Http\Message\ServerRequestInterface;
 
 class GetPrestationAction extends AbstractAction {
 
-
+	/**
+	 * Méthode qui retourne toutes les prestations
+	 * @param ServerRequestInterface $request
+	 * @param ResponseInterface $response
+	 * @param array $args
+	 * @return ResponseInterface
+	 */
 	public function __invoke(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface {
 		$prestaService = new PrestationsService();
 		$prestations = $prestaService->getPrestations();

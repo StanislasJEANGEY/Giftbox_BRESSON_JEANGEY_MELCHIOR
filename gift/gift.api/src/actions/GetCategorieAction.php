@@ -9,6 +9,13 @@ use Psr\Http\Message\ServerRequestInterface;
 
 class GetCategorieAction extends AbstractAction
 {
+	/**
+	 * Méthode qui retourne toutes les catégories
+	 * @param ServerRequestInterface $request
+	 * @param ResponseInterface $response
+	 * @param array $args
+	 * @return ResponseInterface
+	 */
     public function __invoke(ServerRequestInterface $request, ResponseInterface $response, array $args) : ResponseInterface
     {
         $categService = new CategorieService();
