@@ -23,7 +23,7 @@ class GetInscriptionAction extends AbstractAction {
 		$view->render($response, 'InscriptionView.twig');
 
 		$routeContext = RouteContext::fromRequest($request);
-		$url = $routeContext->getRouteParser()->urlFor('accueil');
+		$url = $routeContext->getRouteParser()->urlFor('connexion_get');
 
 		if ($request->getMethod() === 'POST') {
 			$data = $request->getParsedBody();

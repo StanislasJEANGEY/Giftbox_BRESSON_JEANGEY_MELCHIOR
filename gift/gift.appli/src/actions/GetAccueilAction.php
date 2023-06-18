@@ -21,6 +21,7 @@ class  GetAccueilAction
 
         $authService = new AuthentificationService();
         $estConnecte = $authService->getCurrentUser();
+        echo $estConnecte;
         $view = Twig::fromRequest($request);
         return $view->render($response, 'AccueilView.twig', [
             'estConnecte' => $estConnecte,

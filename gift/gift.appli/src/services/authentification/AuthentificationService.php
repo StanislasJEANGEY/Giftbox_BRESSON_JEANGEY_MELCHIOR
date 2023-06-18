@@ -8,19 +8,16 @@ class AuthentificationService
 {
 	public function getConnexion(string $email, string $password): bool
 	{
-		$user = User::where('email', $email)->first();
+        // Récupérer l'utilisateur par le nom d'utilisateur
+        $user = User::where('email', $email)->first();
 
-		if ($user && password_verify($password, $user->password)) {
-			$_SESSION['id'] = $user->id;
-			$_SESSION['nom'] = $user->nom;
-			$_SESSION['prenom'] = $user->prenom;
-			$_SESSION['email'] = $user->email;
-			$_SESSION['role'] = $user->role;
-			$_SESSION['logged_in'] = true;
-			return true;
-		}
+        if ($user && password_verify($password, $user->password)) {
+            // Identifiant valide, connecte l'utilisateur (par exemple, en utilisant une session)
+            $_SESSION['user_id'] = $user->id;
+            return true;
+        }
 
-		return false;
+        return false;
 	}
 
 	public function getInscription(string $nom, string $prenom, string $email, string $password): void

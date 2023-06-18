@@ -21,42 +21,30 @@ class GetConnexionAction extends AbstractAction {
 	 * @throws LoaderError
 	 */
 	public function __invoke(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface {
-		$view = Twig::fromRequest($request);
 
-		if ($request->getMethod() === 'POST') {
-			$data = $request->getParsedBody();
-			$email = $data['email'] ?? '';
-			$password = $data['password'] ?? '';
+            $authService = new AuthentificationService();
+            $view = Twig::fromRequest($request);
+            $routeContext = RouteContext::fromRequest($request);
+            $url = $routeContext->getRouteParser()->urlFor('accueil');
 
-			// Valider les champs du formulaire
-			if (empty($email) || empty($password)) {
-				// Rediriger avec un message d'erreur si des champs sont vides
-				$_SESSION['flash']['error'] = 'Veuillez remplir tous les champs.';
-				$routeContext = RouteContext::fromRequest($request);
-				$url = $routeContext->getRouteParser()->urlFor('connexion_get');
-				return $response->withHeader('Location', $url)->withStatus(302);
-			}
+            if ($request->getMethod() === 'POST') {
+                $data = $request->getParsedBody();
 
-			$authService = new AuthentificationService();
-			try {
-				$loggedIn = $authService->getConnexion($email, $password);
-			} catch (Exception $e) {
-				throw new HttpBadRequestException($request, $e->getMessage());
-			}
+                $email = $data['email'];
+                $password = $data['password'];
 
-			if ($loggedIn) {
-				$routeContext = RouteContext::fromRequest($request);
-				$url = $routeContext->getRouteParser()->urlFor('accueil');
-			} else {
-				$_SESSION['failed_login'] = true;
-				$_SESSION['flash']['error'] = 'Identifiants invalides.';
-				$routeContext = RouteContext::fromRequest($request);
-				$url = $routeContext->getRouteParser()->urlFor('connexion_get');
-			}
-			return $response->withHeader('Location', $url)->withStatus(302);
-		} else {
-			$view->render($response, 'ConnexionView.twig');
-			return $response;
-		}
-	}
+                // Authentifier l'utilisateur
+                $success = $authService->getConnexion($email, $password);
+
+                if ($success) {
+                    $response = $response->withHeader('Location', $url)->withStatus(302);
+                } else {
+                    // Afficher le formulaire de connexion avec un message d'erreur
+                    return $view->render($response, 'ConnexionView.twig', ['error' => 'Identifiants invalides']);
+                }
+            }
+        $view = Twig::fromRequest($request);
+        return $view->render($response, 'ConnexionView.twig');
+
+        }
 }
