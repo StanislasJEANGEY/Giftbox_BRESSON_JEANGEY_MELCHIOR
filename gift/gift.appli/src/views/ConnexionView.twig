@@ -9,13 +9,6 @@
             <input type="password" id="password" name="password" required placeholder="password">
 
             <input type="submit" value="Connexion">
-            {% if session.'failed_login' %}
-                <script>
-                    window.addEventListener('DOMContentLoaded', function() {
-                        alert('Échec de la connexion. Veuillez vérifier vos identifiants.');
-                    });
-                </script>
-            {% endif %}
         </form>
     </div>
 {% endblock %}

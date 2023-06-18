@@ -2,6 +2,7 @@
 
 namespace gift\app\actions;
 
+use gift\app\services\authentification\AuthentificationService;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Slim\Views\Twig;
@@ -18,8 +19,11 @@ class  GetAccueilAction
      */
     public function __invoke(ServerRequestInterface $request, ResponseInterface $response, array $args) : ResponseInterface {
 
-		var_dump($_SESSION['id']);
+        $authService = new AuthentificationService();
+        $estConnecte = $authService->getCurrentUser();
         $view = Twig::fromRequest($request);
-        return $view->render($response, 'AccueilView.twig');
+        return $view->render($response, 'AccueilView.twig', [
+            'estConnecte' => $estConnecte,
+        ]);
     }
 }
