@@ -5,6 +5,18 @@ SET time_zone = '+00:00';
 SET foreign_key_checks = 0;
 SET sql_mode = 'NO_AUTO_VALUE_ON_ZERO';
 
+DROP TABLE IF EXISTS `user`;
+CREATE TABLE `user`
+(
+    `id`       INT                 NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    `nom`      VARCHAR(255),
+    `prenom`   VARCHAR(255),
+    `email`    VARCHAR(255) unique NOT NULL,
+    `password` VARCHAR(255)        NOT NULL,
+    `role`     int(11)             NOT NULL DEFAULT 1
+) ENGINE = InnoDB
+  DEFAULT CHARSET = utf8;
+
 DROP TABLE IF EXISTS `box`;
 CREATE TABLE `box`
 (
@@ -18,9 +30,8 @@ CREATE TABLE `box`
     `statut`      int(11)        NOT NULL DEFAULT 1,
     `created_at`  datetime       NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE current_timestamp(),
     `updated_at`  datetime       NOT NULL,
-    `user_id`     int(11)        NOT NULL,
-    PRIMARY KEY (`id`),
-    FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
+    `user_id`    int(11)         NOT NULL DEFAULT 0,
+    PRIMARY KEY (`id`)
 ) ENGINE = InnoDB
   DEFAULT CHARSET = utf8;
 
@@ -57,18 +68,6 @@ CREATE TABLE `prestation`
     `tarif`       decimal(10, 2) NOT NULL,
     `img`         varchar(128)   NOT NULL,
     `cat_id`      int(11)        NOT NULL
-) ENGINE = InnoDB
-  DEFAULT CHARSET = utf8;
-
-DROP TABLE IF EXISTS `user`;
-CREATE TABLE `user`
-(
-    `id`       INT                 NOT NULL PRIMARY KEY AUTO_INCREMENT,
-    `nom`      VARCHAR(255),
-    `prenom`   VARCHAR(255),
-    `email`    VARCHAR(255) unique NOT NULL,
-    `password` VARCHAR(255)        NOT NULL,
-    `role`     int(11)             NOT NULL DEFAULT 1
 ) ENGINE = InnoDB
   DEFAULT CHARSET = utf8;
 
