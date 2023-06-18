@@ -19,11 +19,13 @@
             <p>Coffret cadeau : non</p>
         {% endif %}
         {% if estProprio == true %}
+            {% if box.status == 2 %}
                 <div class="update-button">
                     <a href="{{ url_for('update_box_get', { 'id': box.id } ) }}">
                         <button>Modifier</button>
                     </a>
                 </div>
+            {% endif %}
         {% endif %}
 
         <h2 class="prestations-heading"><a href="{{ url_for('prestations_by_box', { 'id': box.id } ) }}">Prestations</a>
