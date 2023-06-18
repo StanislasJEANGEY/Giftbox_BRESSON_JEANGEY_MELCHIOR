@@ -58,7 +58,7 @@ class GetAddPrestationAction extends AbstractAction
 			try {
 				$csrf = CsrfService::generate();
 				$view->render($response, 'AddPrestationView.twig', [
-					'csrf_token' => $csrf, 'estConnecte' => $estConnecte
+					'csrf_token' => $csrf, 'estConnecte' => $estConnecte, 'url' => $url
 				]);
 			} catch (Exception $e) {
 				throw new HttpBadRequestException($request, $e->getMessage());

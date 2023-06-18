@@ -2,6 +2,11 @@
 {% block content %}
     <div class="container">
         <h2 class="heading">Créer une prestation :</h2>
+        <div class="back-button">
+            <a href="{{ url_for('prestations') }}">
+                <button>Retour</button>
+            </a>
+        </div>
         <form class="gift_form" method="post" action="{{ url_for('add_prestation_post') }}">
             <label for="libelle">Libelle</label>
             <input type="text" id="libelle" name="libelle" required placeholder="libelle">
