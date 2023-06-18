@@ -19,7 +19,7 @@
             <p>Coffret cadeau : non</p>
         {% endif %}
         {% if estProprio == true %}
-            {% if box.status !=2  %}
+            {% if box.statut != 2  %}
                 <div class="update-button">
                     <a href="{{ url_for('update_box_get', { 'id': box.id } ) }}">
                         <button>Modifier</button>
