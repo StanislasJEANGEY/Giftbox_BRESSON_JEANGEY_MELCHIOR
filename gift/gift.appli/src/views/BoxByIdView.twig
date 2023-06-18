@@ -18,13 +18,13 @@
         {% else %}
             <p>Coffret cadeau : non</p>
         {% endif %}
-{#        {% if boxStatut != box.VALIDATED and box['user_id'] == session['id'] %}#}
+        {% if estProprio == true %}
                 <div class="update-button">
                     <a href="{{ url_for('update_box_get', { 'id': box.id } ) }}">
                         <button>Modifier</button>
                     </a>
                 </div>
-{#        {% endif %}#}
+        {% endif %}
 
         <h2 class="prestations-heading"><a href="{{ url_for('prestations_by_box', { 'id': box.id } ) }}">Prestations</a>
         </h2>
