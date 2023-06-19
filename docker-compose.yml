@@ -1,19 +1,33 @@
-version: "3"
-
+version: "1"
 networks:
   giftbox.net:
     driver: bridge
 
 services:
-  # appli giftbox
-  appli:
-    image: canals/php:latest
+  api:
+    image: stanislasj/sae_php:latest
     environment:
       - http_proxy=http://www-cache.iutnc.univ-lorraine.fr:3128
       - https_proxy=http://www-cache.iutnc.univ-lorraine.fr:3128
     ports:
       - "18080:80"
-    volumes :
+    volumes:
+      - ./gift.api/public:/var/www/html
+      - ./gift.api/src:/var/www/src
+    working_dir: /var/www/src
+    networks:
+      - giftbox.net
+    depends_on:
+      - sql
+
+  appli:
+    image: stanislasj/sae_php:latest
+    environment:
+      - http_proxy=http://www-cache.iutnc.univ-lorraine.fr:3128
+      - https_proxy=http://www-cache.iutnc.univ-lorraine.fr:3128
+    ports:
+      - "18081:80"
+    volumes:
       - ./gift.appli/public:/var/www/html
       - ./gift.appli/src:/var/www/src
     working_dir: /var/www/src
@@ -22,23 +36,6 @@ services:
     depends_on:
       - sql
 
-  # api giftbox
-  api:
-    image: canals/php:latest
-    environment:
-      - http_proxy=http://www-cache.iutnc.univ-lorraine.fr:3128
-      - https_proxy=http://www-cache.iutnc.univ-lorraine.fr:3128
-    ports:
-      - "18083:80"
-    volumes :
-      - ./gift.api/public:/var/www/html
-      - ./gift.api/src:/var/www/src
-    working_dir: /var/www/src
-    networks:
-      - giftbox.net
-    depends_on:
-      - sql
-  # base de données
   sql:
     image: mysql:latest
     environment:
@@ -46,24 +43,19 @@ services:
       - MYSQL_DATABASE=${DB_NAME}
       - MYSQL_USER=${DB_USER_NAME}
       - MYSQL_PASSWORD=${DB_USER_PASSWORD}
-
     ports:
-      - "18082:3306"
+      - "18083:3306"
     networks:
       giftbox.net:
         aliases:
           - sql.db
 
-  # phpmyadmin
   phpmyadmin:
     image: phpmyadmin:latest
     environment:
       PMA_HOST: sql
       PMA_PORT: 3306
     ports:
-      - "18081:80"
-
+      - "18082:80"
     networks:
       - giftbox.net
-    depends_on:
-      - sql
