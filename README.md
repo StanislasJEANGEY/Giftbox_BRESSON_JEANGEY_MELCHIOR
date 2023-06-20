@@ -10,10 +10,16 @@ Nous avons rencontré des problèmes de stabilité sur docketu. Les dockers en c
 planter et impossible d'y accéder, ni de les redémarrer. Obligé de demander l'intervention de l'administrateur
 réseau pour arrêter de forces les services docker et les redémarrer. Nous allons voir ce problème en détail 
 avec l'administrateur réseau lundi 19/06 pour que la correction (et également la SAE) se déroule sans encombres.  
+
+Les problèmes rencontrés précédemment ont normalement été résolus. Cependant, nous avons rencontré un nouveau problème 
+avec le proxy donc ne nous pouvons pas faire de composer install.  
+Nous faisons au plus vite pour le rendre fonctionnel.  
+
 Merci de votre compréhension.
 
 ### URL docketu : 
-htttp://docketu.iutnc.univ-lorraine.fr:18080
+appli : htttp://docketu.iutnc.univ-lorraine.fr:18090  
+api : htttp://docketu.iutnc.univ-lorraine.fr:18091
 
 <br>
 
