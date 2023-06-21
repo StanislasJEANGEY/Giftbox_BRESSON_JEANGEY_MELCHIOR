@@ -32,9 +32,11 @@ class GetAddBoxAction extends AbstractAction
         $view = Twig::fromRequest($request);
 
         if ($estConnecte['role'] == 2){
+            $url2 = 'box';
             $url = $routeContext->getRouteParser()->urlFor('box');
         } else {
             $url = $routeContext->getRouteParser()->urlFor('box_perso');
+            $url2 = 'box_perso';
         }
         if ($request->getMethod() === "POST"){
             $data = $request->getParsedBody();
@@ -64,7 +66,7 @@ class GetAddBoxAction extends AbstractAction
                 }
                 $view->render($response, 'AddBoxView.twig', [
                     'csrf_token' => $csrf, 'estConnecte' => $estConnecte,
-                    'boxs' => $boxs, 'box' => $box, 'url' => $url
+                    'boxs' => $boxs, 'box' => $box, 'url' => $url2
                 ]);
             } catch (Exception $e) {
                 throw new HttpBadRequestException($request, $e->getMessage());
