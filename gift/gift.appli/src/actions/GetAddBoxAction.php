@@ -32,9 +32,9 @@ class GetAddBoxAction extends AbstractAction
         $view = Twig::fromRequest($request);
 
         if ($estConnecte['role'] == 2){
-            $url = 'box';
+            $url = $routeContext->getRouteParser()->urlFor('box');
         } else {
-            $url = 'box_perso';
+            $url = $routeContext->getRouteParser()->urlFor('box_perso');
         }
         if ($request->getMethod() === "POST"){
             $data = $request->getParsedBody();
