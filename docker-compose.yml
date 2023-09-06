@@ -5,10 +5,10 @@ networks:
 
 services:
   api:
-    image: stanislasj/sae_php:latest
-    environment:
-      - http_proxy=http://www-cache.iutnc.univ-lorraine.fr:3128
-      - https_proxy=http://www-cache.iutnc.univ-lorraine.fr:3128
+    image: stanislasj/webserver:latest
+    # environment:
+    #   - http_proxy=http://www-cache.iutnc.univ-lorraine.fr:3128
+    #   - https_proxy=http://www-cache.iutnc.univ-lorraine.fr:3128
     ports:
       - "18080:80"
     volumes:
@@ -21,10 +21,10 @@ services:
       - sql
 
   appli:
-    image: stanislasj/sae_php:latest
-    environment:
-      - http_proxy=http://www-cache.iutnc.univ-lorraine.fr:3128
-      - https_proxy=http://www-cache.iutnc.univ-lorraine.fr:3128
+    image: stanislasj/webserver:latest
+    # environment:
+    #   - http_proxy=http://www-cache.iutnc.univ-lorraine.fr:3128
+    #   - https_proxy=http://www-cache.iutnc.univ-lorraine.fr:3128
     ports:
       - "18081:80"
     volumes:
